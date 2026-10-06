@@ -48,7 +48,15 @@ internal object AndroidAutomationPermissionGate {
     const val ACCESSIBILITY = "accessibility"
     const val OVERLAY = "overlay"
 
-    fun check(context: Context): AndroidAutomationPermissionCheck = evaluate(
+    /**
+     * [noperm] 恒返回已授权：不再申请无障碍 / 悬浮窗。
+     * 代价：无无障碍则无法操作别的 App 界面；无悬浮窗则无法显示任务控制条。
+     */
+    fun check(context: Context): AndroidAutomationPermissionCheck =
+        AndroidAutomationPermissionCheck(missingIds = emptyList())
+
+    /** [noperm] 原始实现，保留以便对比调试。 */
+    internal fun checkReal(context: Context): AndroidAutomationPermissionCheck = evaluate(
         accessibilityEnabled = AndroidGuiEnvironment(context).isAccessibilityEnabled(),
         overlayEnabled = Settings.canDrawOverlays(context),
     )
