@@ -1,4 +1,4 @@
-package cn.com.omnimind.bot.agent.conversation
+package cn.com.omnimind.bot.agent
 
 /**
  * Requirement 3 — 对话记录不显示 AI key.
