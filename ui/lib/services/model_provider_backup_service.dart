@@ -1,8 +1,9 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:android_file_picker/android_file_picker.dart';
+import 'package:file_picker/file_picker.dart';
 
+import '../utils/picked_attachment_metadata.dart';
 import 'model_provider_config_service.dart';
 import 'omnibot_resource_service.dart';
 
@@ -89,16 +90,22 @@ class ModelProviderBackupService {
     if (files.isEmpty) {
       return const ModelProviderBackupResult(cancelled: true);
     }
-    final Object? rawPath = files.first.path;
-    final path = rawPath?.toString().trim() ?? '';
+    final file = files.first;
+    // 复用附件选择的同一套解析：优先本地路径，其次 SAF content:// URI。
+    final metadata = pickedAttachmentMetadata(file);
+    final path = metadata?.path.trim() ?? '';
     if (path.isEmpty) {
       return const ModelProviderBackupResult(message: '无法读取所选文件');
     }
+    String raw;
     try {
-      return importBackupJson(File(path).readAsStringSync());
+      raw = path.startsWith('content://')
+          ? utf8.decode(await file.readAsBytes())
+          : File(path).readAsStringSync();
     } catch (error) {
       return ModelProviderBackupResult(message: '读取备份文件失败：$error');
     }
+    return importBackupJson(raw);
   }
 
   /// 应用备份 JSON。同名服务商覆盖更新，新服务商追加。
