@@ -104,7 +104,7 @@ Conversation -> ACP Session -> Prompt Turn -> Session Update / PromptResponse
 - skill 未调用完成工具时不断追加恢复提示；
 - 截断 tool call 后让模型再次生成。
 
-这些路径属于小万 ACP Agent 内部的模型/工具执行实现，本身不能因为“ACP Client 不需要轮数”而整体删除；否则 Agent 会失去完成工具任务的能力。真正需要删除的是宿主侧的次数配置、UI retry 状态和第二套生命周期。Agent 内部可以在返回 `PromptResponse` 前进行多次模型/工具交换，但必须在官方 stop reason、取消、真实错误或确定的无进展条件下结束。
+这些路径属于小程 ACP Agent 内部的模型/工具执行实现，本身不能因为“ACP Client 不需要轮数”而整体删除；否则 Agent 会失去完成工具任务的能力。真正需要删除的是宿主侧的次数配置、UI retry 状态和第二套生命周期。Agent 内部可以在返回 `PromptResponse` 前进行多次模型/工具交换，但必须在官方 stop reason、取消、真实错误或确定的无进展条件下结束。
 
 #### D. Harness 安装和探活侵入正常聊天路径
 
@@ -455,7 +455,7 @@ flutter test test/features/home/pages/command_overlay/chat_bot_sheet_acp_test.da
 
 ### 7.7 2026-09-05：自定义 Adapter 不再被名称／命令误判为旧内置 Agent
 
-将 7.6 节入口测试的 profile store 替身换成真实 `AcpAgentProfileStore` 和 APK 实际使用的 `acp/agents.json`，补充保存后从磁盘重新构造 Context/store 的验证。由此复现：自定义名称含“小万”、命令含 `xiaowan` 或显式复用内置命令时，原生旧身份迁移会删除刚保存的配置，导致保存抛出 `NoSuchElementException`；Flutter 目录去重也可能隐藏该配置。此前只模拟存储接口，无法发现这个用户路径故障。
+将 7.6 节入口测试的 profile store 替身换成真实 `AcpAgentProfileStore` 和 APK 实际使用的 `acp/agents.json`，补充保存后从磁盘重新构造 Context/store 的验证。由此复现：自定义名称含“小程”、命令含 `xiaowan` 或显式复用内置命令时，原生旧身份迁移会删除刚保存的配置，导致保存抛出 `NoSuchElementException`；Flutter 目录去重也可能隐藏该配置。此前只模拟存储接口，无法发现这个用户路径故障。
 
 修复仅调整已有身份判断：原生迁移和 Flutter 去重只识别确定的历史 ID `legacy-xiaowan-bot`、`legacy-xiaowan-command`，不再用用户可修改的名称／命令猜身份。内置 `xiaowan-acp` 仍保持原身份；明确历史 ID 的选择项、session 和 conversation 绑定迁移仍保留。没有增加 profile 类型、注册平台、重试或 Agent 生命周期。
 
@@ -496,9 +496,9 @@ flutter test test/services/model_provider_config_service_test.dart \
 
 ### 7.10 2026-09-05：工具工作卡反映实际输入和结果
 
-用户报告小万制作 HTML 时看不到工作卡，以及报错后的显示与实际不一致。本次只修复已有 Provider → ACP → shared reducer → 工具卡的投影，不新增 Agent、状态机、协议、自动重放或页面退出后的执行策略。
+用户报告小程制作 HTML 时看不到工作卡，以及报错后的显示与实际不一致。本次只修复已有 Provider → ACP → shared reducer → 工具卡的投影，不新增 Agent、状态机、协议、自动重放或页面退出后的执行策略。
 
-- 小万原先只在模型完整返回后、开始执行工具时上报工作卡。现在沿现有回调链转交 Provider 已有 ID／名称的工具输入，使用官方 `tool_call(status=pending)` 和同 ID 的 `tool_call_update`。输入不完整时不执行；真实执行才上报 `in_progress`，真实工具结果决定 `completed`／`failed`。展示复用已有 300ms 更新节奏，不截断输入或限制模型生成。
+- 小程原先只在模型完整返回后、开始执行工具时上报工作卡。现在沿现有回调链转交 Provider 已有 ID／名称的工具输入，使用官方 `tool_call(status=pending)` 和同 ID 的 `tool_call_update`。输入不完整时不执行；真实执行才上报 `in_progress`，真实工具结果决定 `completed`／`failed`。展示复用已有 300ms 更新节奏，不截断输入或限制模型生成。
 - 前端不再将所有 `pending` 解释成等待批准。普通 pending 显示“准备中”，实际批准请求仍由原有 ACP permission request 卡负责。移除文件卡隐藏状态标签的特殊分支；没有 HTML 专用分支。
 - 流式 `rawInput` 尚非完整 JSON 时，原先显示整个事件封装、后续可能保留旧参数；现在原样显示输入字符串，同卡更新，完整 JSON 和工具结果继续走现有解析器。
 - 移除 shared reducer 在 prompt 结束时替未完成工具补“成功”的推断。已收到的成功／失败结果保持不变；未收到工具结果的卡片使用已有“中断”展示，不声称文件已写入，不产生新的工具终止协议事件。官方 prompt 响应／错误／取消仍是唯一所属执行边界。
@@ -543,7 +543,7 @@ bash scripts/test-agent-runtime.sh --offline
 
 本节修正 7.10 中“将未完成工具统一显示中断”的决定；不再把请求结束推断成工具终止结果。
 
-1. 小万配置不再写死推理档位，也不默认关闭思考。当前 Provider 模型目录只有 reasoning 布尔能力，没有具体档位，故不伪造 thought_level 选项；模型请求不填 reasoning override，由 Provider 使用自身默认值。外部 ACP Harness 实际声明的 configOptions 仍完整展示。删除无运行时调用、会把 max/xhigh 降成 high 的旧 normalizeXiaowanReasoningEffort。
+1. 小程配置不再写死推理档位，也不默认关闭思考。当前 Provider 模型目录只有 reasoning 布尔能力，没有具体档位，故不伪造 thought_level 选项；模型请求不填 reasoning override，由 Provider 使用自身默认值。外部 ACP Harness 实际声明的 configOptions 仍完整展示。删除无运行时调用、会把 max/xhigh 降成 high 的旧 normalizeXiaowanReasoningEffort。
 2. 模型选择通过已有 AcpAgentProfileStore 按 sessionId 持久化，附带 Provider identity。load/resume 初始化时读取同 session 配置，不把另一个 Provider 的选择带过去；session/delete 的既有解绑路径同时清理配置。先确认配置合法并持久化成功，再更新内存值；没有配置重放、自动重开或新增生命周期。
 3. 创建、恢复和 initialize 不再调用 /models。ModelProviderConfigStore 只读 Provider 编辑器已有缓存，核对 profileId、规范化地址和 revision；不匹配则不采用旧目录。已绑定模型仍可启动，目录刷新由原有 Provider 设置入口负责。没有增加另一份模型缓存。
 4. shared reducer 删除请求结束时批量改写工具卡状态的函数。保留最近一次真实工具状态及结果；请求结束仍由原有 prompt response 路径投影，不替工具补 success/interrupted。显式用户取消路径与真实工具终止更新不在此批量改写范围内。
@@ -596,7 +596,7 @@ flutter test test/features/home/pages/chat/chat_conversation_runtime_coordinator
 - `acp_config_button_test.dart` 新增慢刷新返回后的禁止写入与恢复、首次加载失败后的显式重新加载、离开页面后的迟到成功／失败响应测试。竞态测试修复前失败、修复后通过；整份文件 12 项通过。首次加载重新加载本来就可用，本轮没有另加重试入口或自动重试。
 - 将配置面板测试纳入 `scripts/test-agent-runtime.sh`，避免只单独运行后遗漏于长期回归。Adapter、配置管理和 Profile 持久化三个 JVM 测试类共 53 项通过；协议契约 43 项通过；debug APK 构建成功。以上属于本地自动化，不等同于手机或真实外部 Harness 验收。
 - 扩展回归命令 `bash scripts/test-agent-runtime.sh --offline --skip-gradle` 通过：Flutter 554 项、Node 59 项、WebChat 12 项，以及 WebChat typecheck/build。JVM 使用上列三个定向测试类，未声称全量 Android 测试通过；离线运行没有调用真实 Provider。
-- 未解决项必须保留：`LocalAcpRuntime.resumeThread` 对已有会话的 `refreshConfig` 目前只对小万调用加载刷新；其他 Harness 返回内存中的会话配置。因此不能把本轮 UI 修复描述为“所有 Harness 实时刷新已修好”。后续需按协商能力验证官方配置更新／会话加载行为，不能凭空添加通用刷新 RPC，也不能偷偷重启进程。
+- 未解决项必须保留：`LocalAcpRuntime.resumeThread` 对已有会话的 `refreshConfig` 目前只对小程调用加载刷新；其他 Harness 返回内存中的会话配置。因此不能把本轮 UI 修复描述为“所有 Harness 实时刷新已修好”。后续需按协商能力验证官方配置更新／会话加载行为，不能凭空添加通用刷新 RPC，也不能偷偷重启进程。
 - 用户手机“首次刷新直接报错”尚未取得设备日志，不能认定与本轮竞态同源。USB 与无线 ADB 均未发现设备，尚未覆盖安装及实机复现；恢复连接后使用 `adb install -r`，保留用户配置和历史。
 
 ### 7.18 2026-09-06：可编辑配置不再打断 Agent 或沿用旧启动快照
