@@ -550,10 +550,9 @@ extension _ChatPageUserMessageActions on _ChatPageStateBase {
       return;
     }
 
-    if (text.isNotEmpty) {
-      await AssistsMessageService.copyToClipboard(text);
-      if (!mounted) return;
-    }
+    // 重试（重复发送）用户消息时不再把文本写入系统剪贴板，
+    // 避免覆盖用户当前剪贴板内容；用户如需复制可用消息菜单里的“复制”。
+    if (!mounted) return;
 
     if (_editingUserMessageId == message.id) {
       _stopUserMessageEditing();

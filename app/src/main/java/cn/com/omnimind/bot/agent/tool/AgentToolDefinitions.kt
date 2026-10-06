@@ -1405,7 +1405,7 @@ object AgentToolDefinitions {
                 putJsonObject("properties") {
                     putJsonObject("path") {
                         put("type", "string")
-                        put("description", "目录路径。默认当前 workspace。")
+                        put("description", "目录路径。默认当前 workspace；也支持公共存储路径，如 /storage/emulated/0/Download、/storage/emulated/0/Documents。")
                     }
                     putJsonObject("recursive") {
                         put("type", "boolean")
@@ -1436,7 +1436,7 @@ object AgentToolDefinitions {
                 putJsonObject("properties") {
                     putJsonObject("path") {
                         put("type", "string")
-                        put("description", "搜索起始目录，默认当前 workspace。")
+                        put("description", "搜索起始目录。默认当前 workspace；搜索下载的 apk、文档等外部文件时传公共存储路径，如 /storage/emulated/0 或 /storage/emulated/0/Download。")
                     }
                     putJsonObject("query") {
                         put("type", "string")

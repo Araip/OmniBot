@@ -131,6 +131,50 @@ object ExternalApkInstaller {
         }
     }
 
+    /**
+     * 安装本地已有的 APK 文件（如已经下载到公共存储/workspace 的 apk）。
+     * 复用 [buildInstallIntent]，通过 FileProvider 暴露 uri 后打开系统安装界面。
+     */
+    fun installLocalApk(
+        context: Context,
+        apkPath: String,
+        displayName: String
+    ): ExternalApkInstallResult {
+        val appContext = context.applicationContext
+        if (!canInstallPackages(appContext)) {
+            openInstallPermissionSettings(context)
+            return ExternalApkInstallResult(
+                success = false,
+                status = STATUS_INSTALL_PERMISSION_REQUIRED,
+                message = "请先允许本应用安装未知应用，然后再次安装 $displayName。"
+            )
+        }
+        val apkFile = File(apkPath)
+        if (!apkFile.exists() || !apkFile.isFile) {
+            return ExternalApkInstallResult(
+                success = false,
+                status = STATUS_INSTALL_FAILED,
+                message = "找不到 APK 文件：$apkPath"
+            )
+        }
+        val launched = installApk(appContext, apkFile)
+        return if (launched) {
+            ExternalApkInstallResult(
+                success = true,
+                status = STATUS_INSTALLER_LAUNCHED,
+                message = "$displayName 已打开系统安装界面。",
+                filePath = apkFile.absolutePath
+            )
+        } else {
+            ExternalApkInstallResult(
+                success = false,
+                status = STATUS_INSTALL_FAILED,
+                message = "$displayName 无法打开系统安装界面。",
+                filePath = apkFile.absolutePath
+            )
+        }
+    }
+
     private fun existingDownloadedApk(context: Context, apkFileName: String): File? {
         val apkFile = File(File(context.filesDir, DOWNLOAD_DIR_NAME), apkFileName)
         return apkFile.takeIf { it.exists() && it.length() > 0L }

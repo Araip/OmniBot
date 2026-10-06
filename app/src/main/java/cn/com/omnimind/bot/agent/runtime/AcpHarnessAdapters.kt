@@ -173,7 +173,7 @@ internal object AcpHarnessAdapters {
                 "configPath" to DEEPSEEK_HARNESS_CONFIG_DISPLAY_PATH,
                 "baseUrl" to (provider?.baseUrl ?: config.baseUrl),
                 "model" to model.orEmpty(),
-                "apiKey" to config.apiKey,
+                "apiKey" to CredentialsRedaction.apiKeyMask(config.apiKey),
                 "reasoningEffort" to config.reasoningEffort,
                 "permissionMode" to config.permissionMode,
             )

@@ -12,7 +12,7 @@ class ChatSpotlightTour extends StatefulWidget {
     required this.onFinish,
   });
 
-  static const int stepCount = 6;
+  static const int stepCount = 5;
 
   final int step;
   final GlobalKey? anchorKey;
@@ -55,8 +55,8 @@ class _ChatSpotlightTourState extends State<ChatSpotlightTour> {
       final localTopLeft = overlayBox.globalToLocal(globalTopLeft);
       final anchorRect = localTopLeft & anchorBox.size;
       final measured = switch (widget.step) {
+        3 => anchorRect.inflate(4),
         4 => anchorRect.inflate(4),
-        5 => anchorRect.inflate(4),
         _ => anchorRect.inflate(6),
       };
       final previous = _measuredSpotlight;
@@ -261,13 +261,12 @@ class _ChatSpotlightTourState extends State<ChatSpotlightTour> {
     return switch (step) {
       0 => Rect.fromLTWH(8, top, 54, 52),
       1 => Rect.fromLTWH(70, top, (width - 140).clamp(150, 320), 52),
-      2 => Rect.fromLTWH(width - 112, top, 104, 52),
-      3 => Rect.fromCenter(
+      2 => Rect.fromCenter(
         center: Offset(width / 2, top + 82),
         width: (width * 0.54).clamp(176, 300),
         height: 48,
       ),
-      4 => Rect.fromLTWH(
+      3 => Rect.fromLTWH(
         size.width - 118,
         size.height - bottomPadding - 187,
         40,
@@ -310,14 +309,6 @@ const List<_SpotlightItem> _items = <_SpotlightItem>[
     descriptionZh: '顶部模式岛可在小万、编程 Agent 与纯聊天之间切换，当前选择会直接影响执行方式。',
     descriptionEn:
         'Use the top mode island to switch between OmniAi, coding agents, and pure chat.',
-  ),
-  _SpotlightItem(
-    icon: LucideIcons.pawPrint,
-    titleZh: '宠物与工作区',
-    titleEn: 'Pet and workspace',
-    descriptionZh: '右上角可以显示桌面宠物；在平板或宽屏设备上，还能展开工作区文件面板。',
-    descriptionEn:
-        'Show the desktop pet, or open the workspace pane on tablets and wider screens.',
   ),
   _SpotlightItem(
     icon: LucideIcons.squareTerminal,

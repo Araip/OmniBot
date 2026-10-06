@@ -75,8 +75,9 @@ class DraggableBallLoader(
             WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
         PixelFormat.TRANSLUCENT
     ).apply {
+        // P0 改动：悬浮球贴屏幕最左（gravity=START 保持顶部坐标，x=0 贴最左，y 仍屏幕中心）
         gravity = Gravity.TOP or Gravity.START
-        x = context.resources.displayMetrics.widthPixels - width
+        x = 0
         y = context.resources.displayMetrics.heightPixels / 2
     }
     private val messageParams = WindowManager.LayoutParams(

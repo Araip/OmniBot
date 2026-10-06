@@ -160,8 +160,8 @@ class _AuthorizeSettingPageState extends State<AuthorizeSettingPage>
             icon: LucideIcons.pictureInPicture2,
             title: context.trLegacy('悬浮窗权限'),
             subtitle: _localeText(
-              zh: '允许小万在其他应用上方显示宠物、半屏聊天和任务提醒。',
-              en: 'Allow Omnibot to show the pet, half-screen chat, and task reminders above other apps.',
+              zh: '允许小万在其他应用上方显示悬浮提示和任务提醒。',
+              en: 'Allow Omnibot to show floating hints and task reminders above other apps.',
             ),
             trailing: _buildPermissionTrailing(
               label: context.trLegacy(_overlayPermission ? '已开启' : '去开启'),

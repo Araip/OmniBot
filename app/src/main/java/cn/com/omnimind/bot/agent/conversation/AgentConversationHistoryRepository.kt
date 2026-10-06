@@ -724,10 +724,15 @@ class AgentConversationHistoryRepository(
         val targetMode = canonicalConversationMode(targetConversationMode)
         sourceEntries.forEach { entry ->
             DatabaseHelper.upsertAgentConversationEntry(
-                entry.copy(
-                    id = 0,
-                    conversationId = targetConversationId,
-                    conversationMode = targetMode,
+                // Route the fork copy through the same storage guard as live
+                // writes so a legacy row that still holds a raw key is scrubbed
+                // rather than multiplied into the new conversation.
+                AgentConversationHistorySupport.prepareEntryForStorage(
+                    entry.copy(
+                        id = 0,
+                        conversationId = targetConversationId,
+                        conversationMode = targetMode,
+                    )
                 )
             )
         }

@@ -83,7 +83,6 @@ import 'tool_activity_utils.dart';
 import 'widgets/chat_widgets.dart';
 import 'widgets/chat_browser_overlay.dart';
 import 'widgets/chat_message_anchor_bar.dart';
-import 'widgets/pet_overlay_permission_sheet.dart';
 import 'widgets/chat_tool_activity_strip.dart';
 import 'widgets/chat_spotlight_tour.dart';
 import 'package:ui/widgets/app_update_dialog.dart';
@@ -163,7 +162,6 @@ abstract class _ChatPageStateBase extends State<ChatPage>
   final GlobalKey _slashCommandStripKey = GlobalKey();
   final GlobalKey _toolActivityStripKey = GlobalKey();
   final GlobalKey _firstUseTourMenuAnchorKey = GlobalKey();
-  final GlobalKey _firstUseTourPetAnchorKey = GlobalKey();
   final GlobalKey _firstUseTourIslandAnchorKey = GlobalKey();
   final GlobalKey _firstUseTourModeAnchorKey = GlobalKey();
   final GlobalKey _firstUseTourModelAnchorKey = GlobalKey();
@@ -259,8 +257,6 @@ abstract class _ChatPageStateBase extends State<ChatPage>
       'chat_hd_pad_right_pane_width';
   bool _workspaceBrowserCanGoUp = false;
   Future<OmnibotWorkspacePaths>? _workspacePathsLoadFuture;
-  bool _isPetOverlayOpening = false;
-  bool _isPetOverlayShowing = false;
   AppUpdateStatus? _appUpdateStatus;
   ModalRoute<dynamic>? _subscribedRoute;
   StreamSubscription<Map<String, dynamic>>?
@@ -345,9 +341,8 @@ abstract class _ChatPageStateBase extends State<ChatPage>
   GlobalKey get _firstUseTourAnchorKey => switch (_firstUseTourStep) {
     0 => _firstUseTourMenuAnchorKey,
     1 => _firstUseTourModeAnchorKey,
-    2 => _firstUseTourPetAnchorKey,
-    3 => _firstUseTourIslandAnchorKey,
-    4 => _firstUseTourModelAnchorKey,
+    2 => _firstUseTourIslandAnchorKey,
+    3 => _firstUseTourModelAnchorKey,
     _ => _inputAreaKey,
   };
 
@@ -1775,10 +1770,6 @@ abstract class _ChatPageStateBase extends State<ChatPage>
   Future<void> _syncVisibleChatConversation();
 
   Future<void> _clearVisibleChatConversation();
-
-  Future<void> _handlePetOverlayTap();
-
-  Future<void> _syncPetOverlayState();
 
   void _armComposerLiftIntent();
 

@@ -276,7 +276,20 @@ internal object AgentConversationHistorySupport {
         // Room stores the canonical ACP item. Do not replace an oversized
         // payload with a summary or an omitted placeholder; if the storage
         // backend cannot persist it, surface that backend error to the owner.
-        return entry
+        //
+        // Requirement 3 — 对话记录不显示 AI key: a raw API key that leaked into a
+        // tool result, tool args or assistant message must never become part of
+        // the persisted history. Redaction only rewrites string values, so the
+        // JSON shape and the replay metadata stay intact.
+        val redactedPayload = ConversationSecretRedactor.redact(entry.payloadJson)
+        val redactedSummary = ConversationSecretRedactor.redact(entry.summary)
+        if (redactedPayload == entry.payloadJson && redactedSummary == entry.summary) {
+            return entry
+        }
+        return entry.copy(
+            payloadJson = redactedPayload.orEmpty(),
+            summary = redactedSummary.orEmpty()
+        )
     }
 
     fun buildPromptSeedFromEntries(

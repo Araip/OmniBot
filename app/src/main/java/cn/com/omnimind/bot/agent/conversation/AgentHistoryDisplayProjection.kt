@@ -42,7 +42,13 @@ internal object AgentHistoryDisplayProjection {
             val file = File(directory, "${entry.id}-$hash.json")
             if (!file.exists()) check(temporary.renameTo(file)) { "Could not save complete history record" }
             val payload = file.reader(Charsets.UTF_8).use { readPayload(it) }
-            return AgentHistoryDisplayEntry(entry.copy(payloadJson = gson.toJson(payload)), file)
+            val displayJson = gson.toJson(payload)
+            // Requirement 3 — 对话记录不显示 AI key. Rows persisted before the
+            // write-path guard existed may still carry a raw key, so mask the
+            // rendered payload as well; the undredacted bytes stay only in the
+            // complete-record attachment.
+            val safeJson = ConversationSecretRedactor.redact(displayJson) ?: displayJson
+            return AgentHistoryDisplayEntry(entry.copy(payloadJson = safeJson), file)
         } finally {
             temporary.delete()
         }

@@ -166,7 +166,11 @@ android {
     compileSdk = 37
 
     defaultConfig {
-        applicationId = "cn.com.omnimind.bot"
+        // 共存版本：applicationId 加 .dev 后缀，可与官方 cn.com.omnimind.bot
+        // 在同一台设备上并存。namespace 与 Kotlin package 保持不变，因此
+        // 包内所有 package/import、MethodChannel 名、Manifest 组件名都无需改动；
+        // FileProvider / Shizuku 的 authorities 用的是 ${applicationId}，会自动跟随新值。
+        applicationId = "cn.com.omnimind.bot.dev"
         minSdk = 29
         targetSdk = 36
         // Release 0.6.1. Keep the Android version code monotonic so the APK

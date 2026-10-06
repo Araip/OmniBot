@@ -1372,11 +1372,6 @@ mixin _ChatPageUiMixin on _ChatPageStateBase {
           children: [
             ChatAppBar(
               onMenuTap: onMenuTap,
-              onPetTap: () {
-                unawaited(_handlePetOverlayTap());
-              },
-              isPetOpening: _isPetOverlayOpening,
-              isPetShowing: _isPetOverlayShowing,
               onOmniAiTap: () {
                 // Xiaowan and the built-in Xiaowan ACP profile are one
                 // visible Agent. Keep the old shortcut callback only as the
@@ -1437,7 +1432,6 @@ mixin _ChatPageUiMixin on _ChatPageStateBase {
               showWorkspacePaneButton: showWorkspacePaneButton,
               onWorkspacePaneTap: onWorkspacePaneTap,
               tutorialMenuAnchorKey: _firstUseTourMenuAnchorKey,
-              tutorialPetAnchorKey: _firstUseTourPetAnchorKey,
               tutorialIslandAnchorKey: _firstUseTourIslandAnchorKey,
               tutorialModeAnchorKey: _firstUseTourModeAnchorKey,
             ),

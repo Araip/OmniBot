@@ -63,7 +63,7 @@ internal object CodexConfigAdapter : AgentConfigAdapter {
             "baseUrl" to (provider?.baseUrl
                 ?: extractTomlString(configToml, "base_url").orEmpty()),
             "model" to input.model.orEmpty(),
-            "apiKey" to extractOpenAiApiKey(authJson).orEmpty(),
+            "apiKey" to CredentialsRedaction.apiKeyMask(extractOpenAiApiKey(authJson)),
         )
     }
 
