@@ -44,7 +44,7 @@ void main() {
       iconWidth: 32,
       iconHeight: 32,
       name: '悬浮窗权限',
-      description: '桌面悬浮显示，快速唤起小万',
+      description: '桌面悬浮显示，快速唤起小程',
       onAuthorize: () async {
         granted = true;
       },

@@ -40,7 +40,7 @@ enum ConversationMode {
   }
 
   String get displayLabel => switch (this) {
-    ConversationMode.normal => LegacyTextLocalizer.localize('小万'),
+    ConversationMode.normal => LegacyTextLocalizer.localize('小程'),
     ConversationMode.chatOnly => LegacyTextLocalizer.localize('纯聊天'),
     ConversationMode.openclaw => 'OpenClaw',
     ConversationMode.subagent => 'SubAgent',

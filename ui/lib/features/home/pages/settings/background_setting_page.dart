@@ -122,7 +122,7 @@ class _BackgroundSettingPageState extends State<BackgroundSettingPage> {
   List<_OverlayPetOption> _petOptions = const [
     _OverlayPetOption(
       id: 'builtin:xiaowan',
-      name: '小万',
+      name: '小程',
       description: '默认的桌面悬浮窗宠物',
       imagePath: '',
       isBuiltin: true,
@@ -844,7 +844,7 @@ class _BackgroundSettingPageState extends State<BackgroundSettingPage> {
     final options = <_OverlayPetOption>[
       const _OverlayPetOption(
         id: 'builtin:xiaowan',
-        name: '小万',
+        name: '小程',
         description: '默认的桌面悬浮窗宠物',
         imagePath: '',
         isBuiltin: true,

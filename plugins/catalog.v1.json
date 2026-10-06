@@ -195,7 +195,7 @@
       },
       "presentation": {
         "description": {
-          "zh": "启用后，Agent 可以生成带独立 HTML 界面和 SVG 桌面图标的小 App，并快速连接小万、可调用工具与隔离数据；发布后作为独立插件管理。",
+          "zh": "启用后，Agent 可以生成带独立 HTML 界面和 SVG 桌面图标的小 App，并快速连接小程、可调用工具与隔离数据；发布后作为独立插件管理。",
           "en": "Enable the Agent to generate a standalone HTML App with an SVG home-screen icon, then link Xiaowan, callable tools, and isolated data behind it as an independent plugin."
         },
         "dashboard": {
@@ -238,7 +238,7 @@
       },
       "presentation": {
         "description": {
-          "zh": "让小万在聊天中直接组合 OmniLink 原语：查询另一台手机的电量和在线状态，订阅隐私安全的事件摘要，给另一台设备上的小万发信号，并自动把事件回流当前会话。",
+          "zh": "让小程在聊天中直接组合 OmniLink 原语：查询另一台手机的电量和在线状态，订阅隐私安全的事件摘要，给另一台设备上的小程发信号，并自动把事件回流当前会话。",
           "en": "Let Xiaowan compose OmniLink primitives from chat: query another phone's battery and reachability, subscribe to privacy-safe event summaries, signal another Xiaowan, and surface events in the current conversation."
         },
         "readiness": "omnilink_local_gateway",
@@ -250,7 +250,7 @@
               "en": "Inspect devices first"
             },
             "description": {
-              "zh": "说“列出协作设备”，小万会读取设备 readiness，再按你的意图组合查询。",
+              "zh": "说“列出协作设备”，小程会读取设备 readiness，再按你的意图组合查询。",
               "en": "Say “list collaboration devices”; Xiaowan reads readiness and composes the requested query."
             }
           },
@@ -261,7 +261,7 @@
               "en": "Query the other phone"
             },
             "description": {
-              "zh": "说“查另一台手机的电量和是否在线”，小万会读取实时 readiness。",
+              "zh": "说“查另一台手机的电量和是否在线”，小程会读取实时 readiness。",
               "en": "Say “check the other phone's battery and reachability”; Xiaowan reads live readiness."
             }
           },
@@ -279,22 +279,22 @@
           {
             "icon": "notifications",
             "title": {
-              "zh": "小万自己组合事件订阅",
+              "zh": "小程自己组合事件订阅",
               "en": "Compose event subscriptions"
             },
             "description": {
-              "zh": "说“开始接收另一台手机的通知”，小万会选择安全事件类型并建立持续回流。",
+              "zh": "说“开始接收另一台手机的通知”，小程会选择安全事件类型并建立持续回流。",
               "en": "Say “start receiving notifications from the other phone”; Xiaowan selects safe event types and starts the stream."
             }
           },
           {
             "icon": "send",
             "title": {
-              "zh": "让两个小万互相发信号",
+              "zh": "让两个小程互相发信号",
               "en": "Message between Agents"
             },
             "description": {
-              "zh": "说“给另一台设备上的小万发消息：……”；消息带幂等 ID，可安全重试。",
+              "zh": "说“给另一台设备上的小程发消息：……”；消息带幂等 ID，可安全重试。",
               "en": "Say “send a message to the other Xiaowan: …”; messages carry an idempotency ID and can be retried safely."
             }
           },
@@ -322,7 +322,7 @@
               "en": "Return to chat and say “List collaboration devices.”"
             },
             {
-              "zh": "再说“给设备 <device_id> 上的小万发消息：请回复 READY”。",
+              "zh": "再说“给设备 <device_id> 上的小程发消息：请回复 READY”。",
               "en": "Then say “Send to device <device_id>: reply READY.”"
             },
             {
@@ -353,11 +353,11 @@
             "en": "Read device readiness"
           },
           "Send idempotent Agent messages": {
-            "zh": "向另一个小万发送可重试消息",
+            "zh": "向另一个小程发送可重试消息",
             "en": "Send retry-safe Agent messages"
           },
           "Subscribe to Agent message events": {
-            "zh": "订阅另一台设备的小万消息",
+            "zh": "订阅另一台设备的小程消息",
             "en": "Subscribe to peer Agent events"
           },
           "Reconnect-safe event cursors": {

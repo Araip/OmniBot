@@ -42,7 +42,7 @@ class _WebViewPageState extends State<WebViewPage> {
   bool _isDownloading = false;
 
   /// 保存到的相册名称
-  static const String _albumName = '小万';
+  static const String _albumName = '小程';
 
   /// 可下载的文件扩展名
   static const _downloadableExtensions = [

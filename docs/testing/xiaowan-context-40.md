@@ -1,4 +1,4 @@
-# 小万长上下文 40 步长期回归
+# 小程长上下文 40 步长期回归
 
 测试集 ID：`xiaowan-context-40`。复用 `verify-agent-user-journey.mjs`，按顺序在同一个隔离模拟器、同一条聊天中执行：
 
@@ -12,7 +12,7 @@
 
 ## 准备
 
-需要 Node.js、Python 3.9+、ADB、已安装 debug APK 的隔离模拟器及其 `run-as`/SQLite 测试能力。用例页面为英文，小万模式，聊天已打开且空闲。复用旧的压力测试聊天可覆盖持续累积；新聊天的 40 步不等于复现历史上数千条记录的堆压力。
+需要 Node.js、Python 3.9+、ADB、已安装 debug APK 的隔离模拟器及其 `run-as`/SQLite 测试能力。用例页面为英文，小程模式，聊天已打开且空闲。复用旧的压力测试聊天可覆盖持续累积；新聊天的 40 步不等于复现历史上数千条记录的堆压力。
 
 ```sh
 python3 scripts/fixtures/generate-context-files.py /tmp/oob-context-data
@@ -37,7 +37,7 @@ OOB_FILE_TEST_DIR=/tmp/oob-context-data OOB_FILE_TEST_IMAGE=/tmp/oob-context-dat
 adb -s emulator-5560 shell am broadcast -n cn.com.omnimind.bot/.debug.DebugModelProviderConfigReceiver -a cn.com.omnimind.bot.debug.CONFIGURE_MODEL_PROVIDER --es operation configure --es profileId oob-context-regression --es name OOB-Context-Regression --es baseUrl http://10.0.2.2:18769/v1 --es apiKey fixture-not-a-secret --es modelId gpt-4o
 ```
 
-配置结果保存在 App 的 `files/debug-model-provider-config-result.json`，确认 success 后在小万聊天中选择该测试模型。测试保留聊天数据，不执行卸载或清数据。
+配置结果保存在 App 的 `files/debug-model-provider-config-result.json`，确认 success 后在小程聊天中选择该测试模型。测试保留聊天数据，不执行卸载或清数据。
 
 ## 执行
 

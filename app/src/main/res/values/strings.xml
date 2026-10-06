@@ -20,7 +20,7 @@
     <string name="quick_log_font_regular">常规</string>
     <string name="quick_log_font_large">大</string>
     <string name="quick_log_entry_title">写入记忆</string>
-    <string name="quick_log_entry_subtitle">写下想记住的内容，小万会把它同步到短期记忆。</string>
+    <string name="quick_log_entry_subtitle">写下想记住的内容，小程会把它同步到短期记忆。</string>
     <string name="quick_log_entry_edit_title">编辑记忆</string>
     <string name="quick_log_entry_edit_subtitle">这里的修改会同步回短期记忆。</string>
     <string name="quick_log_entry_hint">写下想记住的内容</string>

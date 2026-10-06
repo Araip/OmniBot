@@ -48,7 +48,7 @@ class AcpAgentProfileStoreTest {
 
     @Test
     fun `custom display name does not become a built-in identity`() =
-        assertCustomProfileSurvives(name = "小万", command = "my-acp")
+        assertCustomProfileSurvives(name = "小程", command = "my-acp")
 
     @Test
     fun `a custom profile can explicitly launch the built-in command`() =
@@ -57,14 +57,14 @@ class AcpAgentProfileStoreTest {
     @Test
     fun `reading an existing custom adapter cannot rewrite its saved ownership`() =
         assertCustomProfileSurvives(
-            name = "小万 Bot", command = "/workspace/xiaowan-next/acp", preexisting = true,
+            name = "小程 Bot", command = "/workspace/xiaowan-next/acp", preexisting = true,
         )
 
     @Test
     fun `known legacy identity still migrates its selection and conversation bindings`() {
         val context = acpProfileStoreTestContext(directory.root)
         val legacy = AcpAgentProfile(
-            id = "legacy-xiaowan-bot", name = "小万 Bot", command = "legacy-xiaowan",
+            id = "legacy-xiaowan-bot", name = "小程 Bot", command = "legacy-xiaowan",
         )
         context.getSharedPreferences("acp_agent_profiles", Context.MODE_PRIVATE).edit()
             .putString("profiles", Gson().toJson(listOf(legacy)))

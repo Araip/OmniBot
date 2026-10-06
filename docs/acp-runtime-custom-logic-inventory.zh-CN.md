@@ -139,7 +139,7 @@ Conversation
 | `AgentLlmClient.kt` | Provider 拒绝 thinking 后切换参数、拒绝 image 后去掉图片、模型不支持时切换候选模型、reasoning leak 后换 variant | 这些是兼容策略，不是 ACP；每个 fallback 都应有 Provider capability 依据。若官方 SDK/Provider 已负责，应删除本地 fallback。 |
 | `AgentLlmClient.kt`、`AgentTurnTimingPolicy.kt` | `PROVIDER_STREAM_IDLE_TIMEOUT_MS = 90_000` 及 idle watchdog | 不是 Agent turn 完成判定，但仍是宿主 watchdog。应下沉给 Provider transport 或设为明确的 transport capability；不能叫 ACP 超时。 |
 | `AgentLlmStreamAccumulator.kt` | `<think>` 标签识别、reasoning leak 检测、首段 buffer 900 字符/6 chunks、日志 preview 500 | 供应商输出兼容和展示优化；不属于通用 ACP。应按 Provider adapter 拆分，删除与官方 stream 已重复的判断。 |
-| `AgentConversationContextCompactor.kt` | 小万内部上下文压缩和用户显式 `/compact` | 2026-09-06 按用户要求局部恢复容量判断、预留余量与每轮自动压缩。它属于小万现有 prompt 内部的上下文管理，不创建 ACP turn、不重放请求；外部 Harness 仍管理各自上下文。 |
+| `AgentConversationContextCompactor.kt` | 小程内部上下文压缩和用户显式 `/compact` | 2026-09-06 按用户要求局部恢复容量判断、预留余量与每轮自动压缩。它属于小程现有 prompt 内部的上下文管理，不创建 ACP turn、不重放请求；外部 Harness 仍管理各自上下文。 |
 | `AgentOrchestrator.kt` | Provider 溢出直接结束当前 prompt；截断 tool call 回传错误 | 不再识别 overflow 后替换历史或重试，也不再有无进展 fingerprint。保留的 tool-call 配对必须不重放副作用。 |
 
 ### 4.3 当前明确存在的风险

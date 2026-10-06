@@ -5,7 +5,7 @@ description: 在当前 Android 设备安装、升级或修复 DSH、Codex、Clau
 
 # 在本机安装 ACP 助手
 
-由已经可用的小万执行安装。使用 skills_read 加载本技能后，通过 terminal_execute 在当前设备的内置 Linux / PRoot 环境执行；不把安装转移到开发者电脑，也不要求尚未安装的目标助手安装自己。
+由已经可用的小程执行安装。使用 skills_read 加载本技能后，通过 terminal_execute 在当前设备的内置 Linux / PRoot 环境执行；不把安装转移到开发者电脑，也不要求尚未安装的目标助手安装自己。
 
 ## 1. 确认目标与环境
 

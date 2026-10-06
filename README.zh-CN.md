@@ -79,7 +79,7 @@ OmniBot 是一个基于 Android 原生 Kotlin 与 Flutter 构建的端侧 AI Age
 
 ### Skills
 
-你可以直接把 skills 仓库链接发给小万，让她帮你安装。推荐仓库：https://github.com/OpenMinis/MinisSkills
+你可以直接把 skills 仓库链接发给小程，让她帮你安装。推荐仓库：https://github.com/OpenMinis/MinisSkills
 
 在技能仓库中可以选择开启或关闭某项技能：
 

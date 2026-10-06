@@ -1,4 +1,4 @@
-# 小万 Kotlin 上下文超限修复
+# 小程 Kotlin 上下文超限修复
 
 状态：修复代码、本地测试、APK 构建及模拟器回归完成；**待真机验证**。尚未取得原报错服务的模型信息及长度单位，因此不宣称原手机和原服务已验收。
 
@@ -12,7 +12,7 @@
 - `AgentConversationContextCompactor` 复核摘要输入和重建后的大小；摘要输出设置明确预算。失败、空摘要、截断或重建后仍过大时停止当前请求，不继续发送已知超限原文。
 - `AgentOrchestrator` 识别服务端明确的 `Prompt exceeds max length` / `Input length ... exceeds ...` 拒绝；若该请求尚未开始输出，则只在同一 ACP turn 内强制调用既有压缩器并重建一次请求。已经开始输出时不重放、不创建新 turn。
 - 既有 Conversation 检查点支持已完成工具组边界。只接受完整、唯一的 canonical tool/assistant 匹配；日志投影尚未提交或身份有歧义时不推进持久化 cutoff，原始历史保留，下一次加载由发送前检查重新维护上下文。
-- 小万子任务使用同一压缩器工厂，但 conversationId 为 null，不写父会话摘要；手动压缩也接入既有 offload 能力。
+- 小程子任务使用同一压缩器工厂，但 conversationId 为 null，不写父会话摘要；手动压缩也接入既有 offload 能力。
 
 此次没有修改模型容量与用户阈值的配置同步逻辑，也没有修改外部 ACP Harness 内部循环。估算不是精确 tokenizer；不可分割且过大的用户输入会明确报错，不能保证任意单条输入都能自动处理。
 
@@ -43,7 +43,7 @@
 
 ## 模拟器实际操作
 
-设备：Android 13 ARM64，隔离 AVD `OobCleanInstall20260907` / `emulator-5560`。保留旧数据，安装修复 APK 后新建小万对话。测试 Provider 为本机受控接口，没有调用外部收费模型。
+设备：Android 13 ARM64，隔离 AVD `OobCleanInstall20260907` / `emulator-5560`。保留旧数据，安装修复 APK 后新建小程对话。测试 Provider 为本机受控接口，没有调用外部收费模型。
 
 执行入口：
 

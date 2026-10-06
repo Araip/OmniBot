@@ -1,4 +1,4 @@
-# Pi Agent 设计研究与小万优化映射
+# Pi Agent 设计研究与小程优化映射
 
 ## 研究基线
 
@@ -8,7 +8,7 @@
 - commit 时间：2026-08-13T00:53:22+02:00
 - 重点范围：`packages/agent`、`packages/coding-agent/src/core`
 
-本文只把能够说明收益、失败边界和回归门槛的设计迁移到小万。Pi 面向桌面编程 Agent，小万同时操作 Android、终端、浏览器和特权能力，不能直接复制其默认并行或自扩展策略。
+本文只把能够说明收益、失败边界和回归门槛的设计迁移到小程。Pi 面向桌面编程 Agent，小程同时操作 Android、终端、浏览器和特权能力，不能直接复制其默认并行或自扩展策略。
 
 ## 结论
 
@@ -95,9 +95,9 @@ Pi 的核心优势不是某一段 Prompt，而是把 Agent 拆成可组合的运
 
 - provider、model、stop reason、token、cache、cost、首块延迟、重试和 operation outcome 使用低基数结构化字段。
 
-## 与小万的对照
+## 与小程的对照
 
-### 小万已有等价机制
+### 小程已有等价机制
 
 - `AgentToolConcurrencyPolicy` 已采用“默认串行、纯读白名单并行”，比 Pi 的默认全局并行更适合 Android 副作用工具。
 - `AgentOrchestrator` 已保持并行执行、原调用顺序写回，并支持工具手动中断。
@@ -106,7 +106,7 @@ Pi 的核心优势不是某一段 Prompt，而是把 Agent 拆成可组合的运
 - `streamTurnWithRetry` 已使用协程 `delay`，取消运行时不会继续等待重试。
 - `SubagentDispatcher` 已有受限 profile、轮数和输出预算。
 
-### 小万上下文窗口审计
+### 小程上下文窗口审计
 
 当前链路由四层组成：
 
@@ -131,7 +131,7 @@ Pi 的核心优势不是某一段 Prompt，而是把 Agent 拆成可组合的运
 
 这些方向有价值，但需要数据库迁移、UI 语义或真实设备故障注入，不能在没有专项验证时直接并入：
 
-1. **Steering/follow-up 队列**：允许用户在小万运行中追加“立即调整”或“完成后继续”。需要明确消息持久化、取消和多端同步语义。
+1. **Steering/follow-up 队列**：允许用户在小程运行中追加“立即调整”或“完成后继续”。需要明确消息持久化、取消和多端同步语义。
 2. **Durable operation state**：为模型请求、工具执行和等待权限记录 intent/result，进程重启后避免重复副作用。应先从 terminal、browser、privileged action 三类非幂等工具试点。
 3. **确定性压缩附件**：从 tool result 中提取已读文件、已改文件、生成 artifact 和未完成工具，独立于模型摘要保存。
 4. **完整工具输出 artifact**：大输出在模型上下文中保留 head/tail 和路径，完整内容存 workspace 临时文件并可按需读取。
@@ -148,4 +148,4 @@ Pi 的核心优势不是某一段 Prompt，而是把 Agent 拆成可组合的运
 3. 没有隐式副作用重放；恢复和重试要区分模型请求、只读工具和非幂等工具。
 4. 有聚焦测试覆盖新分支，并保留现有编排器、记忆、压缩和并发策略测试。
 5. 能观测收益：至少对应安全事件、token、延迟、成功率或恢复率中的一项。
-6. 不把 Pi 的未实现 harness 骨架、桌面 shell 假设或无限制自修改直接带入小万。
+6. 不把 Pi 的未实现 harness 骨架、桌面 shell 假设或无限制自修改直接带入小程。

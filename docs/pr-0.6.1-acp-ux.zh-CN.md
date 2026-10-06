@@ -53,9 +53,9 @@
 ### 4. Provider、Adapter 与会话配置
 
 - 模型缓存跟随保存后的 Provider identity／revision；合法空目录可以替换旧缓存，临时凭据查询不污染保存配置，迟到响应不覆盖新配置。
-- 自定义 Adapter 保留用户命令、参数、环境和 API 配置，不因名称含小万而误删；保存配置不主动打断正在运行的进程，下次进程启动使用新配置。
+- 自定义 Adapter 保留用户命令、参数、环境和 API 配置，不因名称含小程而误删；保存配置不主动打断正在运行的进程，下次进程启动使用新配置。
 - 模型选择按 session 保存并核对 Provider 归属。聊天已有输入区接入模型与参数弹层，读取 ACP configOptions 并沿 setSessionConfigOption 写入；外部选项不在 Flutter 另造厂商生命周期。
-- 当前内置小万实际仍声明 default/none/low/medium/high/max 推理档位，default 不发送 override，切换模型重置为 default。这是本地声明，并非已验证所有 Provider 都支持全部档位；此处以当前代码为准，修正较早“完全不声明档位”的阶段记录。
+- 当前内置小程实际仍声明 default/none/low/medium/high/max 推理档位，default 不发送 override，切换模型重置为 default。这是本地声明，并非已验证所有 Provider 都支持全部档位；此处以当前代码为准，修正较早“完全不声明档位”的阶段记录。
 - 普通会话启动读取缓存；用户显式刷新配置可刷新模型目录。当前 Node 源码契约与该显式刷新路径冲突，见失败清单。
 - 弹层避让键盘；工作区目录主刷新改为异步 IO 并忽略过期目录结果，避免页面刷新／滑动期间同步扫描，保留加载与错误状态。并非所有工作区同步 IO 已清除。
 

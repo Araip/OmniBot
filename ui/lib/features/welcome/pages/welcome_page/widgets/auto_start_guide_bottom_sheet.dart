@@ -68,12 +68,12 @@ class _AutoStartGuideBottomSheetState extends State<AutoStartGuideBottomSheet>
     ),
     _GuidePageData(
       title: '',
-      subtitle: '关闭小万右侧的"自动管理开关"(状态如图),此时会出现手动管理弹框。',
+      subtitle: '关闭小程右侧的"自动管理开关"(状态如图),此时会出现手动管理弹框。',
       imagePath: 'assets/welcome/auto_start_guide_2.png',
       titleSpan: TextSpan(
         children: [
           TextSpan(
-            text: '确保" 小万 " 的启动管理为',
+            text: '确保" 小程 " 的启动管理为',
             style: TextStyle(
               color: Colors.black,
               fontSize: 14,
@@ -95,7 +95,7 @@ class _AutoStartGuideBottomSheetState extends State<AutoStartGuideBottomSheet>
     ),
     _GuidePageData(
       title: '开启所有开关',
-      subtitle: '需要把所有的启动开关和后台活动开关都开启,小万就能随时陪着你啦!',
+      subtitle: '需要把所有的启动开关和后台活动开关都开启,小程就能随时陪着你啦!',
       imagePath: 'assets/welcome/auto_start_guide_3.png',
     ),
   ];

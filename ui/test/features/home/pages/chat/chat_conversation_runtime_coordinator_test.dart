@@ -55,7 +55,7 @@ void main() {
     String? sessionId,
     Map<String, dynamic> params = const <String, dynamic>{},
     String agentId = 'xiaowan-acp',
-    String agentName = '小万',
+    String agentName = '小程',
     int? conversationId,
     bool hostAssignedTurn = false,
   }) {
@@ -90,7 +90,7 @@ void main() {
     Map<String, dynamic> params = const <String, dynamic>{},
     String mode = kChatRuntimeModeAgent,
     String agentId = 'xiaowan-acp',
-    String agentName = '小万',
+    String agentName = '小程',
     bool hostAssignedTurn = false,
   }) {
     if (method == 'turn/started' &&

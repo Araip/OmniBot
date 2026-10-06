@@ -319,7 +319,7 @@ class VlmToolHandler(context: Context) : ToolHandler {
             ?.isConfigured() == true
         if (boundProviderReady || ModelProviderConfigStore.getConfig().isConfigured()) return null
 
-        return "小万官方内置模型暂不可用，请稍后重试或在模型场景中选择其他 Provider。"
+        return "小程官方内置模型暂不可用，请稍后重试或在模型场景中选择其他 Provider。"
     }
 }
 

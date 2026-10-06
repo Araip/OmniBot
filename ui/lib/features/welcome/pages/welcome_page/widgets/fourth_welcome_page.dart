@@ -207,7 +207,7 @@ class _FourthWelcomePageState extends State<FourthWelcomePage>
               const SizedBox(height: 85),
               // 顶部标题
               GradientText(
-                LegacyTextLocalizer.localize('让小万带你执行一次任务吧！'),
+                LegacyTextLocalizer.localize('让小程带你执行一次任务吧！'),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: const Color(0xFF91DCFF),

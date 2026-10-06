@@ -272,7 +272,7 @@ class _StartupAccountSlogan extends StatelessWidget {
     final slogan = Semantics(
       header: true,
       child: Text(
-        '小万通灵，云启大千',
+        '小程通灵，云启大千',
         key: const ValueKey('startup-account-slogan'),
         maxLines: 1,
         overflow: TextOverflow.fade,

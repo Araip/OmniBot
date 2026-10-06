@@ -114,7 +114,7 @@ class _AppSelectionBottomSheetState extends State<AppSelectionBottomSheet> {
           Text(
             Localizations.localeOf(context).languageCode == 'en'
                 ? 'Which app would you like to try Omnibot in?'
-                : '想要在哪个应用中体验小万？',
+                : '想要在哪个应用中体验小程？',
             style: const TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w500,

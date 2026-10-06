@@ -108,7 +108,7 @@ class _AccessibilityPermissionDialogState
           Text(
             _text(
               context,
-              '小万需要读取页面并执行点击、滑动和输入。',
+              '小程需要读取页面并执行点击、滑动和输入。',
               'Omnibot needs to observe the screen and perform taps, swipes, and text input.',
             ),
           ),
@@ -121,7 +121,7 @@ class _AccessibilityPermissionDialogState
           Text(
             _text(
               context,
-              '系统设置 → 无障碍 → 已下载的应用（或已安装的服务）→ 小万 → 开启',
+              '系统设置 → 无障碍 → 已下载的应用（或已安装的服务）→ 小程 → 开启',
               'System Settings → Accessibility → Downloaded apps (or Installed services) → Omnibot → On',
             ),
           ),

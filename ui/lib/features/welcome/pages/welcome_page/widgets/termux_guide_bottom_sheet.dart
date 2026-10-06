@@ -214,7 +214,7 @@ class _TermuxGuideBottomSheetState extends State<TermuxGuideBottomSheet>
           ),
           const SizedBox(height: 12),
           const Text(
-            '开启后，小万会直接在应用内所选的 Alpine 或 Ubuntu（proot）环境执行终端命令，不需要再单独安装 Termux；/workspace 会映射到 Omnibot 应用内部工作区。',
+            '开启后，小程会直接在应用内所选的 Alpine 或 Ubuntu（proot）环境执行终端命令，不需要再单独安装 Termux；/workspace 会映射到 Omnibot 应用内部工作区。',
             style: TextStyle(
               color: AppColors.text,
               fontSize: 14,

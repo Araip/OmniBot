@@ -1,4 +1,4 @@
-# 小万文件读取模拟器验收
+# 小程文件读取模拟器验收
 
 用户本轮明确要求在模拟器测试。本报告只代表模拟器验证，不代表实体手机验收，也不修改“所有 bug 需真机测试”的长期默认规则。
 
@@ -6,7 +6,7 @@
 
 - Android 13 ARM64，隔离 AVD `emulator-5560`，2 GB RAM，应用 Java heap growth limit 192 MiB。
 - 已安装 APK SHA-256 与本轮构建文件一致：`8698d4fbd47fb80a69f90ededc529d62484ac27a9a64180a85dd7fb063338833`。
-- 小万模式，测试 Provider `oob-emulator-regression`，本机受控 HTTP/SSE 接口；没有调用外部真实模型。
+- 小程模式，测试 Provider `oob-emulator-regression`，本机受控 HTTP/SSE 接口；没有调用外部真实模型。
 - 通过实际 UI 新建对话、发送消息、点击停止、切换对话和重启。文件读取、模型请求、ACP 状态更新和历史存储均由 App 自身执行。
 - 使用每轮唯一标记，防止旧成功消息满足新测试；测试后端验证文件内容、图像哈希及重复结果。保存截图与步骤报告。
 
@@ -18,7 +18,7 @@
 OOB_FILE_TEST_DIR=/tmp/oob-file-repro OOB_FILE_TEST_IMAGE=/tmp/oob-large.png \
   node scripts/fixtures/file-read-provider.mjs
 
-# 在小万中新建空白对话后执行；脚本自己添加唯一 runId。
+# 在小程中新建空白对话后执行；脚本自己添加唯一 runId。
 node scripts/verify-agent-user-journey.mjs emulator-5560 \
   scripts/fixtures/agent-user-journeys/xiaowan-file-read-regression.en.json \
   docs/testing/artifacts/xiaowan-emulator-acceptance-2026-09-07

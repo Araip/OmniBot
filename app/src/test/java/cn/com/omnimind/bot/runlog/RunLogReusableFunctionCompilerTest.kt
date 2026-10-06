@@ -16,7 +16,7 @@ class RunLogReusableFunctionCompilerTest {
             success = true,
             steps = listOf(
                 step(0, "state-before", "click", mapOf("x" to 120.0, "y" to 240.0)),
-                step(1, "state-form", "input_text", mapOf("text" to "小万")),
+                step(1, "state-form", "input_text", mapOf("text" to "小程")),
                 step(2, "state-keyboard", "press_key", mapOf("key" to "BACK")),
             ),
             diagnostics = mapOf("done_reason" to "finished"),

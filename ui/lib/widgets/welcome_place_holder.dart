@@ -125,7 +125,7 @@ class _WelcomePlaceHolderState extends State<WelcomePlaceHolder> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24.0),
             child: Text(
-              LegacyTextLocalizer.localize('🎉Hi，我是小万，我会做很多事，让我展示给你下！'),
+              LegacyTextLocalizer.localize('🎉Hi，我是小程，我会做很多事，让我展示给你下！'),
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 16,

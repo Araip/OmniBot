@@ -44,6 +44,6 @@ void main() {
     );
 
     expect(find.text('你好👋，我是OpenCode'), findsOneWidget);
-    expect(find.textContaining('我是小万'), findsNothing);
+    expect(find.textContaining('我是小程'), findsNothing);
   });
 }

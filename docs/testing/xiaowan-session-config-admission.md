@@ -1,8 +1,8 @@
-# 小万配置与参数弹层生命周期回归
+# 小程配置与参数弹层生命周期回归
 
 ## 已复现的边界
 
-- 小万配置原来只检查 `activePromptJob.isActive`。请求已预留但 worker 未启动，以及取消后仍在 finally 清理时，都可能越过该检查；关闭后的 session 也缺少配置入口检查。
+- 小程配置原来只检查 `activePromptJob.isActive`。请求已预留但 worker 未启动，以及取消后仍在 finally 清理时，都可能越过该检查；关闭后的 session 也缺少配置入口检查。
 - prompt 在等待既有执行锁之后没有复查 closed，可能在关闭后进入附件/工具准备。
 - 参数弹层使用 root OverlayEntry。单独的 BackButtonListener 不能让 Android 根页面提前知道返回可被消费；真实模拟器按返回直接退到桌面。LocalHistoryEntry 的中间修正也未解决 Android 的 popDisposition，保留失败证据。
 

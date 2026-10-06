@@ -112,7 +112,7 @@ object AppLocaleManager {
 
     fun brandName(locale: PromptLocale): String {
         return when (locale) {
-            PromptLocale.ZH_CN -> "小万"
+            PromptLocale.ZH_CN -> "小程"
             PromptLocale.EN_US -> "Omnibot"
         }
     }

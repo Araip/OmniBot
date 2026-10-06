@@ -383,7 +383,7 @@ void main() {
       find.byKey(const ValueKey('home-drawer-omnibot-guide')),
       findsNothing,
     );
-    expect(find.text('小万指南'), findsNothing);
+    expect(find.text('小程指南'), findsNothing);
 
     await tester.tap(find.text('开始对话'));
     await tester.pumpAndSettle();
@@ -1393,7 +1393,7 @@ void main() {
     // Agent/Xiaowan histories share the default history timeline; no
     // redundant Xiaowan section header is rendered.
     expect(find.text('Agent'), findsNothing);
-    expect(find.text('小万'), findsNothing);
+    expect(find.text('小程'), findsNothing);
     expect(find.text('纯聊天'), findsOneWidget);
 
     // 每条 Agent 会话直接显示具体 Harness，不再显示 Workspace 分组。
@@ -1505,7 +1505,7 @@ void main() {
         find.byKey(const ValueKey('home-drawer-completed-agent:61')),
         findsOneWidget,
       );
-      expect(find.byTooltip('小万 · 已完成'), findsOneWidget);
+      expect(find.byTooltip('小程 · 已完成'), findsOneWidget);
     },
   );
 }

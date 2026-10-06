@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 /// 思考中浮动三个点动画组件
-/// 用于替代"小万正在思考..."文字，展示更简洁的加载状态
+/// 用于替代"小程正在思考..."文字，展示更简洁的加载状态
 class ThinkingDotsIndicator extends StatefulWidget {
   /// 点的颜色
   final Color dotColor;

@@ -1,6 +1,6 @@
 # ACP 文件读取官方对照与当前覆盖范围
 
-后续范围更新：用户明确要求优先处理小万，其他 Harness 内部 loop 和文件策略由各自负责。小万公共模型结果与 ACP 展示结果的去重已另行实现，见 [小万结果去重](xiaowan-tool-result-dedup-2026-09-07.md)。以下为本次审计时的记录，外部 ACP 文件回调等风险不作为这轮小万修复的扩展任务。
+后续范围更新：用户明确要求优先处理小程，其他 Harness 内部 loop 和文件策略由各自负责。小程公共模型结果与 ACP 展示结果的去重已另行实现，见 [小程结果去重](xiaowan-tool-result-dedup-2026-09-07.md)。以下为本次审计时的记录，外部 ACP 文件回调等风险不作为这轮小程修复的扩展任务。
 
 ## 结论
 
@@ -18,7 +18,7 @@
 
 - `agent/runtime/AgentEventAdapter.kt::toolResultContent`：模型工具结果仍可同时包含 previewJson、rawResultJson 两份相同正文。
 - `agent/XiaowanAcpConnection.kt::toolResultAcpPayload`：ContextResult/McpResult 等仍可包含 previewJson、rawResultJson、result、rawResult，序列化时同一内容可出现四份。上次图片修复避免本地原图 Base64 进入这些 UI 字段；文本分页控制每次读取量，但未消除公共字段重复。
-- `agent/runtime/LocalAcpRuntime.kt::fsReadTextFile`：无 line/limit 时 `file.readText()`；有范围时 useLines 仍可分配完整超长单行。该入口没有采用小万 `file_read` 的分页辅助函数。这是源码确认的内存风险，尚未在该 ACP 入口单独复现 OOM。
+- `agent/runtime/LocalAcpRuntime.kt::fsReadTextFile`：无 line/limit 时 `file.readText()`；有范围时 useLines 仍可分配完整超长单行。该入口没有采用小程 `file_read` 的分页辅助函数。这是源码确认的内存风险，尚未在该 ACP 入口单独复现 OOM。
 - `FileToolHandler.file_edit` 仍全文读写，file_search 使用整行读取，file_list/search 默认结果数量可不受限。它们不是上次 file_read 分页测试的覆盖对象。
 - Flutter 文本编辑器全文加载、PDF 极端长宽比页面渲染风险见 [文件读取报告](file-read-memory-2026-09-07.md)。
 
@@ -26,7 +26,7 @@
 
 核对日期 2026-09-07，v1 文档：
 
-1. [File System](https://agentclientprotocol.com/protocol/v1/file-system)：`fs/read_text_file` 是文本接口，支持可选的 1-based line 和最大行数 limit；响应为 content。协议没有规定统一 64 KiB 上限或 nextOffset 分页字段。小万工具的字符分页属于工具契约，不应直接套入标准 ACP 响应、悄悄返回缺失正文。
+1. [File System](https://agentclientprotocol.com/protocol/v1/file-system)：`fs/read_text_file` 是文本接口，支持可选的 1-based line 和最大行数 limit；响应为 content。协议没有规定统一 64 KiB 上限或 nextOffset 分页字段。小程工具的字符分页属于工具契约，不应直接套入标准 ACP 响应、悄悄返回缺失正文。
 2. [Content](https://agentclientprotocol.com/protocol/v1/content)：区分 text、image、audio、embedded resource、resource_link。图像块的 data 是必需 Base64，可选 uri 不是 data 的替代字段；resource_link 适用于接收方可访问的资源。跨设备不能仅传本机绝对路径就假设 Agent 能读取。
 3. [Tool Calls](https://agentclientprotocol.com/protocol/v1/tool-calls)：content、locations、rawInput/rawOutput 用于工具报告。规范不要求我们自定义的 previewJson/rawResultJson/result/rawResult 四套重复正文；更新只需发送变化字段。
 
@@ -51,7 +51,7 @@
 ## 后续修复应守住的边界
 
 - 在既有工具结果和 ACP 投影边界消除重复正文，复用既有共享 reducer；不要增加新事件协议或页面专用生命周期。
-- 文本工具按范围/分页返回并明确剩余内容；保留原文件。官方 ACP 回调必须保持请求范围的语义，不能把小万 nextOffset 契约强加给未知 Agent。
+- 文本工具按范围/分页返回并明确剩余内容；保留原文件。官方 ACP 回调必须保持请求范围的语义，不能把小程 nextOffset 契约强加给未知 Agent。
 - 对标准 ACP 回调的大响应，需在真实 SDK 序列化链上复现并修复内存分配；无法完成请求时应通过既有 RPC 错误路径明确失败，而非截断后标记成功。具体资源策略尚未在本轮实现，不能计为通过。
 - 模型媒体能力和 UI 展示分别处理，客户端可以加载本地文件预览；模型实际需要图像时仍按其能力提供图像数据。
 

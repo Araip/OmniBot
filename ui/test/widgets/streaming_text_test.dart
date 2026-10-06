@@ -17,7 +17,7 @@ void main() {
 
   test('detects prose versus structured Markdown', () {
     expect(
-      omnibotTextRequiresStructuredMarkdown('在呢~ 😊 小万随时待命。\n今天有什么想让我帮忙的吗？'),
+      omnibotTextRequiresStructuredMarkdown('在呢~ 😊 小程随时待命。\n今天有什么想让我帮忙的吗？'),
       isFalse,
     );
     expect(omnibotTextRequiresStructuredMarkdown('## 标题'), isTrue);
@@ -41,7 +41,7 @@ void main() {
   testWidgets(
     'plain streamed prose keeps one layout across Markdown flush markers',
     (tester) async {
-      const text = '在呢~ 😊 小万随时待命。今天有什么想让我帮忙的吗？比如查点什么、整理文件、设个提醒。';
+      const text = '在呢~ 😊 小程随时待命。今天有什么想让我帮忙的吗？比如查点什么、整理文件、设个提醒。';
 
       Widget build({
         required int? markdownRenderedLength,

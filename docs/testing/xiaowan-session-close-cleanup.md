@@ -1,4 +1,4 @@
-# 小万 ACP 关闭过程的资源清理
+# 小程 ACP 关闭过程的资源清理
 
 ## 原因与修复
 
@@ -21,7 +21,7 @@
 追加的 `xiaowan-close-cleanup-smoke.en.json` 用本地 API 测试 Stop 后下一轮及重启历史，已在 emulator-45562 使用现有本地 API 完整执行 11/11 步通过。精确关闭取消时序及物理设备验收均待验证。
 
 
-模拟器补充回归入口（预先安装记录版本、选择现有本地 API 小万空闲会话）：
+模拟器补充回归入口（预先安装记录版本、选择现有本地 API 小程空闲会话）：
 
 ```sh
 node scripts/verify-agent-user-journey.mjs emulator-45562 scripts/fixtures/agent-user-journeys/xiaowan-close-cleanup-smoke.en.json /tmp/oob-close-cleanup-unique

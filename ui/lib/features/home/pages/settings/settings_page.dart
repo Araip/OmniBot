@@ -7,6 +7,7 @@ import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:ui/core/router/go_router_manager.dart';
 import 'package:ui/l10n/l10n.dart';
 import 'package:ui/services/mcp_server_service.dart';
+import 'package:ui/services/model_provider_backup_service.dart';
 import 'package:ui/services/storage_service.dart';
 import 'package:ui/services/workspace_memory_service.dart';
 import 'package:ui/theme/app_colors.dart';
@@ -286,13 +287,64 @@ class _SettingsPageState extends State<SettingsPage> {
             },
           ),
           _SettingItem(
-            icon: LucideIcons.fileBox,
-            title: context.l10n.settingsSceneModelTitle,
-            subtitle: context.l10n.settingsSceneModelSubtitle,
-            onTap: () {
-              GoRouterManager.push('/home/scene_model_setting');
+            icon: Icons.upload_file,
+            title: '导出 Key 备份',
+            subtitle: '把本机模型服务商的 Key 导出为备份文件',
+            onTap: () async {
+              final messenger = ScaffoldMessenger.of(context);
+              messenger.showSnackBar(
+                const SnackBar(content: Text('正在导出 Key 备份…')),
+              );
+              try {
+                final result = await ModelProviderBackupService.exportBackup();
+                messenger.hideCurrentSnackBar();
+                messenger.showSnackBar(
+                  SnackBar(
+                    content: Text(
+                      result.filePath == null
+                          ? '备份已生成，请在分享面板中选择保存位置'
+                          : '备份已生成：${result.filePath}',
+                    ),
+                  ),
+                );
+              } catch (error) {
+                messenger.hideCurrentSnackBar();
+                messenger.showSnackBar(
+                  SnackBar(content: Text('导出失败：$error')),
+                );
+              }
             },
           ),
+          _SettingItem(
+            icon: Icons.download,
+            title: '导入 Key 恢复',
+            subtitle: '从备份文件一键恢复，支持导入另一台设备的 Key',
+            onTap: () async {
+              final messenger = ScaffoldMessenger.of(context);
+              try {
+                final result =
+                    await ModelProviderBackupService.importFromPickedFile();
+                if (result.cancelled) {
+                  return;
+                }
+                messenger.showSnackBar(
+                  SnackBar(
+                    content: Text(
+                      result.message ??
+                          '导入完成：新增 ${result.added} 个，更新 ${result.updated} 个',
+                    ),
+                  ),
+                );
+              } catch (error) {
+                messenger.showSnackBar(
+                  SnackBar(content: Text('导入失败：$error')),
+                );
+              }
+            },
+          ),
+          // 「场景模型配置」入口已按要求从设置页隐藏：仅隐藏入口，
+          // 页面与路由 /home/scene_model_setting 保留，记忆嵌入模型仍可从
+          // 工作区记忆设置页进入。
           _SettingItem(
             icon: LucideIcons.database,
             title: context.l10n.settingsWorkspaceMemoryTitle,

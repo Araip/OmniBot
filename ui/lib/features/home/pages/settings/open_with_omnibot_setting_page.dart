@@ -111,7 +111,7 @@ class _OpenWithOmnibotSettingPageState
     final palette = context.omniPalette;
     final sections = [
       _SettingSection(
-        label: context.trLegacy('使用小万打开'),
+        label: context.trLegacy('使用小程打开'),
         items: [
           _SettingItem(
             icon: LucideIcons.image,
@@ -147,7 +147,7 @@ class _OpenWithOmnibotSettingPageState
 
     return Scaffold(
       backgroundColor: palette.pageBackground,
-      appBar: CommonAppBar(title: context.trLegacy('使用小万打开'), primary: true),
+      appBar: CommonAppBar(title: context.trLegacy('使用小程打开'), primary: true),
       body: SafeArea(
         top: false,
         bottom: false,

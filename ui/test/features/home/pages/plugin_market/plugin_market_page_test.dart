@@ -109,7 +109,7 @@ Map<String, Object?> _runtimePlugin() => <String, Object?>{
   'presentation': <String, Object?>{
     'description': <String, Object?>{
       'zh':
-          '小万原生手机操作能力随 APK 提供，无需安装插件即可在线点击、滑动和输入。安装本插件后，还可以录下操作过程、查看每一步，并把成功流程保存下来，在相似任务中自动复用。',
+          '小程原生手机操作能力随 APK 提供，无需安装插件即可在线点击、滑动和输入。安装本插件后，还可以录下操作过程、查看每一步，并把成功流程保存下来，在相似任务中自动复用。',
       'en':
           "XiaoWan's native phone controls ship with the APK, so online taps, swipes, and text input work without this plugin. Install the plugin to record actions, inspect every step, and save successful flows for automatic reuse in similar tasks.",
     },
@@ -134,7 +134,7 @@ Map<String, Object?> _runtimePlugin() => <String, Object?>{
           'en': 'Phone controls work out of the box',
         },
         'description': <String, Object?>{
-          'zh': '打开无障碍权限后，即使不安装插件，也可以直接让小万在线操作手机。',
+          'zh': '打开无障碍权限后，即使不安装插件，也可以直接让小程在线操作手机。',
           'en':
               "The APK uses XiaoWan's accessibility runtime directly for Kotlin online vlm_task.",
         },
@@ -315,7 +315,7 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('插件详情'), findsOneWidget);
-    expect(find.textContaining('小万原生手机操作能力随 APK 提供'), findsOneWidget);
+    expect(find.textContaining('小程原生手机操作能力随 APK 提供'), findsOneWidget);
     expect(find.text('核心功能'), findsOneWidget);
     await tester.scrollUntilVisible(
       find.text('录下你的手机操作'),
@@ -332,7 +332,7 @@ void main() {
     );
     expect(find.text('工作方式'), findsOneWidget);
     expect(find.textContaining('自动准备 OmniFlow 运行环境'), findsOneWidget);
-    expect(find.textContaining('即使不安装插件，也可以直接让小万在线操作手机'), findsOneWidget);
+    expect(find.textContaining('即使不安装插件，也可以直接让小程在线操作手机'), findsOneWidget);
     expect(find.text('安装'), findsOneWidget);
   });
 
@@ -487,7 +487,7 @@ void main() {
       find.textContaining("XiaoWan's native phone controls ship with the APK"),
       findsOneWidget,
     );
-    expect(find.textContaining('小万原生手机操作能力随 APK 提供'), findsNothing);
+    expect(find.textContaining('小程原生手机操作能力随 APK 提供'), findsNothing);
 
     await tester.tap(find.text('OmniFlow'));
     await tester.pumpAndSettle();
@@ -496,7 +496,7 @@ void main() {
       find.textContaining("XiaoWan's native phone controls ship with the APK"),
       findsOneWidget,
     );
-    expect(find.textContaining('小万原生手机操作能力随 APK 提供'), findsNothing);
+    expect(find.textContaining('小程原生手机操作能力随 APK 提供'), findsNothing);
   });
 
   testWidgets('renders a second runtime plugin from presentation', (

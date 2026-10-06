@@ -298,5 +298,5 @@ class MemoryDetailPage extends StatelessWidget {
     return false;
   }
 
-  String get _albumName => '小万';
+  String get _albumName => '小程';
 }

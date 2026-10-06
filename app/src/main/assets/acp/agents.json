@@ -4,8 +4,8 @@
   "agents": [
     {
       "id": "xiaowan-acp",
-      "name": "小万",
-      "description": "小万内置能力通过官方 ACP Agent 接口提供",
+      "name": "小程",
+      "description": "小程内置能力通过官方 ACP Agent 接口提供",
       "command": "omnibot-xiaowan-acp",
       "builtIn": true,
       "runtime": {

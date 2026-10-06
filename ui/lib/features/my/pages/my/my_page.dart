@@ -168,7 +168,7 @@ class MyPageState extends State<MyPage> {
                               },
                             ),
                             SettingTile(
-                              title: '关于小万',
+                              title: '关于小程',
                               onTap: () {
                                 GoRouterManager.push('/my/about');
                               },

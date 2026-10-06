@@ -615,7 +615,7 @@ mixin _ChatPageLifecycleMixin on _ChatPageStateBase {
     String visibleText;
     if (kind == 'omnilink_agent_message') {
       final message = event['message']?.toString().trim() ?? '';
-      visibleText = message.isEmpty ? '' : '来自协作设备上的小万：\n$message';
+      visibleText = message.isEmpty ? '' : '来自协作设备上的小程：\n$message';
     } else if (kind == 'omnilink_device_notification') {
       final applicationId = event['applicationId']?.toString().trim() ?? '';
       final sourceLabel = applicationId.isEmpty ? '协作设备' : applicationId;
@@ -643,7 +643,7 @@ mixin _ChatPageLifecycleMixin on _ChatPageStateBase {
       content: {
         'text': visibleText,
         'id': chatMessageId,
-        'agentName': 'OmniLink 协作小万',
+        'agentName': 'OmniLink 协作小程',
         'source': 'omnilink',
         'sourceDeviceId': sourceDeviceId,
         'messageId': eventId,

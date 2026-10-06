@@ -14,6 +14,6 @@ node scripts/verify-agent-user-journey.mjs emulator-45562 scripts/fixtures/agent
 
 另一次只读合成消息查询确认两轮均属 Conversation 7、Session `01a085e4-0292-7c10-8c6e-8516c0fa4a94`，turnId 各不相同；此跨轮身份检查是本轮补充探针，尚未纳入 journey 的单独 action，不能说由 11 步本身断言。
 
-结果、执行用例、身份与版本记录位于 `artifacts/codex-android-real-20260909/`。当前 App 保留 Codex 会话与已有小万数据。本轮没有产品代码修改。
+结果、执行用例、身份与版本记录位于 `artifacts/codex-android-real-20260909/`。当前 App 保留 Codex 会话与已有小程数据。本轮没有产品代码修改。
 
 这是模拟器上的安装/两轮对话/重启验收，不包含工具、权限、Plan 或物理设备。不能用 Mac CLI 测试补算这些 Android 操作。**待真机验证，整体目标仍未完成。**

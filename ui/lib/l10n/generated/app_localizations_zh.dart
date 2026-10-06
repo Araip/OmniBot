@@ -26,10 +26,10 @@ class AppLocalizationsZh extends AppLocalizations {
   String get memoryShortDeleted => '短期记忆已删除';
 
   @override
-  String get appName => '小万';
+  String get appName => '小程';
 
   @override
-  String get brandName => '小万';
+  String get brandName => '小程';
 
   @override
   String get brandNameEnglish => 'Omnibot';
@@ -122,7 +122,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get settingsLocalServiceTitle => '本机服务';
 
   @override
-  String get settingsLocalServiceSubtitle => '在局域网内访问小万 MCP 和 webchat 服务';
+  String get settingsLocalServiceSubtitle => '在局域网内访问小程 MCP 和 webchat 服务';
 
   @override
   String get settingsAlpineTitle => '终端环境';
@@ -188,7 +188,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get settingsHabitualHandRight => '右手';
 
   @override
-  String get settingsAboutTitle => '关于小万';
+  String get settingsAboutTitle => '关于小程';
 
   @override
   String get settingsHideRecentsFailed => '设置后台隐藏失败';
@@ -429,7 +429,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get networkErrorMessage => '抱歉，刚刚网络开小差了。再发一次试试？';
 
   @override
-  String get rateLimitErrorMessage => '小万忙不过来了，等会儿再试试吧';
+  String get rateLimitErrorMessage => '小程忙不过来了，等会儿再试试吧';
 
   @override
   String get chatHistoryArchivedTitle => '归档对话';
@@ -1311,7 +1311,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get aboutDescription =>
-      '小万，是一款以智能对话为核心的手机AI助\n手，通过语义理解与持续学习能力，协助用户\n完成信息处理、决策辅助和日常管理。';
+      '小程，是一款以智能对话为核心的手机AI助\n手，通过语义理解与持续学习能力，协助用户\n完成信息处理、决策辅助和日常管理。';
 
   @override
   String get aboutBetaProgramTitle => '加入 beta 测试';
@@ -1606,7 +1606,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get alpineWorkDir => '工作目录';
 
   @override
-  String get alpineBootAutoStart => '打开小万时自动启动';
+  String get alpineBootAutoStart => '打开小程时自动启动';
 
   @override
   String get alpineDevEnv => '开发环境';
@@ -1656,7 +1656,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get homeDrawerAgentSection => 'Agent';
 
   @override
-  String get homeDrawerOmniAiSection => '小万';
+  String get homeDrawerOmniAiSection => '小程';
 
   @override
   String get homeDrawerChatOnlySection => '纯聊天';
@@ -1668,7 +1668,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get homeDrawerGreeting => '你好！';
 
   @override
-  String get homeDrawerWelcome => '欢迎使用小万';
+  String get homeDrawerWelcome => '欢迎使用小程';
 
   @override
   String get homeDrawerDawnGreeting => '凌晨啦';
@@ -1728,7 +1728,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get homeDrawerLunchGreeting3 => '午餐不知道吃什么？';
 
   @override
-  String get homeDrawerLunchSub3 => '让小万帮你推荐吧！';
+  String get homeDrawerLunchSub3 => '让小程帮你推荐吧！';
 
   @override
   String get homeDrawerAfternoonGreeting => '喝杯茶提提神';
@@ -1776,7 +1776,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get homeDrawerNightGreeting3 => '该休息了';
 
   @override
-  String get homeDrawerNightSub3 => '让小万帮你定个闹钟吧！';
+  String get homeDrawerNightSub3 => '让小程帮你定个闹钟吧！';
 
   @override
   String get homeDrawerLateNightGreeting => '放下手机早点睡';

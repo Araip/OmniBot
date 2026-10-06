@@ -230,7 +230,7 @@ class _LoadingPageState extends State<LoadingPage>
                     Opacity(
                       opacity: _fadeAnimation.value,
                       child: GradientText(
-                        '我是小万\n你的屏幕伙伴',
+                        '我是小程\n你的屏幕伙伴',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 20,

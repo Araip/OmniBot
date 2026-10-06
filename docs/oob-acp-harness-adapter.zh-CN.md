@@ -1,6 +1,6 @@
 # OOB ACP Harness 适配边界
 
-本文记录 OpenOmniBot（OOB）中小万、Codex、Claude Code、OpenCode 和 DeepSeek Harness 的统一 ACP 接入方式。目标是：每个 Harness 只声明自己的外部运行时差异，主聊天、会话、Provider、流式事件和插件能力全部走同一条主路。
+本文记录 OpenOmniBot（OOB）中小程、Codex、Claude Code、OpenCode 和 DeepSeek Harness 的统一 ACP 接入方式。目标是：每个 Harness 只声明自己的外部运行时差异，主聊天、会话、Provider、流式事件和插件能力全部走同一条主路。
 
 ## 总体原则
 
@@ -60,7 +60,7 @@ val adapter = AcpHarnessAdapters.forProfile(profile)
 
 | Harness | 必须保留的 adapter 差异 | 统一复用的部分 | 是否需要独立配置重写 |
 | --- | --- | --- | --- |
-| 小万 | 使用内置 ACP connection；不需要外部 managed npm 包 | Provider/模型、session、事件、MCP/插件边界 | 不需要 DSH 风格配置文件；只维护自身官方 ACP 启动入口 |
+| 小程 | 使用内置 ACP connection；不需要外部 managed npm 包 | Provider/模型、session、事件、MCP/插件边界 | 不需要 DSH 风格配置文件；只维护自身官方 ACP 启动入口 |
 | Codex | 官方 `config.toml`、`auth.json`、model catalog；Responses wire API | session、Provider 绑定、事件、取消和统一 MCP | 需要自己的官方配置面，但不需要自己的会话/插件机制 |
 | Claude Code | 官方 `settings.json`；`ANTHROPIC_*` 环境变量和模型映射 | ACP 生命周期、Provider、事件、MCP 声明 | 需要自己的配置面；原始 JSON 内容走统一 raw-config 兼容 |
 | OpenCode | 官方 `opencode.json` provider/model 配置；`OPENAI_*` 环境变量 | ACP 生命周期、Provider、事件、MCP 声明 | 需要自己的配置面；只同步共享 Provider/model |
@@ -88,7 +88,7 @@ DeepSeek Harness 的差异是事实上的官方运行时差异，不应被删除
 4. 是否复用了 OmniFlow/MCP 插件系统，没有创建 Harness 专属插件安装器？
 5. Provider 和模型是否仍来自 Agent 的共享绑定，而不是静默恢复旧默认模型？
 6. 配置读写、安装、MCP transport 和协议归一化是否有聚焦单测？
-7. 切换 Harness 后是否验证首轮、第二轮、取消、重新连接和切回小万？
+7. 切换 Harness 后是否验证首轮、第二轮、取消、重新连接和切回小程？
 
 ## 验证命令
 

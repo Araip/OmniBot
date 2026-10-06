@@ -306,7 +306,7 @@ const List<_SpotlightItem> _items = <_SpotlightItem>[
     icon: LucideIcons.workflow,
     titleZh: '选择工作模式',
     titleEn: 'Choose a work mode',
-    descriptionZh: '顶部模式岛可在小万、编程 Agent 与纯聊天之间切换，当前选择会直接影响执行方式。',
+    descriptionZh: '顶部模式岛可在小程、编程 Agent 与纯聊天之间切换，当前选择会直接影响执行方式。',
     descriptionEn:
         'Use the top mode island to switch between OmniAi, coding agents, and pure chat.',
   ),

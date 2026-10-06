@@ -318,7 +318,7 @@ private class XiaowanAgentSupport(
             implementation = Implementation(
                 name = "xiaowan",
                 version = BuildConfig.VERSION_NAME,
-                title = "小万",
+                title = "小程",
             ),
             _meta = JsonNull,
         )

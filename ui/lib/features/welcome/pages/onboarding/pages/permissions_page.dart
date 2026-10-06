@@ -58,7 +58,7 @@ class OnboardingPermissionsPage extends StatelessWidget {
           title: onbTr(context, '悬浮窗权限', 'Floating window'),
           subtitle: onbTr(
             context,
-            '允许小万在其他应用上方显示宠物、半屏聊天和任务提醒。',
+            '允许小程在其他应用上方显示宠物、半屏聊天和任务提醒。',
             'Allow Omnibot to show the pet, half-screen chat, and task reminders above other apps.',
           ),
           granted: controller.overlay,
@@ -87,7 +87,7 @@ class OnboardingPermissionsPage extends StatelessWidget {
           title: onbTr(context, '所有文件访问权限', 'All files access'),
           subtitle: onbTr(
             context,
-            '允许小万访问设备公共存储中的文件与文件夹，用于文件读取、整理和下载等操作。',
+            '允许小程访问设备公共存储中的文件与文件夹，用于文件读取、整理和下载等操作。',
             'Allow Omnibot to read and manage files in shared device storage for file tasks and downloads.',
           ),
           granted: controller.publicStorage,

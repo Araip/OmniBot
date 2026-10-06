@@ -67,7 +67,7 @@ class ChatEmptyGreeting extends StatelessWidget {
         MediaQuery.maybeOf(context)?.disableAnimations ?? false;
     final resolvedAgentName = agentName?.trim() ?? '';
     final displayAgentName = resolvedAgentName.isEmpty
-        ? (isEnglish ? 'Omnibot' : '小万')
+        ? (isEnglish ? 'Omnibot' : '小程')
         : resolvedAgentName;
     final headline = isEnglish
         ? "Hi 👋, I'm $displayAgentName"

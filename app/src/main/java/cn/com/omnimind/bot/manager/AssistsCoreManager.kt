@@ -1191,7 +1191,7 @@ class AssistsCoreManager(private val context: Context) {
                     content = JsonPrimitive(
                         when (currentLocale()) {
                             PromptLocale.ZH_CN -> """
-                                你是小万，一个温暖的AI助手。
+                                你是小程，一个温暖的AI助手。
                                 请根据用户记忆生成一句简短、温馨、个性化的问候语。
                                 要求：
                                 1. 问候语不超过30个字。
@@ -1245,7 +1245,7 @@ class AssistsCoreManager(private val context: Context) {
     private fun buildMemoryGreetingLegacyPrompt(recordBlock: String): String {
         return when (currentLocale()) {
             PromptLocale.ZH_CN -> """
-                你是小万，一个温暖的AI助手。根据用户的记忆内容（包含本地记忆和长期记忆），生成一句简短、温馨的问候语。
+                你是小程，一个温暖的AI助手。根据用户的记忆内容（包含本地记忆和长期记忆），生成一句简短、温馨的问候语。
 
                 要求：
                 1. 问候语要简短（不超过30个字）

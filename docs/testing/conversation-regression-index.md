@@ -52,7 +52,7 @@ CTX-SUITE-040：原图读取、连续长任务、实际自动摘要和重启恢�
 
 每次工作对话将用户的实际需求、故障与验收条件加入此索引，并链接既有可执行测试及证据。清单不等于已实现测试；模拟器通过不等于真机验收。原始聊天记录不作为可公开测试数据，样本应脱敏。
 
-## 2026-09-07：小万读取文件与长上下文
+## 2026-09-07：小程读取文件与长上下文
 
 更新：用户已授权先用 Kotlin 移植。CTX-001 至 CTX-005 的实现与新增可执行回归见 `context-compaction-fix-2026-09-07.md`；144 项本地测试与连续读取/重启模拟器回归通过，仍待真机验证。下表中“待实现/未修复”为最初审计状态，以该修复报告逐项描述的覆盖与限制为准。CTX-006 配置同步问题不在本次修改范围。
 
@@ -66,7 +66,7 @@ CTX-SUITE-040：原图读取、连续长任务、实际自动摘要和重启恢�
 | CTX-002 | 同一条用户任务中工具不断累积，能压缩已完成片段，保留任务及调用配对，不重放工具 | 同上；现有 `AgentOrchestratorTest` 尚不覆盖此边界 | 待实现回归用例；未修复 |
 | CTX-003 | 服务不返回 usage，或一次/并行工具结果突然增大，仍能在下一请求前维护预算 | 同上 | 待实现回归用例；未修复 |
 | CTX-004 | 摘要请求本身不超限；摘要失败、过长或取消，不错误提交检查点、不继续发送已知超限原文 | `AgentConversationContextCompactorTest` 有失败不提交及取消覆盖；其余见审计 | 部分已有测试；新增边界待实现；未修复 |
-| CTX-005 | 小万子任务独立维护上下文，不能污染父历史 | 同上；现有子任务测试尚不覆盖压缩 | 待实现回归用例；未修复 |
+| CTX-005 | 小程子任务独立维护上下文，不能污染父历史 | 同上；现有子任务测试尚不覆盖压缩 | 待实现回归用例；未修复 |
 | CTX-006 | 用户压缩阈值与模型容量区分；切换小容量模型、刷新配置、重启后保持正确 | 同上 | 待实现回归用例与真机复现 |
 
 可执行文件读取 journey 由 `scripts/verify-agent-user-journey.mjs` 运行，测试 Provider 为 `scripts/fixtures/file-read-provider.mjs`，详细样本准备和命令见模拟器报告。它没有模拟 CTX-001 的服务端硬长度上限，不能替代长上下文测试。
@@ -120,7 +120,7 @@ Codex Plan 补验：用户指定模拟器验收，实际 UI 27 步（计划、�
 - 尚未完成：成熟搜索程序接入、文件名/正文能力拆分、长行/二进制扫描、大目录模拟器端到端回归；待真机验证。现有未指定 maxResults 的完整结果语义暂未修改。
 - 补充执行：`bash scripts/test-agent-runtime.sh --offline --skip-gradle --skip-flutter --skip-webchat`，80 项 Node + 7 项 Python 通过；真实 Provider、Harness、Android/Flutter 和真机验收均未包含在该命令内。
 
-### 2026-09-09 小万命令菜单与构建版本对齐
+### 2026-09-09 小程命令菜单与构建版本对齐
 
 - 当前 `XiaowanAcpConnection.postInitialize` 只通过官方 AvailableCommandsUpdate 发布 compact。但继续追到前端确认 init 是明确标注的“生成或更新 AGENTS.md”提示词快捷操作，通过普通 prompt 发送，并非原生命令。菜单用例仍应检查 init；曾改为 absent 的误判已撤回。plan 按声明模式显示，review 按声明命令显示。
 - emulator-45562 的已安装兼容包（versionName 0.6.2.2 / code 14 / target 35）运行旧 6 步用例通过，显示 init。该包与当前源码不一致，不能用这项成功宣称当前源码验收通过。菜单显示 init 本身并不证明版本差异；该包是兼容包的结论来自其构建基线。旧用例证据保留于本机 /tmp/oob-command-capabilities-20260909，未将私有截图入库。
@@ -131,7 +131,7 @@ Codex Plan 补验：用户指定模拟器验收，实际 UI 27 步（计划、�
 - 复现：原代码在已取消 worker 内 send CANCELLED 并 runCatching；慢消费者/无缓冲 channel 下只收到 running，send 抛 JobCancellationException，被吞掉。缓冲充足时收到 cancelled，因此具有时序相关性。该协程复现尚不能证明所有用户失败都由此引起。
 - 修复：保持 Conversation -> ACP Session -> Turn -> Item 及现有 promptMutex / activePromptJob；工作协程只执行和记录取消，存活的 prompt collector 在 join 后发送原来的官方 PromptResponse(CANCELLED)。没有 NonCancellable 无限发送、私有终态或第二次执行。
 - 可执行入口：XiaowanPromptWorkerTest，已加入 scripts/test-agent-runtime.sh。4 项本机 JVM 测试通过，包括 40 轮 x 两种缓冲设置的取消/后续任务、普通完成、工具取消异常、接收端断开。
-- 限制：完整 Android 构建、模拟器安装回归与真机验收仍待执行；小万取消当前 turn 不等于暂停并恢复同一个执行栈。
+- 限制：完整 Android 构建、模拟器安装回归与真机验收仍待执行；小程取消当前 turn 不等于暂停并恢复同一个执行栈。
 - 回归敏感性核验：将相同测试临时运行于旧 worker 内发送/吞异常逻辑，4 项中 1 项失败（缺少 cancelled）；恢复生产修复后 4 项全通过。临时旧逻辑未写入仓库。
 - 后续边界：已新增“执行 worker 尚未启动即停止”的用例。修复前未返回任何结束结果，修复后通过；最终 5 项 JVM 测试通过。
 - 真实 Provider 补充：使用本地已有 LLMTHU 配置执行 `node scripts/agent_provider_smoke.mjs`，GLM-5.1 模型目录和真实 completion 通过；这是单次真实连接证据，不覆盖所有请求、拒绝、额度和超时场景，也不替代 App 端到端测试。
@@ -282,7 +282,7 @@ Codex Plan 补验：用户指定模拟器验收，实际 UI 27 步（计划、�
 
 ### 2026-09-09：冷启动会话列表误报运行时不可用
 
-- 复现：小万历史聊天重启后，点击顶部已选中的 Agent 分段；列表显示 `Agent runtime is unavailable`，未尝试连接。
+- 复现：小程历史聊天重启后，点击顶部已选中的 Agent 分段；列表显示 `Agent runtime is unavailable`，未尝试连接。
 - 原因：`AgentRuntimeManager.status()` 的可用性探测得到 `ready=true`，但合并 `LocalAcpRuntime.statusPayload()` 时被 `ready=isConnected=false` 覆盖；分发环境的 `connected` 判定也可能被覆盖。保留 host 对这两个字段的所有权，其他 ACP 元数据正常合并。未新增生命周期或重试。
 - 可执行回归：`AgentRuntimeProtocolPayloadTest.disconnectedTransportDoesNotHideAnAvailableAgent`、`transportCannotOverrideHostDistributionOrAvailabilityChecks`；旧逻辑 2/2 失败，修正后该测试类 73/73 通过。执行 `./gradlew :app:testDevelopStandardDebugUnitTest --tests '*AgentRuntimeProtocolPayloadTest'`；Flutter 会话列表测试 2/2 通过。
 - 模拟器操作：保留数据重装、冷进入列表、打开历史、重新进入、强停重启后再进入，列表均恢复。设备/版本/原始 XML/红绿日志见 `artifacts/session-readiness-20260909/verification.json`。无物理设备，**待真机验证**。
@@ -323,8 +323,8 @@ Codex Plan 补验：用户指定模拟器验收，实际 UI 27 步（计划、�
 
 ### 2026-09-09：session/delete 使用正式 SDK，避免删除成功后再次 close
 
-- 本地依赖 `com.agentclientprotocol:acp-jvm:0.30.1` 已提供 `Client.deleteSession`。旧 host 跳过小万协议请求，外部 Agent 则 raw delete 后再 close，可能将已成功删除误报为会话不存在。改为统一正式 SDK 调用、声明能力检查、确认成功后清理 host 绑定；拒绝/传输失败保留原状态，不添加重试。
-- 官方语义与关闭不同：delete 主要从 session/list 移除，存储及 load 行为由 Agent 定义；参考 https://agentclientprotocol.com/rfds/session-delete 。小万已有的删除回调保留 Conversation 历史；host 提前保存绑定的 conversationId，以兼容回调先解除绑定。
+- 本地依赖 `com.agentclientprotocol:acp-jvm:0.30.1` 已提供 `Client.deleteSession`。旧 host 跳过小程协议请求，外部 Agent 则 raw delete 后再 close，可能将已成功删除误报为会话不存在。改为统一正式 SDK 调用、声明能力检查、确认成功后清理 host 绑定；拒绝/传输失败保留原状态，不添加重试。
+- 官方语义与关闭不同：delete 主要从 session/list 移除，存储及 load 行为由 Agent 定义；参考 https://agentclientprotocol.com/rfds/session-delete 。小程已有的删除回调保留 Conversation 历史；host 提前保存绑定的 conversationId，以兼容回调先解除绑定。
 - 可执行 `LocalAcpSessionDeleteTest`：旧逻辑断言失败；覆盖活动任务拒绝、Agent 拒绝后引用保留、成功只 delete 不 close、能力未声明不发请求，以及回调解除绑定后的 conversationId。执行 `./gradlew :app:testDevelopStandardDebugUnitTest --tests '*LocalAcpSessionDeleteTest'`。
 - 当前 Flutter 只有 deleteSession 服务定义、没有页面调用；不把普通删除聊天当成该 ACP 操作验收。本轮仅保留数据重装并验证原 37 条历史和取消结果，**删除协议设备测试未运行，待真机验证**。没有删除任何已有设备会话。
 - 证据目录 `artifacts/session-delete-20260909/`，测试最终结果以其中 XML/verification.json 为准。
@@ -387,7 +387,7 @@ Codex Plan 补验：用户指定模拟器验收，实际 UI 27 步（计划、�
 
 ### 2026-09-09：Provider 错误分类必须跨过正式 ACP 错误边界
 
-- 小万流内 error 原先只抛普通异常，不能可靠区分额度不足、请求限流和原因不明的 429。保留 Provider status/code，复用现有错误格式化；未知 429 不再默认称为频率限制。异常仍是原请求的失败，不增加重试或第二套生命周期。
+- 小程流内 error 原先只抛普通异常，不能可靠区分额度不足、请求限流和原因不明的 429。保留 Provider status/code，复用现有错误格式化；未知 429 不再默认称为频率限制。异常仍是原请求的失败，不增加重试或第二套生命周期。
 - 设备运行 `1788916583700` 复现“任务已失败但用户提示仍通用”。接收端分类尝试 `1788917086654` 仍失败：官方 SDK 已将异常序列化成 JsonRpcException，原类型不在接收端。撤回无效接收端改动，在 XiaowanAcpConnection 发送正式错误前保留 executor 已生成的用户提示，原异常作为 cause；取消分支仍优先处理。
 - 可执行入口：`node scripts/verify-agent-user-journey.mjs emulator-45562 scripts/fixtures/agent-user-journeys/xiaowan-provider-limit-categories.en.json OUT`。三类注入错误分别验证唯一终态及精确提示，随后发送正常请求，并重启复查四轮历史。使用本地故障服务，不能冒充真实 Provider 额度事故。
 - 分类/取消 worker 单元测试 23 项、Flutter 错误格式化 61 项、故障服务 3 项通过；APK 构建通过。设备最终结果见 `artifacts/provider-limit-categories-20260909/verification.json`；两次失败证据均保留。**待真机验证**。
@@ -414,13 +414,13 @@ Codex Plan 补验：用户指定模拟器验收，实际 UI 27 步（计划、�
 
 ### 2026-09-09：持久终端进程退出必须结束命令等待
 
-- 模拟器旧包运行 `1788920146314`：真实模型创建终端并执行 `exit 7`，终端已显示进程退出码 7，但小万仍等待工具完成；60 秒回复观察超时后，用户 Stop 路径正式取消该轮。原因是原 `sendSessionCommandAndAwait` 只等 sourced shell wrapper 的完成标记，进程退出、会话消失或替换均没有结束条件。
+- 模拟器旧包运行 `1788920146314`：真实模型创建终端并执行 `exit 7`，终端已显示进程退出码 7，但小程仍等待工具完成；60 秒回复观察超时后，用户 Stop 路径正式取消该轮。原因是原 `sendSessionCommandAndAwait` 只等 sourced shell wrapper 的完成标记，进程退出、会话消失或替换均没有结束条件。
 - 在原终端轮询内检查同一个 TerminalSession 的存在性与运行状态；正式命令完成标记优先，否则已退出进程返回工具失败，由现有 Agent loop 决定后续操作。没有新增 ACP 状态、重试或进程自动重开路径。
 - `PersistentSessionCommandTest` 旧轮询先红后绿，覆盖丢失/退出会话、部分输出、完成标记优先、40 次重复及取消后下一次独立命令；相关原生测试共 16 项通过，APK 构建及覆盖安装成功。
 - 可执行入口：`node scripts/verify-agent-user-journey.mjs emulator-45562 scripts/fixtures/agent-user-journeys/xiaowan-session-exit.en.json OUT`。要求真实工具 journal 证明两次创建、第一次 exec 以 exit=7 失败、第二次不同 sessionId 的 exec 实际 stdout 正确、成功停止新终端，最后正式结束并重启复查。结果见 `artifacts/terminal-exit-20260909/verification.json`。
 - 取消验证器旧断言错误要求一定有 assistant_message；纯工具轮已有正式 cancelled 元数据却被误判。修正为同一轮任意记录的正式 stopReason，并保留唯一终态和无待回答请求校验；文本“cancelled”不能代替元数据。新增回归先失败后通过，验证器 27 项通过，旧包失败轮实际取消断言通过。
 - 独立未解决：权限回归先成功 Stop，随后真实模型返回空正文且无 tool_calls，正式报错；原因尚未定位，未计为全流程通过。另一次权限用例因模型设置弹层未关闭而未发送，不算产品生命周期复现。失败证据均保留。
-- 小万 Stop 是取消当前轮，session/resume 恢复持久上下文，不提供命令执行栈暂停/原地续跑。本次修复不增加“暂停”能力。**待真机验证**。
+- 小程 Stop 是取消当前轮，session/resume 恢复持久上下文，不提供命令执行栈暂停/原地续跑。本次修复不增加“暂停”能力。**待真机验证**。
 
 - 本轮设备结果：`1788920467528` 全部 7 步通过；重复运行 `1788920830576` 在 60 秒回复观察期限失败，保留原失败结果，随后同一轮正式完成。另行核对实际工具结果及重启后的终态、工具记录均通过；没有重发请求，也不将迟到完成改记为完整 7 步通过。
 
@@ -435,7 +435,7 @@ Codex Plan 补验：用户指定模拟器验收，实际 UI 27 步（计划、�
 
 ### 2026-09-09：未提供暂停与执行栈恢复时的真实命令入口
 
-- 小万现有 AvailableCommandsUpdate 发布 compact；init 是 UI 明示的生成/更新 AGENTS.md 提示词快捷入口，进入普通 prompt。session/resume 恢复持久会话上下文，不等于用户输入 /resume 后恢复某条已取消命令的执行栈。
+- 小程现有 AvailableCommandsUpdate 发布 compact；init 是 UI 明示的生成/更新 AGENTS.md 提示词快捷入口，进入普通 prompt。session/resume 恢复持久会话上下文，不等于用户输入 /resume 后恢复某条已取消命令的执行栈。
 - 新增 `scripts/fixtures/agent-user-journeys/xiaowan-unsupported-lifecycle.en.json`：检查 init/compact 显示，plan/review/pause/resume 不可点击；实际输入 /pause、/resume，断言没有活动 Stop 控件且数据库 user_message 数量不增加；重启重复整套操作。复用原 UI 输入与数据库只读快照，不直接调用产品接口。
 - 解析回归覆盖 20 轮 /pause、/resume、大小写与带参数输入；相关 Flutter 5 项通过。当前实现即通过，未增加产品生命周期、重试或前端状态。
 - 首次设备用例重启前均通过，重启后 UIAutomator 返回 null root，未执行点击；失败记录保留。设备上随后新快照确认界面已恢复，为用例补上命令按钮就绪观察，再执行原流程。最终证据见 `artifacts/unsupported-lifecycle-20260909/verification.json`。
@@ -444,7 +444,7 @@ Codex Plan 补验：用户指定模拟器验收，实际 UI 27 步（计划、�
 
 ### 2026-09-09：停留在会话列表时更新本地任务状态
 
-- 页面原定时刷新只接受 remote，并监听已过时的 thread/turn/item 事件；本地小万被排除，正式任务结束后列表可能保留 Running。页面级回归实际复现：服务的 session/list 已返回完成状态，页面仍找不到 Finished now。
+- 页面原定时刷新只接受 remote，并监听已过时的 thread/turn/item 事件；本地小程被排除，正式任务结束后列表可能保留 Running。页面级回归实际复现：服务的 session/list 已返回完成状态，页面仍找不到 Finished now。
 - 统一使用既有每 3 秒 session/list 查询，不从文本、工具输出或旧事件名推断状态；本地与远端同一路径，移除旧事件订阅。增加正在刷新保护，避免慢查询重叠；列表被其他页面覆盖时停止轮询，返回后恢复，dispose 后停止。
 - 另移除远端“查询 loaded 再查询所有 session”的重复请求，因为现有 listLoadedSessions 已映射到同一 session/list；标准快照已有 loaded/active 信息，不需要另一套 loaded 查询。
 - 可执行页面测试 `agent_sessions_refresh_test.dart` 覆盖 20 次运行/完成切换、页面覆盖/返回/销毁、慢查询；与原列表解析测试共 5 项通过。定向分析与最终 APK 构建通过。
@@ -535,9 +535,9 @@ Codex Plan 补验：用户指定模拟器验收，实际 UI 27 步（计划、�
 
 ### 2026-09-09：Harness 切换草稿与实际发送归属
 
-- 新增长期 `xiaowan-harness-switch-draft.en.json`：prepare-draft 仅通过 UI 输入脱敏草稿，不发送；选择 DSH 后检查完整 EditText 文本及原生 selected_profile_id，切回小万再次检查，再点击一次 Send，验证本地 GLM 实际回复与正式完成，重启复核。输入工具按字符键入的约 51/56 秒不是 App 消息启动耗时。
+- 新增长期 `xiaowan-harness-switch-draft.en.json`：prepare-draft 仅通过 UI 输入脱敏草稿，不发送；选择 DSH 后检查完整 EditText 文本及原生 selected_profile_id，切回小程再次检查，再点击一次 Send，验证本地 GLM 实际回复与正式完成，重启复核。输入工具按字符键入的约 51/56 秒不是 App 消息启动耗时。
 - 首次把回复整行断言误用于多行草稿，测试失败；截图及原生选中项确认已切 DSH、草稿仍在。保留失败，修正为输入框完整文本检查，从原未发送草稿继续完成。之后完整 11 步重新运行一次通过，journey harness 2 项通过。本轮未改产品代码。
-- `assert-agent-prompt-owner.py SERIAL OOB_LIVE_SWITCH_DRAFT_RUNID xiaowan-acp` 读取唯一用户提交、Conversation→Session 绑定、ProfileStore 的 Session→Agent 映射以及输出 turn，实际验证两轮属于小万且各自独立 session。证据 `artifacts/harness-switch-draft-20260909/verification.json`。
+- `assert-agent-prompt-owner.py SERIAL OOB_LIVE_SWITCH_DRAFT_RUNID xiaowan-acp` 读取唯一用户提交、Conversation→Session 绑定、ProfileStore 的 Session→Agent 映射以及输出 turn，实际验证两轮属于小程且各自独立 session。证据 `artifacts/harness-switch-draft-20260909/verification.json`。
 - 这证明顺序切换、草稿保留及实际发送归属；没有刻意触发微任务间隙的新切换，不替代上一轮竞态的设备验收。未发送 DSH 模型任务、不涉及沙箱通过。**待真机验证**。
 
 
@@ -575,7 +575,7 @@ Codex Plan 补验：用户指定模拟器验收，实际 UI 27 步（计划、�
 
 ### 2026-09-09：本地真实 API 连续自动摘要与重启恢复
 
-- emulator-45562 最新安装 APK，小万既有本地 GLM-5.1 配置；在测试会话 6 通过 UI 将阈值从 128k 调为 32k，开始前无摘要。一次用户发送要求连续读取 20 页，不调用手动 compact。正式 end_turn，观察到同任务三次不同摘要 revision/cutoff 推进；重启前后最终摘要 hash/cutoff/revision 完全一致。结束后通过 UI 恢复 128k，数据库确认成功。
+- emulator-45562 最新安装 APK，小程既有本地 GLM-5.1 配置；在测试会话 6 通过 UI 将阈值从 128k 调为 32k，开始前无摘要。一次用户发送要求连续读取 20 页，不调用手动 compact。正式 end_turn，观察到同任务三次不同摘要 revision/cutoff 推进；重启前后最终摘要 hash/cutoff/revision 完全一致。结束后通过 UI 恢复 128k，数据库确认成功。
 - 实际 3 步任务 + 4 步续接验证均通过；不是重新跑完合并入口。新 xiaowan-live-auto-compact.en.json 合并上述流程及严格分页断言，共 8 步。verify_live_checkpoint 仅接受本次用户之后、下一用户之前的成功工具检查点，排除旧/后续任务摘要冒充成功；5 项断言测试、2 项 journey 测试通过，纳入 Agent 总入口。
 - 严格分页断言实际失败：除覆盖全部 20 页，还存在初始页重复、读取 offload 文件绕路以及一次非法 offset 后恢复。原结果含 nextOffset，但 boundToolOutputs 把整个工具文本替换成引用，当前分页控制信息不再直接可见；后续需要修复这一上下文投影边界，不能因最终完成就计为全通过。证据 artifacts/auto-compaction-real-api-20260909/；无凭据或完整摘要内容入库。
 - 这次证明真实 API 的自动摘要持续运行且检查点跨 App 重启保持，并未证明无绕路或所有长任务都可靠。**待真机验证**。
@@ -614,7 +614,7 @@ Codex Plan 补验：用户指定模拟器验收，实际 UI 27 步（计划、�
 - Flutter 716、WebChat 12、typecheck/build 通过；配置的本地 GLM-5.1 目录与真实 completion 通过。证据 artifacts/integrated-compaction-20260909/verification.json。结果来自多个明确记录的阶段，不是一轮连续全绿。本次未重跑官方 Harness CLI，不替代模拟器用户旅程或物理设备验收，**待真机验证**。
 
 
-### 2026-09-09：小万关闭调用被取消后 MCP 清理遗漏
+### 2026-09-09：小程关闭调用被取消后 MCP 清理遗漏
 
 - 实际私有 Session 方法的时序测试复现：close 置 closed=true 后等待 prompt 停止，调用者取消导致 MCP close 及 onClosed 未执行；再次关闭直接返回。
 - 原 close 方法用 NonCancellable 完成已有资源清理，closeMutex 让重复关闭等待同次清理结束，不新增生命周期或普通 Stop 重试。第一次修复中的协程 cancel 名称解析问题被测试拦截，明确限定为 Session.cancel 后通过；失败版未安装。
@@ -667,7 +667,7 @@ Codex Plan 补验：用户指定模拟器验收，实际 UI 27 步（计划、�
 ### 2026-09-09：最新安装版本环境与命令能力复验
 
 - [当前版本报告](current-runtime-capabilities-20260909.md)：同一 `8a3e5e93…` APK，App UID 下标准输入与退出码探针通过；DSH 官方 read-only/workspace-write 仍失败，Landlock 内核未启用、bubblewrap 的 /proc 访问被拒绝。没有修改权限或启用无隔离回退。
-- 小万菜单及手动 /pause、/resume 回归 **23/23 步通过**，重启前后均没有误提交用户消息或启动任务。复用已有可执行测试，不发模型请求。
+- 小程菜单及手动 /pause、/resume 回归 **23/23 步通过**，重启前后均没有误提交用户消息或启动任务。复用已有可执行测试，不发模型请求。
 - 结果在 `artifacts/dsh-sandbox-20260909-current/`。DSH 隔离和 UI 错误展示尚未完成验收，**待真机验证**。
 
 ### 2026-09-09：登记等待中的断开与停止

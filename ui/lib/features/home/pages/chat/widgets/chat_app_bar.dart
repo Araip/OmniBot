@@ -622,7 +622,7 @@ class _ChatAppBarModeShortcutButtonState
               ? _ChatAppBarModeShortcutMenuItemData(
                   action: _ChatAppBarModeShortcutAction.omniAi,
                   iconAsset: _kChatAppBarAgentIconAsset,
-                  tooltip: isEnglish ? 'OmniAi' : '小万',
+                  tooltip: isEnglish ? 'OmniAi' : '小程',
                   selected:
                       widget.isOmniAiSelected &&
                       (widget.activeAcpAgentId?.trim().isEmpty ?? true),

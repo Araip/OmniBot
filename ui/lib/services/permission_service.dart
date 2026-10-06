@@ -319,7 +319,7 @@ class PermissionService {
                   : '悬浮窗权限',
               description: LegacyTextLocalizer.isEnglish
                   ? 'Desktop overlay for quick access'
-                  : '桌面悬浮显示，快速唤起小万',
+                  : '桌面悬浮显示，快速唤起小程',
               onAuthorize: () async {},
               checkAuthorization: () async => false,
             ),

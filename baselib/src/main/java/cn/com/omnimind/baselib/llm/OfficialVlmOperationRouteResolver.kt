@@ -2,7 +2,7 @@ package cn.com.omnimind.baselib.llm
 
 object OfficialVlmOperationRouteResolver {
     const val PROFILE_ID = "official-gelab-vlm"
-    const val PROFILE_NAME = "小万官方内置模型"
+    const val PROFILE_NAME = "小程官方内置模型"
     const val ROUTE_TAG = "official_gelab_vlm"
 
     fun resolve(

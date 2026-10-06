@@ -10,7 +10,7 @@ import 'package:ui/widgets/omnibot_markdown_body.dart';
 import 'package:ui/widgets/omnibot_resource_widgets.dart';
 
 /// 思考中的加载文案（原始中文值，用于数据比较）
-const String kThinkingText = '小万正在思考...';
+const String kThinkingText = '小程正在思考...';
 
 /// 思考中的加载文案（本地化显示用）
 String get kThinkingTextLocalized =>

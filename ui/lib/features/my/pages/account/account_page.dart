@@ -1279,8 +1279,8 @@ class _AccountPageState extends State<AccountPage> {
                     child: SettingsSectionTitle(
                       key: ValueKey(_registerMode),
                       label: _registerMode
-                          ? _text('创建小万账号', 'Create your account')
-                          : _text('登录小万账号', 'Sign in to OmniBot'),
+                          ? _text('创建小程账号', 'Create your account')
+                          : _text('登录小程账号', 'Sign in to OmniBot'),
                       subtitle: _text(
                         '账号用于同步登录状态和平台额度；登录后官方 AI 会作为可选渠道提供。',
                         'Your account syncs sessions and platform quota; official AI becomes an optional provider after sign-in.',

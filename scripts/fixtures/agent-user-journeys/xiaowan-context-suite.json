@@ -1,6 +1,6 @@
 {
   "id": "xiaowan-context-40",
-  "name": "小万文件读取、连续长任务、自动摘要与恢复",
+  "name": "小程文件读取、连续长任务、自动摘要与恢复",
   "expectedSteps": 40,
   "journeys": [
     {"id": "files", "file": "xiaowan-file-read-regression.en.json", "expectedSteps": 16},

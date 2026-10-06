@@ -568,7 +568,7 @@ class AgentRuntimeProtocolPayloadTest {
     @Test
     fun managedAcpCatalogIncludesSupportedAgentsWithoutGemini() {
         assertEquals(
-            listOf("小万", "Kimi Code", "Claude Code", "Codex", "OpenCode", "DeepSeek Harness"),
+            listOf("小程", "Kimi Code", "Claude Code", "Codex", "OpenCode", "DeepSeek Harness"),
             officialCatalogAgents().map { it.name }
         )
         assertTrue(officialCatalogAgents().all { it.builtIn })
@@ -668,7 +668,7 @@ class AgentRuntimeProtocolPayloadTest {
             AcpAgentProfileStore.isLegacyXiaowanAlias(
                 AcpAgentProfile(
                     id = "legacy-xiaowan-bot",
-                    name = "小万 Bot",
+                    name = "小程 Bot",
                     command = "legacy-xiaowan"
                 )
             )
@@ -686,7 +686,7 @@ class AgentRuntimeProtocolPayloadTest {
             AcpAgentProfileStore.isLegacyXiaowanAlias(
                 AcpAgentProfile(
                     id = AcpAgentProfileStore.XIAOWAN_AGENT_ID,
-                    name = "小万",
+                    name = "小程",
                     command = "omnibot-xiaowan-acp",
                     builtIn = true
                 )

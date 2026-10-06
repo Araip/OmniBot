@@ -63,7 +63,7 @@ adb -s emulator-5560 shell run-as cn.com.omnimind.bot cp /data/local/tmp/oob-lar
 OOB_IMAGE_TEST_FILE=/tmp/oob-large.png node scripts/fixtures/image-read-provider.mjs
 ```
 
-另一个终端配置隔离 Provider，选择 OmniAi / 小万模式并从空草稿发送：
+另一个终端配置隔离 Provider，选择 OmniAi / 小程模式并从空草稿发送：
 
 ```bash
 OMNIBOT_TEST_API_KEY=fixture-only OMNIBOT_TEST_BASE_URL=http://10.0.2.2:18769/v1 OMNIBOT_TEST_MODEL=gpt-4o node scripts/configure-agent-test-provider.mjs emulator-5560

@@ -94,7 +94,7 @@ void main() {
         find.byKey(const Key('account-auth-mode-selector')),
         findsOneWidget,
       );
-      expect(find.text('登录小万账号'), findsNothing);
+      expect(find.text('登录小程账号'), findsNothing);
       expect(find.text('账号用于同步登录状态和平台额度；登录后官方 AI 会作为可选渠道提供。'), findsNothing);
       expect(
         tester
@@ -102,7 +102,7 @@ void main() {
             .height,
         lessThan(600),
       );
-      expect(find.text('小万通灵，云启大千'), findsOneWidget);
+      expect(find.text('小程通灵，云启大千'), findsOneWidget);
       final sloganRect = tester.getRect(
         find.byKey(const ValueKey('startup-account-slogan')),
       );

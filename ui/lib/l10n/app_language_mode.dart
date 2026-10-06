@@ -31,7 +31,7 @@ class ResolvedAppLocale {
 
   bool get isEnglish => locale.languageCode == 'en';
   bool get isChinese => locale.languageCode == 'zh';
-  String get brandName => isEnglish ? 'Omnibot' : '小万';
+  String get brandName => isEnglish ? 'Omnibot' : '小程';
 }
 
 ResolvedAppLocale resolveAppLocale({

@@ -101,7 +101,7 @@ class PermissionRegistry {
         name: LegacyTextLocalizer.isEnglish ? 'Overlay Permission' : '悬浮窗权限',
         description: LegacyTextLocalizer.isEnglish
             ? 'Desktop overlay for quick access'
-            : '桌面悬浮显示，快速唤起小万',
+            : '桌面悬浮显示，快速唤起小程',
         openMethod: 'openOverlaySettings',
         checkMethod: 'isOverlayPermission',
       ),
@@ -186,7 +186,7 @@ class PermissionRegistry {
                 : '应用启动管理',
             description: LegacyTextLocalizer.isEnglish
                 ? 'Prevent Omnibot from being killed by system'
-                : '防止小万被系统关闭',
+                : '防止小程被系统关闭',
             openMethod: 'openAutoStartSettings',
             applicableLevels: const {PermissionLevel.fullExecution},
             customCheckMethod: () async {

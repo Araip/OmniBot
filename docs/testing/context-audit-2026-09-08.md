@@ -4,7 +4,7 @@
 
 ## 已复现
 
-1. `AgentConversationHistoryRepositoryTest.offloadingResultMustNotLoseItsDurableCheckpointIdentity`：调用真实压缩器把大结果保存成文件引用后，原来可定位的检查点从 7 变为 null。定位依赖 `modelAssistantMessageJson` 和 `modelToolResultMessageJson` 的内容相等，而内容是可变请求视图，不是稳定身份。小万同一任务内后续压缩可能无法落盘检查点。
+1. `AgentConversationHistoryRepositoryTest.offloadingResultMustNotLoseItsDurableCheckpointIdentity`：调用真实压缩器把大结果保存成文件引用后，原来可定位的检查点从 7 变为 null。定位依赖 `modelAssistantMessageJson` 和 `modelToolResultMessageJson` 的内容相等，而内容是可变请求视图，不是稳定身份。小程同一任务内后续压缩可能无法落盘检查点。
 2. `ConversationCheckpointTest.lateSnapshotCannotResurrectExplicitlyClearedCheckpoint`：真实 Android SQLite 上，明确 clear 后迟到的普通快照复活 old summary。clear 把 contextSummaryUpdatedAt 归零，而普通 update 仍可写入整个检查点。检查点写入权限与失效顺序没有闭合。3 项该类 instrumentation 测试运行，旧 2 项通过、新 1 项失败。
 
 附加读取证据：隔离模拟器 emulator-5560，历史回归会话 7 最近 20 条 tool_event 中，上述两个 canonical 字段均为 0 条。源码检索只找到这些字段的读取/保留逻辑，当前 ACP 写入链路未找到对应生产写入。测试中手造 canonical 行不能代替完整 App 持久化验证。不能把“重启后页面还在”当作“摘要及截断位置已可靠恢复”。

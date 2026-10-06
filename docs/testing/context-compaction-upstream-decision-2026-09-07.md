@@ -34,13 +34,13 @@
 
 [chatCompressionService.ts](https://github.com/google-gemini/gemini-cli/blob/85aca163f6c73ac6ce380b5447359146b8adcae4/packages/core/src/context/chatCompressionService.ts) 实际包含：旧工具结果预算、将大结果保存到临时文件并以可读取引用替代、为摘要选择能容纳的历史表示，以及压缩后重新计数并拒绝比原历史更大的摘要结果。这里是兼容能力的对照，不决定再拼装第二套压缩引擎。
 
-## 对小万的集成方向与明确障碍
+## 对小程的集成方向与明确障碍
 
 以 Pi 作为首选复用对象，先用原模块验证“只有一条用户任务、很多工具结果”的场景和原上游用例，再确定 Android 集成方式。业务所有权保持现有 `AgentOrchestrator`、ACP prompt、Conversation 原始历史与检查点。
 
 具体接入位置是每次模型请求前的上下文维护入口，以及现有摘要检查点的保存/恢复入口。用上游保留边界替换“只在最后用户消息前截断”的限制；当前任务的已完成片段可摘要，最近片段与工具配对保留。恢复后不能重新执行已完成工具。
 
-直接依赖尚有真实障碍：Pi 代码是 TypeScript，并依赖 Pi 消息类型、SessionEntry/session-manager 和 pi-ai；小万当前 loop 是 Android/Kotlin。尚未证明可以不增加运行时负担地直接调用，不能说成只换一个 SDK 就完成。
+直接依赖尚有真实障碍：Pi 代码是 TypeScript，并依赖 Pi 消息类型、SessionEntry/session-manager 和 pi-ai；小程当前 loop 是 Android/Kotlin。尚未证明可以不增加运行时负担地直接调用，不能说成只换一个 SDK 就完成。
 
 下一实现步骤应先验证原模块的独立运行与所需边界。如果只能做 Kotlin 移植，必须明确标为上游移植，保留版本、许可证、原测试输入及差分验证方案，并说明无法直接复用的原因；不能借“参考 Pi”重新设计算法。不会为了调用压缩模块启动 Pi 的另一套 Agent loop，也不会照搬与项目 ACP 终态/重试规则冲突的恢复流程。
 

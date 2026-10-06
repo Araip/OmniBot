@@ -18,7 +18,7 @@ python3 scripts/verify-terminal-stdio.py emulator-45562 docs/testing/artifacts/d
 
 需要支持官方隔离后端的运行环境才能继续受限命令的隔离验收。不得将应用权限内的普通 shell 成功当成工作区隔离成功；本次没有执行 DSH 模型任务，也没有确认其 UI 错误展示。
 
-## 小万能力边界
+## 小程能力边界
 
 当前 `xiaowanAgentCapabilities` 声明 ACP session/resume、close、delete 等能力。session/resume 恢复持久化上下文，不表示暂停后恢复执行栈。执行 pause/resume 不能从 ACP Session 恢复能力推导出来。
 

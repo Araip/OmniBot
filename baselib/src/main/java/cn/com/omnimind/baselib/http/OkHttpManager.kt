@@ -207,7 +207,7 @@ object OkHttpManager {
 
             override fun onResponse(call: Call, response: Response) {
                 if (response.code == 429) {
-                    continuation.resumeWithException(Http429Exception("小万忙不过来了，等会儿再试试吧!"))
+                    continuation.resumeWithException(Http429Exception("小程忙不过来了，等会儿再试试吧!"))
                     return
                 }
                 if (continuation.isCancelled) return

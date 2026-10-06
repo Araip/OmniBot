@@ -261,6 +261,23 @@ extension _HomeDrawerActions on HomeDrawerState {
     );
   }
 
+  Future<void> _exportConversation(ConversationModel conversation) async {
+    if (_busyConversationKeys.contains(conversation.threadKey)) {
+      return;
+    }
+    final exported = await ConversationHistoryService.exportConversation(
+      conversation.id,
+      mode: conversation.mode,
+    );
+    if (!mounted) return;
+    showToast(
+      exported
+          ? context.trLegacy('已导出对话记录')
+          : context.trLegacy('导出失败'),
+      type: exported ? ToastType.success : ToastType.error,
+    );
+  }
+
   Future<void> _archiveConversation(ConversationModel conversation) async {
     if (_busyConversationKeys.contains(conversation.threadKey)) {
       return;
@@ -448,6 +465,19 @@ extension _HomeDrawerActions on HomeDrawerState {
         child: const Center(
           child: Icon(
             Icons.content_copy_rounded,
+            size: HomeDrawerState._conversationActionIconSize,
+            color: Colors.white,
+          ),
+        ),
+      ),
+      ConversationSlideAction(
+        onPressed: () => _exportConversation(conversation),
+        backgroundColor: context.isDarkTheme
+            ? context.omniPalette.surfaceElevated
+            : AppColors.text.withValues(alpha: 0.62),
+        child: const Center(
+          child: Icon(
+            Icons.ios_share_rounded,
             size: HomeDrawerState._conversationActionIconSize,
             color: Colors.white,
           ),

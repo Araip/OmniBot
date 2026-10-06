@@ -106,59 +106,59 @@ class PermissionGuideRepository {
     PermissionGuideTopicInfo(
       id: 'overlay',
       title: '悬浮窗权限',
-      subtitle: '允许小万显示在其他应用上层，便于随时唤起。',
+      subtitle: '允许小程显示在其他应用上层，便于随时唤起。',
       iconPath: 'assets/welcome/permission_overlay.svg',
       openMethod: 'openOverlaySettings',
       brandSteps: {
         'oppo': [
           PermissionGuideStep(
             title: '点击“悬浮窗权限”',
-            description: '在小万的权限引导页点击该权限，系统会跳转到对应设置页。',
+            description: '在小程的权限引导页点击该权限，系统会跳转到对应设置页。',
           ),
           PermissionGuideStep(
-            title: '选择“小万”',
-            description: '在“显示在其他应用的上层”列表中找到并点击小万。',
+            title: '选择“小程”',
+            description: '在“显示在其他应用的上层”列表中找到并点击小程。',
           ),
           PermissionGuideStep(
             title: '打开“在其他应用上方显示”开关',
-            description: '开启后小万才能稳定显示在前台。',
+            description: '开启后小程才能稳定显示在前台。',
           ),
         ],
         'huawei': [
           PermissionGuideStep(
             title: '点击“悬浮窗权限”',
-            description: '在小万的权限引导页点击该权限，系统会跳转到对应设置页。',
+            description: '在小程的权限引导页点击该权限，系统会跳转到对应设置页。',
           ),
           PermissionGuideStep(
-            title: '找到“小万”',
-            description: '在悬浮窗管理列表中找到小万并开启权限。',
+            title: '找到“小程”',
+            description: '在悬浮窗管理列表中找到小程并开启权限。',
           ),
         ],
         'honor': [
           PermissionGuideStep(
             title: '点击“悬浮窗权限”',
-            description: '在小万的权限引导页点击该权限，系统会跳转到设置页。',
+            description: '在小程的权限引导页点击该权限，系统会跳转到设置页。',
           ),
-          PermissionGuideStep(title: '开启悬浮窗权限', description: '找到小万，打开悬浮窗开关。'),
+          PermissionGuideStep(title: '开启悬浮窗权限', description: '找到小程，打开悬浮窗开关。'),
         ],
         'xiaomi': [
           PermissionGuideStep(
             title: '点击“悬浮窗权限”',
-            description: '在小万的权限引导页点击该权限，系统会跳转到设置页。',
+            description: '在小程的权限引导页点击该权限，系统会跳转到设置页。',
           ),
           PermissionGuideStep(
             title: '开启悬浮窗权限',
-            description: '找到小万，打开“显示悬浮窗”开关。',
+            description: '找到小程，打开“显示悬浮窗”开关。',
           ),
         ],
         'vivo': [
           PermissionGuideStep(
             title: '点击“悬浮窗权限”',
-            description: '在小万的权限引导页点击该权限，系统会跳转到设置页。',
+            description: '在小程的权限引导页点击该权限，系统会跳转到设置页。',
           ),
           PermissionGuideStep(
             title: '允许显示在其他应用上层',
-            description: '找到小万，开启悬浮窗权限。',
+            description: '找到小程，开启悬浮窗权限。',
           ),
         ],
         'other': [
@@ -166,7 +166,7 @@ class PermissionGuideRepository {
           PermissionGuideStep(title: '进入应用管理', description: '找到“应用”或“应用管理”入口。'),
           PermissionGuideStep(
             title: '开启悬浮窗权限',
-            description: '找到小万，在权限设置中开启“悬浮窗”或“显示在其他应用上层”。',
+            description: '找到小程，在权限设置中开启“悬浮窗”或“显示在其他应用上层”。',
           ),
         ],
       },
@@ -174,7 +174,7 @@ class PermissionGuideRepository {
     PermissionGuideTopicInfo(
       id: 'battery',
       title: '后台运行 / 电池优化',
-      subtitle: '防止系统过早回收小万，保证后台运行和唤起稳定性。',
+      subtitle: '防止系统过早回收小程，保证后台运行和唤起稳定性。',
       iconPath: 'assets/welcome/permission_battery.svg',
       openMethod: 'openBatteryOptimizationSettings',
       supportedBrands: {'oppo', 'xiaomi', 'vivo', 'meizu', 'other'},
@@ -194,8 +194,8 @@ class PermissionGuideRepository {
             description: '点击“优化应用电量使用”进入应用列表。',
           ),
           PermissionGuideStep(
-            title: '设置小万为“不优化”',
-            description: '找到小万，将其设置为“不优化”，系统就不会轻易限制后台运行。',
+            title: '设置小程为“不优化”',
+            description: '找到小程，将其设置为“不优化”，系统就不会轻易限制后台运行。',
           ),
         ],
         'xiaomi': [
@@ -204,7 +204,7 @@ class PermissionGuideRepository {
             title: '进入“应用设置”',
             description: '点击“应用设置”并继续进入“应用管理”。',
           ),
-          PermissionGuideStep(title: '找到小万', description: '在应用列表中找到并点击小万。'),
+          PermissionGuideStep(title: '找到小程', description: '在应用列表中找到并点击小程。'),
           PermissionGuideStep(
             title: '设置“省电策略”',
             description: '点击“省电策略”，选择“无限制”。',
@@ -217,8 +217,8 @@ class PermissionGuideRepository {
             description: '点击“电池”，再进入“后台耗电管理”。',
           ),
           PermissionGuideStep(
-            title: '设置小万为“允许高耗电”',
-            description: '找到小万，选择“允许高耗电后台运行”。',
+            title: '设置小程为“允许高耗电”',
+            description: '找到小程，选择“允许高耗电后台运行”。',
           ),
         ],
         'other': [
@@ -229,7 +229,7 @@ class PermissionGuideRepository {
           ),
           PermissionGuideStep(
             title: '允许后台运行',
-            description: '找到小万，设置为后台允许运行、不优化或无限制，建议同时检查自启动权限。',
+            description: '找到小程，设置为后台允许运行、不优化或无限制，建议同时检查自启动权限。',
           ),
         ],
       },
@@ -254,7 +254,7 @@ class PermissionGuideRepository {
             imageAssetPath: 'assets/welcome/auto_start_guide_2.png',
           ),
           PermissionGuideStep(
-            title: '将小万设为手动管理',
+            title: '将小程设为手动管理',
             description: '关闭自动管理，并开启允许自启动、允许关联启动、允许后台活动。',
             imageAssetPath: 'assets/welcome/auto_start_guide_3.png',
           ),
@@ -272,7 +272,7 @@ class PermissionGuideRepository {
           ),
           PermissionGuideStep(
             title: '关闭自动管理并全部放开',
-            description: '找到小万后关闭自动管理，确保所有后台活动相关开关都已开启。',
+            description: '找到小程后关闭自动管理，确保所有后台活动相关开关都已开启。',
             imageAssetPath: 'assets/welcome/auto_start_guide_3.png',
           ),
         ],

@@ -329,7 +329,7 @@ class _ExperienceMiscSettingPageState
           _SettingItem(
             icon: LucideIcons.smartphone,
             title: context.trLegacy('防止任务运行时屏幕休眠'),
-            subtitle: context.trLegacy('任务运行期间保持屏幕常亮，适用于小万（OmniAi）、Agent 和纯聊天'),
+            subtitle: context.trLegacy('任务运行期间保持屏幕常亮，适用于小程（OmniAi）、Agent 和纯聊天'),
             trailing: _buildSwitchTrailing(
               value: _preventScreenSleepDuringTasksEnabled,
               onToggle: _onPreventScreenSleepDuringTasksChanged,
@@ -338,7 +338,7 @@ class _ExperienceMiscSettingPageState
           _SettingItem(
             icon: LucideIcons.bellRing,
             title: context.trLegacy('任务完成通知'),
-            subtitle: context.trLegacy('小万（OmniAi）、Agent 和纯聊天完成后推送提醒'),
+            subtitle: context.trLegacy('小程（OmniAi）、Agent 和纯聊天完成后推送提醒'),
             trailing: _buildSwitchTrailing(
               value: _taskCompletionNotificationEnabled,
               onToggle: _onTaskCompletionNotificationChanged,
@@ -346,7 +346,7 @@ class _ExperienceMiscSettingPageState
           ),
           _SettingItem(
             icon: LucideIcons.folderUp,
-            title: context.trLegacy('使用小万打开'),
+            title: context.trLegacy('使用小程打开'),
             subtitle: context.trLegacy('分别设置图片和文件的打开方式'),
             onTap: () {
               GoRouterManager.push('/home/open_with_omnibot_setting');

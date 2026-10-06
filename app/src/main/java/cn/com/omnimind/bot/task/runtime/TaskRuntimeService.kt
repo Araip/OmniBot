@@ -77,7 +77,7 @@ class TaskRuntimeService : Service() {
         )
         return NotificationCompat.Builder(this, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_notification)
-            .setContentTitle("小万任务执行中")
+            .setContentTitle("小程任务执行中")
             .setContentText("正在后台执行用户发起的任务")
             .setContentIntent(openAppPendingIntent)
             .setOngoing(true)
@@ -95,7 +95,7 @@ class TaskRuntimeService : Service() {
                 CHANNEL_NAME,
                 NotificationManager.IMPORTANCE_LOW,
             ).apply {
-                description = "小万在后台执行用户发起的任务"
+                description = "小程在后台执行用户发起的任务"
                 setShowBadge(false)
             },
         )

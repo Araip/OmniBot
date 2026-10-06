@@ -59,7 +59,7 @@ void main() {
         user: 2,
         content: const <String, dynamic>{
           'id': '$timestamp-ai',
-          'text': '旧小万最终回复',
+          'text': '旧小程最终回复',
         },
       ),
       _thinkingCard(
@@ -76,7 +76,7 @@ void main() {
     expect(entries.first.group?.taskId, '$timestamp-ai');
     expect(
       entries.first.group?.visibleMessagesNewestFirst.single.text,
-      '旧小万最终回复',
+      '旧小程最终回复',
     );
     expect(entries.first.group?.thinkingCount, 1);
     expect(entries.first.group?.hasProcessMessages, isTrue);

@@ -1117,7 +1117,7 @@ extension _HomeDrawerConversationList on HomeDrawerState {
       conversation.agentId ?? 'xiaowan-acp',
     );
     if (agentId == 'xiaowan-acp') {
-      return LegacyTextLocalizer.localize('小万');
+      return LegacyTextLocalizer.localize('小程');
     }
     return switch (agentId) {
       'kimi-code-acp' => 'Kimi Code',

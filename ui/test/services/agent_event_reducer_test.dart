@@ -792,7 +792,7 @@ void main() {
       runtime: runtime,
       event: {
         'agentId': 'xiaowan-acp',
-        'agentName': '小万',
+        'agentName': '小程',
         'message': {
           'id': 'elicitation-owner-1',
           'method': 'elicitation/create',
@@ -814,7 +814,7 @@ void main() {
 
     final card = runtime.messages.single.cardData!;
     expect(card['agentId'], 'xiaowan-acp');
-    expect(card['agentName'], '小万');
+    expect(card['agentName'], '小程');
     expect(card['sessionId'], 'session-owner-1');
   });
 

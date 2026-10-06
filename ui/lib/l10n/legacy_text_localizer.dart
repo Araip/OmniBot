@@ -9,8 +9,8 @@ class LegacyTextLocalizer {
 
   static final Map<String, String> _exactEn = <String, String>{
     '宠物': 'Pet',
-    '小万': 'OmniAi',
-    '小万（OmniAi）': 'OmniAi',
+    '小程': 'OmniAi',
+    '小程（OmniAi）': 'OmniAi',
     '默认的桌面悬浮窗宠物': 'Default desktop floating pet',
     '自定义宠物': 'Custom Pet',
     '已选': 'Selected',
@@ -37,10 +37,10 @@ class LegacyTextLocalizer {
     '地址': 'Address',
     'Token': 'Token',
     '防止任务运行时屏幕休眠': 'Prevent Screen Sleep During Tasks',
-    '任务运行期间保持屏幕常亮，适用于小万（OmniAi）、Agent 和纯聊天':
+    '任务运行期间保持屏幕常亮，适用于小程（OmniAi）、Agent 和纯聊天':
         'Keep the screen awake while OmniAi, Agent, or chat tasks run',
     '任务完成通知': 'Task Completion Notifications',
-    '小万（OmniAi）、Agent 和纯聊天完成后推送提醒':
+    '小程（OmniAi）、Agent 和纯聊天完成后推送提醒':
         'Notify when OmniAi, Agent, or chat responses finish',
     '需要开启通知权限': 'Notification permission is required',
     '未生成': 'Not generated',
@@ -109,9 +109,9 @@ class LegacyTextLocalizer {
         'Home, Hide from Recents, alarms, vibration, and open behavior',
     '后台隐藏、闹钟、振动与打开方式':
         'Hide from Recents, alarms, vibration, and open behavior',
-    '使用小万打开': 'Open with Omnibot',
-    '使用小万打开 - 图片': 'Open with Omnibot - Images',
-    '使用小万打开 - 文件': 'Open with Omnibot - Files',
+    '使用小程打开': 'Open with Omnibot',
+    '使用小程打开 - 图片': 'Open with Omnibot - Images',
+    '使用小程打开 - 文件': 'Open with Omnibot - Files',
     '分别设置图片和文件的打开方式': 'Configure image and file open behavior separately',
     '图片': 'Images',
     '文件': 'Files',
@@ -130,7 +130,7 @@ class LegacyTextLocalizer {
     '非照片文件会启动文件服务器并生成局域网链接':
         'Non-photo files start the file server and create a LAN link',
     '默认': 'Default',
-    '关于小万': 'About Omnibot',
+    '关于小程': 'About Omnibot',
     '背景来源': 'Background Source',
     '效果预览': 'Preview',
     '效果调整': 'Adjustments',
@@ -163,7 +163,7 @@ class LegacyTextLocalizer {
     '清空搜索': 'Clear search',
     '抱歉，刚刚网络开小差了。再发一次试试？':
         'Sorry, the network stumbled just now. Please try sending it again.',
-    '小万忙不过来了，等会儿再试试吧':
+    '小程忙不过来了，等会儿再试试吧':
         'Omnibot is busy right now. Please try again in a moment.',
     '设置后台隐藏失败': 'Failed to update hide-from-recents',
     '设置失败': 'Failed to save settings',
@@ -187,12 +187,12 @@ class LegacyTextLocalizer {
     '正在执行内嵌 Alpine 终端命令':
         'Executing a command in the embedded terminal environment',
     '终端输出更新中': 'Updating terminal output',
-    '🎉Hi，我是小万，我会做很多事，让我展示给你下！':
+    '🎉Hi，我是小程，我会做很多事，让我展示给你下！':
         '🎉Hi, I\'m Omnibot. I can do many things, let me show you!',
-    'Hi，我是小万': 'Hi, I\'m Omnibot',
+    'Hi，我是小程': 'Hi, I\'m Omnibot',
     '你的 AI 助手，随时准备就绪': 'Your AI assistant, always ready',
     '换一换': 'Shuffle',
-    '小万正在思考...': 'Omnibot is thinking...',
+    '小程正在思考...': 'Omnibot is thinking...',
     '总结中': 'Summarizing',
     '总结如下': 'Summary',
     '全选': 'Select all',
@@ -351,7 +351,7 @@ class LegacyTextLocalizer {
     '可选，允许 Agent 通过 Termux 执行终端命令':
         'Optional: allow the Agent to run terminal commands via Termux',
     '可选': 'Optional',
-    '让小万带你执行一次任务吧！': 'Let Omnibot walk you through one task!',
+    '让小程带你执行一次任务吧！': 'Let Omnibot walk you through one task!',
     '其中 Termux 终端能力为可选项，未开启也不影响基础功能':
         'Termux capability is optional; leaving it off will not affect basic features',
     '未绑定': 'Unbound',
@@ -434,7 +434,7 @@ class LegacyTextLocalizer {
     '等待龙虾烹饪': 'Waiting for OpenClaw processing',
     // Onboarding
     '配置你的 AI 助手': 'Configure Your AI Assistant',
-    '选择一种方式开始使用小万': 'Choose a way to start using the assistant',
+    '选择一种方式开始使用小程': 'Choose a way to start using the assistant',
     '云 AI 服务': 'Cloud AI Service',
     '连接 OpenAI、Anthropic 或兼容的 API 服务':
         'Connect to OpenAI, Anthropic, or compatible APIs',

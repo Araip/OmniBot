@@ -6,8 +6,8 @@
 生命周期、重试或持久化消息队列。UI 切换等待仍由现有
 `HarnessSwitchSendBarrier` 所有；实际请求仍进入原有发送入口。
 
-1. **失败回滚身份混用（真机日志证实）**：16:08:52 小万切 Claude 因
-   Provider 协议不兼容失败。native 已恢复小万，但 Flutter 把预显示的
+1. **失败回滚身份混用（真机日志证实）**：16:08:52 小程切 Claude 因
+   Provider 协议不兼容失败。native 已恢复小程，但 Flutter 把预显示的
    Claude ID 用于原 conversation 5 的 `session/load`，随后被正确拒绝。
    将预显示标签和已提交会话身份分开，回滚仅使用后者。
    未发现该时间点的新进程崩溃记录；不能把此问题直接定性为进程闪退。
@@ -33,11 +33,11 @@
 
 ## 设备验收
 
-- 初版包：模拟器小万恢复 conversation 5；小万 -> Kimi 初始化成功。
+- 初版包：模拟器小程恢复 conversation 5；小程 -> Kimi 初始化成功。
   Kimi -> DSH 初始化成功，但切换期间发送失败（如上），不记为发送通过。
 - 最终发送修复包构建成功（5m20s），SHA-256
   `6871c189aada246683c14618cffd8e8179bdaa96ab1770ee7aa70ef9ccffdbcd`，
-  install-r 到模拟器。16:27:52 开始小万 -> DSH，初始化未结束时单次点击
+  install-r 到模拟器。16:27:52 开始小程 -> DSH，初始化未结束时单次点击
   Send；16:29:24 初始化完成，16:29:26 官方 prompt 发出，16:29:41
   `end_turn`，UI 回复 SWITCH_OK。conversation 7 数据库只有 1 条
   user_message 与 1 条 assistant_message 含此标记。应用 PID10246 未退出。
@@ -54,7 +54,7 @@
 
 简单回复仅证明请求路由，不能证明真实工具执行。用户明确要求长任务后，
 停止准备简单失败探针，只删除本任务尚未发送的 `FAIL_DRAFT` 草稿。
-改为在小万切 DSH 的初始化期间提交下面的独立文件开发任务：
+改为在小程切 DSH 的初始化期间提交下面的独立文件开发任务：
 
 > In /workspace/acp_long_20260906 build a Python stdlib CSV report CLI with
 > grouping and numeric totals. Add 12 tests covering empty input, Unicode,
@@ -67,7 +67,7 @@
 
 ### 实际结果（16:36–16:47，emulator-5556）
 
-- 使用整合包 `557ad099...`，在小万原 conversation 5 中输入任务，选择
+- 使用整合包 `557ad099...`，在小程原 conversation 5 中输入任务，选择
   DSH 后于初始化结束前单次点击 Send。16:36:02 开始切换，16:36:46
   初始化完成，16:36:48 正式发送；没有二次点击或重发。
 - 新 conversation **9**，session

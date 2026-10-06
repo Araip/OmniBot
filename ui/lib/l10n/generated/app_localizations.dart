@@ -131,13 +131,13 @@ abstract class AppLocalizations {
   /// No description provided for @appName.
   ///
   /// In zh, this message translates to:
-  /// **'小万'**
+  /// **'小程'**
   String get appName;
 
   /// No description provided for @brandName.
   ///
   /// In zh, this message translates to:
-  /// **'小万'**
+  /// **'小程'**
   String get brandName;
 
   /// No description provided for @brandNameEnglish.
@@ -323,7 +323,7 @@ abstract class AppLocalizations {
   /// No description provided for @settingsLocalServiceSubtitle.
   ///
   /// In zh, this message translates to:
-  /// **'在局域网内访问小万 MCP 和 webchat 服务'**
+  /// **'在局域网内访问小程 MCP 和 webchat 服务'**
   String get settingsLocalServiceSubtitle;
 
   /// No description provided for @settingsAlpineTitle.
@@ -449,7 +449,7 @@ abstract class AppLocalizations {
   /// No description provided for @settingsAboutTitle.
   ///
   /// In zh, this message translates to:
-  /// **'关于小万'**
+  /// **'关于小程'**
   String get settingsAboutTitle;
 
   /// No description provided for @settingsHideRecentsFailed.
@@ -905,7 +905,7 @@ abstract class AppLocalizations {
   /// No description provided for @rateLimitErrorMessage.
   ///
   /// In zh, this message translates to:
-  /// **'小万忙不过来了，等会儿再试试吧'**
+  /// **'小程忙不过来了，等会儿再试试吧'**
   String get rateLimitErrorMessage;
 
   /// No description provided for @chatHistoryArchivedTitle.
@@ -2513,7 +2513,7 @@ abstract class AppLocalizations {
   /// No description provided for @aboutDescription.
   ///
   /// In zh, this message translates to:
-  /// **'小万，是一款以智能对话为核心的手机AI助\n手，通过语义理解与持续学习能力，协助用户\n完成信息处理、决策辅助和日常管理。'**
+  /// **'小程，是一款以智能对话为核心的手机AI助\n手，通过语义理解与持续学习能力，协助用户\n完成信息处理、决策辅助和日常管理。'**
   String get aboutDescription;
 
   /// No description provided for @aboutBetaProgramTitle.
@@ -3077,7 +3077,7 @@ abstract class AppLocalizations {
   /// No description provided for @alpineBootAutoStart.
   ///
   /// In zh, this message translates to:
-  /// **'打开小万时自动启动'**
+  /// **'打开小程时自动启动'**
   String get alpineBootAutoStart;
 
   /// No description provided for @alpineDevEnv.
@@ -3173,7 +3173,7 @@ abstract class AppLocalizations {
   /// No description provided for @homeDrawerOmniAiSection.
   ///
   /// In zh, this message translates to:
-  /// **'小万'**
+  /// **'小程'**
   String get homeDrawerOmniAiSection;
 
   /// No description provided for @homeDrawerChatOnlySection.
@@ -3197,7 +3197,7 @@ abstract class AppLocalizations {
   /// No description provided for @homeDrawerWelcome.
   ///
   /// In zh, this message translates to:
-  /// **'欢迎使用小万'**
+  /// **'欢迎使用小程'**
   String get homeDrawerWelcome;
 
   /// No description provided for @homeDrawerDawnGreeting.
@@ -3317,7 +3317,7 @@ abstract class AppLocalizations {
   /// No description provided for @homeDrawerLunchSub3.
   ///
   /// In zh, this message translates to:
-  /// **'让小万帮你推荐吧！'**
+  /// **'让小程帮你推荐吧！'**
   String get homeDrawerLunchSub3;
 
   /// No description provided for @homeDrawerAfternoonGreeting.
@@ -3413,7 +3413,7 @@ abstract class AppLocalizations {
   /// No description provided for @homeDrawerNightSub3.
   ///
   /// In zh, this message translates to:
-  /// **'让小万帮你定个闹钟吧！'**
+  /// **'让小程帮你定个闹钟吧！'**
   String get homeDrawerNightSub3;
 
   /// No description provided for @homeDrawerLateNightGreeting.

@@ -860,13 +860,13 @@ void main() {
       'agents': <Map<String, dynamic>>[
         <String, dynamic>{
           'id': 'xiaowan-acp',
-          'name': '小万',
+          'name': '小程',
           'command': 'omnibot-xiaowan-acp',
           'builtIn': true,
         },
         <String, dynamic>{
           'id': 'legacy-xiaowan-bot',
-          'name': '小万 Bot',
+          'name': '小程 Bot',
           'command': 'legacy-xiaowan',
         },
         <String, dynamic>{
@@ -881,12 +881,12 @@ void main() {
       'xiaowan-acp',
       'codex-acp',
     ]);
-    expect(catalog.selectedAgent?.name, '小万');
+    expect(catalog.selectedAgent?.name, '小程');
   });
 
   for (final custom in <Map<String, dynamic>>[
-    {'id': 'user-adapter', 'name': '小万', 'command': 'my-acp'},
-    {'id': 'user-adapter', 'name': '小万 Bot', 'command': 'my-bot-acp'},
+    {'id': 'user-adapter', 'name': '小程', 'command': 'my-acp'},
+    {'id': 'user-adapter', 'name': '小程 Bot', 'command': 'my-bot-acp'},
     {'id': 'user-adapter', 'name': 'Xiaowan_Bot', 'command': 'my-other-acp'},
     {
       'id': 'user-adapter',
@@ -905,7 +905,7 @@ void main() {
         'agents': <Map<String, dynamic>>[
           {
             'id': 'xiaowan-acp',
-            'name': '小万',
+            'name': '小程',
             'command': 'omnibot-xiaowan-acp',
             'builtIn': true,
           },

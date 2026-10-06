@@ -321,7 +321,7 @@ class AgentConfigAdaptersTest {
             AcpAgentProfileStore.isLegacyXiaowanAlias(
                 AcpAgentProfile(
                     id = "legacy-xiaowan-bot",
-                    name = "旧版小万",
+                    name = "旧版小程",
                     command = "legacy-xiaowan",
                 ),
             ),
@@ -330,7 +330,7 @@ class AgentConfigAdaptersTest {
             AcpAgentProfileStore.isLegacyXiaowanAlias(
                 AcpAgentProfile(
                     id = "custom-xiaowan",
-                    name = "小万",
+                    name = "小程",
                     command = "custom-agent",
                 ),
             ),

@@ -95,7 +95,7 @@ git diff --check
 - 原因：`replaceConversationSnapshot` 无条件清空 `agentEntryStartTimes`，删除了请求入口记录的计时。现在只保留绑定到同一会话、同一活动请求的 prompt 开始时间；没有添加计时器、协议或完成事件，也不补造旧历史时间。
 - coordinator 与 footer 95 项测试通过；定向 Dart 分析无错误（9 项既有警告）。APK 构建成功，`emulator-5554` 覆盖安装成功；手机不在线，不能据此声称手机验收完成。
 - 新增只读设备断言：`ADB=/path/to/adb node scripts/verify-reply-timing.mjs SERIAL REPLY_MARKER`，要求实际可见的唯一回复同时包含结束时间和耗时；UI dump 失败直接失败，不读取旧快照冒充新结果。
-- 当前模拟器实际对话通过：从输入框发送 `Reply TIME_OK`，小万／GLM-5.1 返回 `TIME_OK`，截图与可访问性树均显示 `12.7s`、`02:25:37`。完成后停止并重开应用，再次运行设备断言通过，两个值保持不变。启动命令曾报告等待超时，但后续新 UI dump 确认应用恢复并显示持久化回复；不能把该命令自身记为启动成功。此结果仅覆盖当前模拟器的小万真实对话，不代表其他 Harness 或未连接手机通过。
+- 当前模拟器实际对话通过：从输入框发送 `Reply TIME_OK`，小程／GLM-5.1 返回 `TIME_OK`，截图与可访问性树均显示 `12.7s`、`02:25:37`。完成后停止并重开应用，再次运行设备断言通过，两个值保持不变。启动命令曾报告等待超时，但后续新 UI dump 确认应用恢复并显示持久化回复；不能把该命令自身记为启动成功。此结果仅覆盖当前模拟器的小程真实对话，不代表其他 Harness 或未连接手机通过。
 
 ### 外部 Harness 实机流程继续（2026-09-06）
 
@@ -114,7 +114,7 @@ git diff --check
 - DeepSeek 准备进展：确认无 DeepSeek/npm 安装进程后，在 Agent Mode 可见行执行 `start-harness-device-install.mjs emulator-5554 'DeepSeek Harness'`。页面显示 Installing in background，现有安装 owner 启动 PRoot 18025，apt-get 18259 执行 `install -y --no-install-recommends build-essential python3`，其子 dpkg 18315 正在配置 dpkg。Kimi Web/ACP 独立进程继续保留。安装尚未结束，不能启动第二次安装或声称 DeepSeek ACP/Web 可用；下一步应继续检查同一进程及应用安装结果。
 - 请求模型的后续核验设施：`agent-provider-observer.mjs` 为测试专用透明 HTTP 转发器，只向明确指定的上游 origin 转发，保留请求与 SSE，不重试、不改写模型响应；日志只包含请求序号、端点、模型 ID、状态码，不含凭据和对话内容。2 项转发／脱敏测试通过并接入 `test-agent-runtime.sh`。真实 Provider 冒烟也经该转发器通过（GLM-5.1，目录 200、完成请求 200），这仍不是设备模型切换的证据。
 - 当前测试观察器在本机 loopback 55684 运行，上游为原 llmapi.paratera.com；模拟器专用 `oob-emulator-regression` Profile 已临时配置到 `http://10.0.2.2:55684`。保留运行进程，不强制更新已有 Kimi 会话。后续核验请求层模型 ID；验证完成必须用不覆盖 `OMNIBOT_TEST_BASE_URL` 的原环境运行 `configure-agent-test-provider.mjs emulator-5554`，恢复原测试 Provider 地址后再关闭观察器。手机和其他 Profile 未改。
-- 请求层设备证据：从 Kimi 切回独立小万会话，面板显示 GLM-5.1；发送 `Reply MODEL_A1`，观察器请求 id=3 确认 `/v1/chat/completions` 的 `model=GLM-5.1`，响应 200，实际回复 `MODEL_A1`，时间断言通过。随后展开模型选择列表出现真实 `session/load: timeout`，仅保留 GLM-5.1；对应观察器 id=4 `/v1/models` 为 transport_error。未自动重试或把第二次成功冒充首次成功。
+- 请求层设备证据：从 Kimi 切回独立小程会话，面板显示 GLM-5.1；发送 `Reply MODEL_A1`，观察器请求 id=3 确认 `/v1/chat/completions` 的 `model=GLM-5.1`，响应 200，实际回复 `MODEL_A1`，时间断言通过。随后展开模型选择列表出现真实 `session/load: timeout`，仅保留 GLM-5.1；对应观察器 id=4 `/v1/models` 为 transport_error。未自动重试或把第二次成功冒充首次成功。
 - 失败后独立诊断：直连 Provider 与经观察器的现有 Provider smoke 均通过；观察器 id=5 models 200、id=6 completion 200。目前不足以把该次超时归因于应用或上游。测试观察器源码补充时间戳、耗时、客户端断开标志和异常类型（不打印异常正文）；当前仍运行的旧观察器尚未重启加载此诊断改动。下一步需核对超时边界并继续 A→B→A 的请求层验证；该项尚未通过。
 - 已确认并修复一项会触发正常慢响应失败的应用限制：`HttpController.fetchProviderModels` 的 connect/read/call timeout 均被单独限制为 4 秒，旧注释用于启动探测，而现有启动已读取缓存。新增真实本地 HTTP 服务延迟 5 秒返回模型目录的回归；修复前 SocketTimeoutException，修复后使用与其他 Provider 检查一致的 OkHttp 默认超时通过，没有增加重试或无限等待。CustomHeaders 3 项、Anthropic 9 项通过，新回归加入统一测试脚本。APK 构建成功，设备重新验收尚待完成；不据此声称所有上游超时已消失。
 - DeepSeek 安装最终结束：镜像尝试 npm 日志 19_16_17 与官方源尝试 19_22_21 均 exit 1，PRoot 18025／npm 19582 已不存在。日志末尾未给出具体原因，不应直接归因于磁盘或网络；尚无 DeepSeek 可用证据。确认安装终止后才开始覆盖安装模型刷新修复 APK，未打断活跃安装。
@@ -131,7 +131,7 @@ git diff --check
 - 随后 `adb -s emulator-5554 install -r .../app-develop-standard-debug.apk` 返回 `Success`。MainActivity 恢复后重新取得成功的 UI dump，原 `MODEL_A1` 回复及 `15.7s / 03:17:20` 均保留；首次启动期间一次 dump 为 null root，已丢弃并重新采集，没有拿旧 XML 充当验收。当前模型刷新修复已安装，真实刷新结果仍待验证。
 - 新 APK 首次展开 Model：观察器 id=7 的 `/v1/models` 返回 200，页面直接显示实际目录，无 `session/load: timeout`。选择 `DeepSeek-V3-250324` 后面板显示对应值，输入 `Reply MODEL_B1`，关闭键盘后确认输入完整再发送；观察器 id=8 确认真实请求 `model=DeepSeek-V3-250324`，返回 200，`verify-reply-timing.mjs emulator-5554 MODEL_B1` 通过。这是 A→B 请求级验证，尚待切回 A 与跨会话隔离。
 - 输入过程发现一个待复核现象：键盘展开时截图中 composer 不可见，关闭键盘后输入 `Reply MODEL_B1` 完整保留且可发送；未重发或清空输入。应在下一轮验证键盘遮挡／布局路径，当前证据不能解释成输入丢失，也不能忽略为已通过。
-- 切回验证完成：再次展开目录的观察器 id=9 返回 200，通过面板搜索并选择 `GLM-5.1`，确认面板值后发送完整输入 `Reply MODEL_A2`；观察器 id=10 的实际请求为 `model=GLM-5.1`，响应 200，`verify-reply-timing.mjs emulator-5554 MODEL_A2` 通过。结合 id=3 的 A、id=8 的 B、id=10 的 A，当前小万同一会话 A→B→A 已得到请求与可见回复双重证据；外部 Harness 和跨会话隔离不能据此关闭。
+- 切回验证完成：再次展开目录的观察器 id=9 返回 200，通过面板搜索并选择 `GLM-5.1`，确认面板值后发送完整输入 `Reply MODEL_A2`；观察器 id=10 的实际请求为 `model=GLM-5.1`，响应 200，`verify-reply-timing.mjs emulator-5554 MODEL_A2` 通过。结合 id=3 的 A、id=8 的 B、id=10 的 A，当前小程同一会话 A→B→A 已得到请求与可见回复双重证据；外部 Harness 和跨会话隔离不能据此关闭。
 
 ### 键盘输入路径的新增回归（2026-09-06）
 
@@ -142,7 +142,7 @@ git diff --check
 - 随后覆盖安装 `Success`。启动尚未稳定时，时间断言因 marker 不可见失败、键盘断言因 IME 未打开失败，未跳过断言；等待页面真实恢复后重新采集成功 UI dump，键盘打开时输入框位于 `[81,477][643,573]`、模型按钮位于 `[391,585][447,641]`，`verify-chat-keyboard.mjs` 通过。原 `MODEL_A2` 的 `11.7s / 03:45:21` 仍存在，时间断言再次通过。此次设备通过与单元测试的确定性红绿分开记录。
 - DeepSeek 后续尝试：在 Agent mode 滚动至完整可见行后，`start-harness-device-install.mjs emulator-5554 'DeepSeek Harness'` 成功派发原有 Install 动作。第一次脚本因行底部 Install 按钮未进入可见范围而失败，未点击其他按钮；滚动后才重新执行。当前进程树为 app 20951 → PRoot 21608 → sh 21632/21643 → npm cache clean 21675，页面显示 Installing in background。磁盘已恢复可用空间后发起这次正常安装，尚不声称前次 npm 失败是磁盘原因；后续必须跟踪同一安装，不重复启动或提前记为 DeepSeek Web/ACP 通过。
 - 同一次安装推进：缓存清理日志 `19_53_42` exit 0，随后 PRoot 21608 下的 `dsh@next` 21720 下载依赖；`19_55_23` 日志最终记录 exit 0 / info ok，后面仍有 generic complete-log 提示，因此只记为 npm 阶段退出成功。父安装 shell 21643 继续执行后续 Node 检查，不能将整项 DeepSeek 安装或 ACP/Web 标为完成。
-- 跨会话模型隔离：新建独立小万会话、选择 `DeepSeek-V3-250324`，发送完整 `Reply ISOLATION_B`；观察器 id=12 确认实际模型 B、200，回复与时间断言通过。返回含 MODEL_A1/B1/A2 的旧会话，面板仍为 GLM-5.1；发送 `Reply BACK_A`，观察器 id=13 确认 GLM-5.1、200，时间断言通过。旧 MODEL_A2 初次检查因处于屏幕下方而不可见，后续通过当前可见的旧消息和面板确认选中了原会话，不将滚动可见性失败报告成历史丢失。此证据覆盖“新会话 B → 旧会话 A”请求隔离，不代表所有外部 Harness 的配置隔离。
+- 跨会话模型隔离：新建独立小程会话、选择 `DeepSeek-V3-250324`，发送完整 `Reply ISOLATION_B`；观察器 id=12 确认实际模型 B、200，回复与时间断言通过。返回含 MODEL_A1/B1/A2 的旧会话，面板仍为 GLM-5.1；发送 `Reply BACK_A`，观察器 id=13 确认 GLM-5.1、200，时间断言通过。旧 MODEL_A2 初次检查因处于屏幕下方而不可见，后续通过当前可见的旧消息和面板确认选中了原会话，不将滚动可见性失败报告成历史丢失。此证据覆盖“新会话 B → 旧会话 A”请求隔离，不代表所有外部 Harness 的配置隔离。
 - DeepSeek 安装本次最终退出，21608/21643 不再存在。库存脚本确认 dsh 命令存在，但新增可选用法 `verify-agent-tools.mjs emulator-5554 deepseek-harness-acp` 执行仓库 catalog 原有 `managedAdapterHealthCommand` 返回 failed，不能算安装完整。设备上 dsh/dsh-acp-android/pnpm 均存在，ACP profile package.json 与 pnpm-workspace.yaml 已创建；`node_modules/@openma/deepseek-harness-acp/package.json` 缺失。该 profile 的 dependencies 为空、bundles 为 `@deepseek-ai/dsh-base` 和 `@deepseek-ai/dsh-acp-app`。下一步应检查实际 DSH 插件安装命令与当前官方 ACP 入口，不能重复全量 npm 安装掩盖阶段差异。
 - 官方入口对照通过：安装的 `@deepseek-ai/dsh` 为 0.1.2-rc.1，官方 `dsh-acp-app` bundle 自带 ACP stdio 配置。新增 `verify-deepseek-acp-initialize.mjs emulator-5554`，通过设备原 init-host 直接启动官方 `node --expose-internals .../dsh/lib/bin.js --profile acp`，不加载应用的 headless patch、不安装第三方 ACP 插件、不发送模型请求。实际 initialize 返回 protocolVersion 1，stdin EOF 后进程正常退出，脚本 exit 0。90 秒是测试观察窗口，不修改应用或官方会话超时。
 - 因而后续可以从现有 catalog/安装 owner 移除过时的第三方插件依赖与 Web 屏蔽层。但必须连同共享 Provider 映射一起对齐：现有 ACP 配置仍输出 DSH_MODEL/DSH_PROVIDER，官方 ACP bundle 默认 provider=deepseek-official、model=deepseek-v4-flash；Web 已有 llm-pi-ai/agent-default-model 官方 patch。此次只证明原生 ACP initialize，不证明使用共享模型的实际对话，更不证明 Web 已通过。
@@ -168,7 +168,7 @@ git diff --check
 - 继续备份约 196 MB 的 APT lists 缓存：`apt-lists.tar.gz` 虽命令 exit 0，但 gzip/tar 完整性失败、解压哈希不匹配，**不可用于恢复，也未据此删除设备原目录**。改用未压缩 `apt-lists.tar`，传输尚在进行。设备端原 tar SHA-256 为 `277fcd7298e6e91bb889e5f2f40a4372f91bb88799e183deb5f24fc366a4d105`；后续必须等待同一进程结束并比对后才清理。
 - 未压缩 lists 传输最终 exit 0，完整 tar 列表通过，电脑 SHA-256 与上述设备值一致。随后仅删除已备份的 `local/ubuntu/var/lib/apt/lists` 缓存并重建空 partial/auxfiles（以后 apt update 可重建，亦可从 `/tmp/oob-apt-cache-backup.se604A/apt-lists.tar` 恢复）。可用空间随后约 1.3 GB；最新 read-boundary 诊断 APK 覆盖安装返回 **Success**，已发起启动。此次才完成新增 tooltip/stdout read 诊断的安装，实际发送及时间差验收仍待运行。
 - MainActivity 启动命令成功。`send-agent-test-message.mjs emulator-5554 DSH_ACP_TWO` 的单次 ADB 整串输入实际变成 `eply DSH_ACP_TW`，精确草稿断言失败且未发送；不能记为 ACP 请求失败。脚本改为先核对聚焦，再逐字符分开发送输入命令，保留最后精确比对，不增加重试；此改进尚待设备验证，当前测试草稿仍保留，下一次运行不可忽略非空草稿保护。
-- 后续只清除该已核对的未发送测试草稿。逐字符版本脚本对 DSH_ACP_TWO 完整核对并语义点击 Send 成功，无坐标兜底。但重启恢复的是小万会话，25169 日志证明实际连接 xiaowan-acp，UI 显示 Failed，时间断言失败；此消息不能记为 DeepSeek 验收。Provider 观察器无新增结果输出，失败原因仍需核对。
+- 后续只清除该已核对的未发送测试草稿。逐字符版本脚本对 DSH_ACP_TWO 完整核对并语义点击 Send 成功，无坐标兜底。但重启恢复的是小程会话，25169 日志证明实际连接 xiaowan-acp，UI 显示 Failed，时间断言失败；此消息不能记为 DeepSeek 验收。Provider 观察器无新增结果输出，失败原因仍需核对。
 - 明确重新选择 DeepSeek Harness 后，用同一脚本发送独立 DSH_ACP_THREE，精确输入／语义发送成功。应用 PID 25169 日志确认 deepseek-harness-acp；initialize flush 为 05:05:39.444，05:07:10.350 超时，stdout read 为 05:07:17.817，collect/inbound 为 05:07:17.825。即约 98.4 秒才读到响应，read→collect 约 8 ms；不能说 SDK 在收到响应后拖延 90 秒，重点转到 Harness 启动／读取之前的耗时。没有重放该消息。
 - 探针新增 `--shared-test-key`：只从 LLMTHU_API_KEY 环境取测试凭据，通过 stdin 第一行读入子进程环境，不写文件／参数／输出。与 managed-patch、disable-link2symlink、filesystem-compat、app-meta、app-capabilities 组合运行，61221 ms initialize 成功并正常 EOF 退出；此前不带凭据为 58275 ms，单次结果不足以归因于凭据。安装包内官方 PiAiAdapter.resolveModel 的代码仅从本地模型 snapshot 构造信息，不是 discoverModels 网络请求。应用已超时的 Node 25900 仍存在；待收敛初始化错误路径中的临时连接清理，不能增加重试来掩盖。
 - 初始化取消清理修复：新增 LocalAcpRuntimeInitializationTest，构造替换仅发生在测试的 Android connection 边界，真实 Protocol/Client.initialize 发出请求后取消。旧实现明确失败 `Unadopted connection leaked expected 1 but was 0`。生产修改仅在原 connect catch 中以 NonCancellable 完成 nextProtocol/nextConnection 清理，再传播原取消或初始化错误；没有新增 lifecycle、重试或终止事件。

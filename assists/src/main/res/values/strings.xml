@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">小万</string>
+    <string name="app_name">小程</string>
     <string name="task_finish">任务完成啦!</string>
     <string name="task_stop">任务结束啦!</string>
     <string name="task_error">任务结束!</string>

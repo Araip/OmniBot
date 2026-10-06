@@ -160,7 +160,7 @@ class _AuthorizeSettingPageState extends State<AuthorizeSettingPage>
             icon: LucideIcons.pictureInPicture2,
             title: context.trLegacy('悬浮窗权限'),
             subtitle: _localeText(
-              zh: '允许小万在其他应用上方显示悬浮提示和任务提醒。',
+              zh: '允许小程在其他应用上方显示悬浮提示和任务提醒。',
               en: 'Allow Omnibot to show floating hints and task reminders above other apps.',
             ),
             trailing: _buildPermissionTrailing(
@@ -201,7 +201,7 @@ class _AuthorizeSettingPageState extends State<AuthorizeSettingPage>
             icon: LucideIcons.folderOpen,
             title: _localeText(zh: '所有文件访问权限', en: 'All files access'),
             subtitle: _localeText(
-              zh: '允许小万访问设备公共存储中的文件与文件夹，用于文件读取、整理和下载等操作。',
+              zh: '允许小程访问设备公共存储中的文件与文件夹，用于文件读取、整理和下载等操作。',
               en: 'Allow Omnibot to read and manage files in shared device storage for file tasks and downloads.',
             ),
             trailing: _buildPermissionTrailing(

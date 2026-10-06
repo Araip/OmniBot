@@ -1660,7 +1660,7 @@ void main() {
     await tester.tap(find.byKey(const ValueKey('agent-run-summary-task-1')));
     await tester.pumpAndSettle();
 
-    // 小万完成后的 turn 仍由外层“已处理”统一折叠，但展开后每次工具调用
+    // 小程完成后的 turn 仍由外层“已处理”统一折叠，但展开后每次工具调用
     // 必须保持为独立胶囊，不能套用 ACP 的并行工具合并胶囊。
     expect(find.text('已运行 1 条命令 · 已读取 1 个文件'), findsNothing);
     expect(find.textContaining('已处理'), findsOneWidget);
@@ -2482,7 +2482,7 @@ List<ChatMessageModel> _buildCompletedAgentRunMessages({bool isFinal = true}) {
     ChatMessageModel.cardMessage(
       <String, dynamic>{
         'type': 'agent_tool_summary',
-        // 原生历史恢复层会给小万工具卡补上这个通用渲染样式；
+        // 原生历史恢复层会给小程工具卡补上这个通用渲染样式；
         // 它不能被当成 ACP Agent 身份标记。
         'uiStyle': 'agent_tool',
         'status': 'success',

@@ -165,7 +165,7 @@ void main() {
         home: Scaffold(
           body: ChatMessageAnchorBar(
             messages: <ChatMessageModel>[
-              ChatMessageModel.assistantMessage('小万回答', id: 'xiaowan'),
+              ChatMessageModel.assistantMessage('小程回答', id: 'xiaowan'),
             ],
             activeAgentTurnIds: const <String>{},
             conversationSignature: 'normal:1',

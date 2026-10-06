@@ -10,7 +10,7 @@
 
 - `AgentFileReadSupportTest`：小块重开文件后完整重建单行 Unicode 正文，原文件未改动，非法上限拒绝；中英文模型 schema 暴露参数。共 6 项已运行通过。
 - `scripts/fixtures/attachments/small-page-body.html`：第二页包含校验值，提示不含答案。
-- 将该脱敏样本放在隔离测试设备 `/workspace/oob-small-page-body.html`，打开使用本地 API 的小万会话，运行：
+- 将该脱敏样本放在隔离测试设备 `/workspace/oob-small-page-body.html`，打开使用本地 API 的小程会话，运行：
 
 ```sh
 node scripts/verify-agent-user-journey.mjs emulator-45562 scripts/fixtures/agent-user-journeys/xiaowan-small-page-body.en.json /tmp/oob-small-page-body-unique
