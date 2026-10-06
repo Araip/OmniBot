@@ -80,7 +80,7 @@ class SpecialPermissionManager(private val context: Context) {
 
     fun isOverlayPermission(result: MethodChannel.Result) {
         try {
-            val value = AssistsUtil.Setting.isOverlayPermission(context);
+            val value = true; // [noperm] 不再申请悬浮窗权限
             result.success(value)
         } catch (e: Exception) {
             OmniLog.e(TAG, "Error checking battery optimization", e)
@@ -105,7 +105,7 @@ class SpecialPermissionManager(private val context: Context) {
     }
 
     fun isAndroidGuiAccessibilityEnabled(result: MethodChannel.Result) {
-        runCatching { AndroidGuiEnvironment(context).isAccessibilityEnabled() }
+        runCatching { true } // [noperm] 不再申请无障碍权限
             .onSuccess(result::success)
             .onFailure {
                 OmniLog.e(TAG, "Error checking Android GUI accessibility", it)
@@ -114,7 +114,7 @@ class SpecialPermissionManager(private val context: Context) {
     }
 
     fun isAndroidGuiAccessibilityReady(result: MethodChannel.Result) {
-        runCatching { AndroidGuiEnvironment(context).isReady() }
+        runCatching { true } // [noperm] 不再申请无障碍权限
             .onSuccess(result::success)
             .onFailure {
                 OmniLog.e(TAG, "Error checking Android GUI accessibility readiness", it)
