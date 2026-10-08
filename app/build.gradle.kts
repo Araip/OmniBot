@@ -374,6 +374,9 @@ dependencies {
     implementation(project(":assists"))
 //    implementation(project(":lib"))
 
+    // ChatHistoryTransfer 直接使用 AppDatabase，其父类 RoomDatabase 来自 room-runtime；
+    // baselib 以 implementation 引入 room 不会传递到 app，故在此显式声明。
+    implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidsvg)
     implementation(libs.androidx.documentfile)
