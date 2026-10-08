@@ -195,10 +195,7 @@ android {
             preferPackagedOmniFlowRuntime.toString(),
         )
         ndk {
-            // 只打包真机需要的 arm64-v8a；x86_64 仅供模拟器使用，
-            // 保留它会让 APK 体积多约 18MB，因此默认不打包。
-            // 需要在 x86_64 模拟器上调试时，把 "x86_64" 加回此列表即可。
-            abiFilters.addAll(listOf("arm64-v8a"))
+            abiFilters.addAll(listOf("arm64-v8a", "x86_64"))
         }
 
     }
