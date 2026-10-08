@@ -134,7 +134,6 @@ jobs:
       - name: Flutter test
         working-directory: ui
         run: flutter test
-        continue-on-error: true
 
       - name: Flutter analyze
         working-directory: ui
@@ -148,3 +147,10 @@ jobs:
           :app:lintDevelopStandardDebug
           :app:assembleDevelopStandardDebug
           -Ptarget=lib/main_standard.dart
+
+      - name: Upload debug APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: omnibot-debug-apk
+          path: app/build/outputs/apk/**/*.apk
+          retention-days: 7
