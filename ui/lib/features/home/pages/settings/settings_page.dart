@@ -6,6 +6,7 @@ import 'package:flutter_switch/flutter_switch.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:ui/core/router/go_router_manager.dart';
 import 'package:ui/l10n/l10n.dart';
+import 'package:ui/services/chat_history_service.dart';
 import 'package:ui/services/mcp_server_service.dart';
 import 'package:ui/services/model_provider_backup_service.dart';
 import 'package:ui/services/storage_service.dart';
@@ -271,6 +272,70 @@ class _SettingsPageState extends State<SettingsPage> {
                 : '注册登录、查看平台额度',
             onTap: () {
               GoRouterManager.push('/my/account');
+            },
+          ),
+        ],
+      ),
+      _SettingSection(
+        label: isEnglish ? 'Data management' : '数据管理',
+        items: [
+          _SettingItem(
+            icon: Icons.upload_file,
+            title: isEnglish ? 'Export chat history' : '导出聊天记录',
+            subtitle: isEnglish
+                ? 'Back up all conversations to a JSON file'
+                : '把所有会话备份为 JSON 文件',
+            onTap: () async {
+              final messenger = ScaffoldMessenger.of(context);
+              messenger.showSnackBar(
+                const SnackBar(content: Text('正在导出聊天记录…')),
+              );
+              try {
+                final result = await ChatHistoryService.exportBackup();
+                messenger.hideCurrentSnackBar();
+                messenger.showSnackBar(
+                  SnackBar(
+                    content: Text(
+                      result.filePath == null
+                          ? '备份已生成，请在分享面板中选择保存位置'
+                          : '备份已生成：${result.filePath}',
+                    ),
+                  ),
+                );
+              } catch (error) {
+                messenger.hideCurrentSnackBar();
+                messenger.showSnackBar(
+                  SnackBar(content: Text('导出失败：$error')),
+                );
+              }
+            },
+          ),
+          _SettingItem(
+            icon: Icons.download,
+            title: isEnglish ? 'Import chat history' : '导入聊天记录',
+            subtitle: isEnglish
+                ? 'Append conversations from a backup file'
+                : '从备份文件追加导入会话',
+            onTap: () async {
+              final messenger = ScaffoldMessenger.of(context);
+              try {
+                final result = await ChatHistoryService.importFromPickedFile();
+                if (result.cancelled) {
+                  return;
+                }
+                messenger.showSnackBar(
+                  SnackBar(
+                    content: Text(
+                      result.message ??
+                          '导入完成：新增 ${result.conversationsImported} 个会话，${result.entriesImported} 条消息',
+                    ),
+                  ),
+                );
+              } catch (error) {
+                messenger.showSnackBar(
+                  SnackBar(content: Text('导入失败：$error')),
+                );
+              }
             },
           ),
         ],
