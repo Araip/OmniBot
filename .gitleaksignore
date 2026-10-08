@@ -1,3 +1,7 @@
 # Historical false-positive/accepted findings in docs examples.
 cdb18baaccc51dac52cb661e53e9cee1f38ca6f5:docs/reference/openclaw-deploy.md:generic-api-key:450
 a6aebf900488107126b24f1d9eda333cd832efc2:docs/reference/openclaw-deploy.md:generic-api-key:450
+# 测试代码里的假 token（占位符），非真实 secret
+6f15cd552267f033ddbde9adcb2b5ceb52254184:app/src/test/java/cn/com/omnimind/bot/plugin/official/agentweb/AgentWebRuntimeTest.kt:generic-api-key:29
+# 第三方 MNN 库 OpenCL kernel 源码字符串误报；文件已不在当前代码树
+9336787f23e245f89c32a0e3b4158dc3190ac619:third_party/mnn_android/source/backend/opencl/execution/cl/opencl_source_map.hpp:linear-client-secret:365
