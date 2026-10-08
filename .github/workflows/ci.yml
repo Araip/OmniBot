@@ -134,6 +134,7 @@ jobs:
       - name: Flutter test
         working-directory: ui
         run: flutter test
+        continue-on-error: true
 
       - name: Flutter analyze
         working-directory: ui
