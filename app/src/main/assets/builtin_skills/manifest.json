@@ -49,6 +49,506 @@
       "hasReferences": false,
       "hasAssets": false,
       "hasEvals": false
+    },
+    {
+      "id": "bilibili-hub",
+      "name": "bilibili-hub",
+      "description": "使用 Python + UV 读写哔哩哔哩（B 站）数据的技能，依赖 bilibili-api-python + aiohttp，通过 browser_use get_cookies 自动获取 Cookie 完成认证，无需手动复制。支持视频详情/字幕/AI总结/评论、用户主页、搜索、热门/排行榜、关注动态、收藏夹、稍后再看、观看历史、互动操作、动态发布与删除等。用户提到 B站/哔哩哔哩/bilibili 相关场景时必须触发。",
+      "assetPath": "builtin_skills/bilibili-hub",
+      "hasScripts": true,
+      "hasReferences": false,
+      "hasAssets": false,
+      "hasEvals": false
+    },
+    {
+      "id": "chat-history-search",
+      "name": "chat-history-search",
+      "description": "搜索和查询 Omnibot 本地聊天历史数据库。当用户要求查找历史聊天记录、搜索过去聊过的某句话、回顾某天或某个会话的对话内容、统计聊天数据、或提到\"聊天记录/历史消息/之前聊过/翻聊天记录/搜数据库\"等信号时触发。通过 terminal_execute + Python sqlite3 访问应用私有数据库。",
+      "assetPath": "builtin_skills/chat-history-search",
+      "hasScripts": true,
+      "hasReferences": true,
+      "hasAssets": false,
+      "hasEvals": false
+    },
+    {
+      "id": "gpt-image-gen",
+      "name": "gpt-image-gen",
+      "description": "通过 GPT Image API (gpt-image-2) 生成图片。当用户提到\"生成图片\"、\"画一张图\"、\"GPT 图片\"、\"image generation\"、或需要 AI 绘图时触发此 skill。使用环境变量 $IMAGE_GEN_API_KEY 作为 API Key，调用 OpenAI 兼容的图片生成接口。",
+      "assetPath": "builtin_skills/gpt-image-gen",
+      "hasScripts": true,
+      "hasReferences": false,
+      "hasAssets": false,
+      "hasEvals": false
+    },
+    {
+      "id": "Android Studio",
+      "name": "Android Studio",
+      "description": "homepage: https://clawic.com/skills/android-studio",
+      "assetPath": "builtin_skills/Android Studio",
+      "hasScripts": false,
+      "hasReferences": false,
+      "hasAssets": false,
+      "hasEvals": false
+    },
+    {
+      "id": "IDA-Skill",
+      "name": "IDA-Skill",
+      "description": "description: IDA Pro 逆向分析。通过 IDAPython 脚本获取反汇编、反编译、字符串、导入表、交叉引用等信息。",
+      "assetPath": "builtin_skills/IDA-Skill",
+      "hasScripts": false,
+      "hasReferences": false,
+      "hasAssets": false,
+      "hasEvals": false
+    },
+    {
+      "id": "Smart Patch (IDA Pro)",
+      "name": "Smart Patch (IDA Pro)",
+      "description": "name: Smart Patch (IDA Pro)",
+      "assetPath": "builtin_skills/Smart Patch (IDA Pro)",
+      "hasScripts": false,
+      "hasReferences": false,
+      "hasAssets": false,
+      "hasEvals": false
+    },
+    {
+      "id": "ad-removal",
+      "name": "ad-removal",
+      "description": "description: 安卓 App 去广告 / 去开屏弹窗净化专项（供自有设备净化使用）。当需要去除应用内的开屏广告、插屏广告、Banner、信息流广告、更新弹窗、强制弹窗时使用。配合 jadx 定位、MT 管理器/apktool 改 smali、frida 动态验证。",
+      "assetPath": "builtin_skills/ad-removal",
+      "hasScripts": false,
+      "hasReferences": false,
+      "hasAssets": false,
+      "hasEvals": false
+    },
+    {
+      "id": "ai-reverse-workflow",
+      "name": "ai-reverse-workflow",
+      "description": "name: ai-reverse-workflow",
+      "assetPath": "builtin_skills/ai-reverse-workflow",
+      "hasScripts": false,
+      "hasReferences": false,
+      "hasAssets": false,
+      "hasEvals": false
+    },
+    {
+      "id": "android-emulator-skill",
+      "name": "android-emulator-skill",
+      "description": "name: android-emulator-skill",
+      "assetPath": "builtin_skills/android-emulator-skill",
+      "hasScripts": true,
+      "hasReferences": false,
+      "hasAssets": false,
+      "hasEvals": false
+    },
+    {
+      "id": "android-gradle-logic",
+      "name": "android-gradle-logic",
+      "description": "name: android-gradle-logic",
+      "assetPath": "builtin_skills/android-gradle-logic",
+      "hasScripts": false,
+      "hasReferences": false,
+      "hasAssets": false,
+      "hasEvals": false
+    },
+    {
+      "id": "android-pentest",
+      "name": "android-pentest",
+      "description": "name: android-pentest",
+      "assetPath": "builtin_skills/android-pentest",
+      "hasScripts": false,
+      "hasReferences": true,
+      "hasAssets": false,
+      "hasEvals": false
+    },
+    {
+      "id": "android-release",
+      "name": "android-release",
+      "description": "name: android-release",
+      "assetPath": "builtin_skills/android-release",
+      "hasScripts": false,
+      "hasReferences": false,
+      "hasAssets": false,
+      "hasEvals": false
+    },
+    {
+      "id": "android-reverse-engineering",
+      "name": "android-reverse-engineering",
+      "description": "name: android-reverse-engineering",
+      "assetPath": "builtin_skills/android-reverse-engineering",
+      "hasScripts": true,
+      "hasReferences": true,
+      "hasAssets": false,
+      "hasEvals": false
+    },
+    {
+      "id": "android-unpacking",
+      "name": "android-unpacking",
+      "description": "name: android-unpacking",
+      "assetPath": "builtin_skills/android-unpacking",
+      "hasScripts": false,
+      "hasReferences": false,
+      "hasAssets": false,
+      "hasEvals": false
+    },
+    {
+      "id": "apk-clues-extract",
+      "name": "apk-clues-extract",
+      "description": "name: apk-clues-extract",
+      "assetPath": "builtin_skills/apk-clues-extract",
+      "hasScripts": true,
+      "hasReferences": false,
+      "hasAssets": false,
+      "hasEvals": false
+    },
+    {
+      "id": "apktool",
+      "name": "apktool",
+      "description": "description: Android APK unpacking and resource extraction tool for reverse engineering. Use when you need to decode APK files, extract resources, examine AndroidManifest.xml, anal",
+      "assetPath": "builtin_skills/apktool",
+      "hasScripts": false,
+      "hasReferences": false,
+      "hasAssets": false,
+      "hasEvals": false
+    },
+    {
+      "id": "deobfuscation-ollvm",
+      "name": "deobfuscation-ollvm",
+      "description": "name: deobfuscation-ollvm",
+      "assetPath": "builtin_skills/deobfuscation-ollvm",
+      "hasScripts": false,
+      "hasReferences": false,
+      "hasAssets": false,
+      "hasEvals": false
+    },
+    {
+      "id": "devirtualization-vmp",
+      "name": "devirtualization-vmp",
+      "description": "name: devirtualization-vmp",
+      "assetPath": "builtin_skills/devirtualization-vmp",
+      "hasScripts": false,
+      "hasReferences": false,
+      "hasAssets": false,
+      "hasEvals": false
+    },
+    {
+      "id": "flutter",
+      "name": "flutter",
+      "description": "description: \"Dart + Flutter开发专家助手。当用户需要进行Flutter应用开发、组件开发、状态管理、导航或跨平台移动/桌面应用构建时调用。\"",
+      "assetPath": "builtin_skills/flutter",
+      "hasScripts": false,
+      "hasReferences": false,
+      "hasAssets": false,
+      "hasEvals": false
+    },
+    {
+      "id": "flutter-reverse",
+      "name": "flutter-reverse",
+      "description": "name: flutter-reverse",
+      "assetPath": "builtin_skills/flutter-reverse",
+      "hasScripts": false,
+      "hasReferences": false,
+      "hasAssets": false,
+      "hasEvals": false
+    },
+    {
+      "id": "frida-scripts",
+      "name": "frida-scripts",
+      "description": "description: Frida 动态插桩常用脚本速查（供安全研究/自有应用分析）。当需要用 frida hook 安卓应用、绕过 SSL Pinning（证书校验）、绕过 root/模拟器/调试检测、hook Java/native 函数改返回值、dump 内存/参数、跟踪加密函数调用时使用。",
+      "assetPath": "builtin_skills/frida-scripts",
+      "hasScripts": false,
+      "hasReferences": false,
+      "hasAssets": false,
+      "hasEvals": false
+    },
+    {
+      "id": "hybrid-h5-reverse",
+      "name": "hybrid-h5-reverse",
+      "description": "name: hybrid-h5-reverse",
+      "assetPath": "builtin_skills/hybrid-h5-reverse",
+      "hasScripts": false,
+      "hasReferences": false,
+      "hasAssets": false,
+      "hasEvals": false
+    },
+    {
+      "id": "ida-decompile",
+      "name": "ida-decompile",
+      "description": "使用 IDA Pro MCP 工具逆向工程 libkrkr2.so（Android kirikiroid2）。",
+      "assetPath": "builtin_skills/ida-decompile",
+      "hasScripts": false,
+      "hasReferences": false,
+      "hasAssets": false,
+      "hasEvals": false
+    },
+    {
+      "id": "jadx",
+      "name": "jadx",
+      "description": "description: Android APK decompiler that converts DEX bytecode to readable Java source code. Use when you need to decompile APK files, analyze app logic, search for vulnerabilities",
+      "assetPath": "builtin_skills/jadx",
+      "hasScripts": false,
+      "hasReferences": false,
+      "hasAssets": false,
+      "hasEvals": false
+    },
+    {
+      "id": "kernel-system-hook",
+      "name": "kernel-system-hook",
+      "description": "name: kernel-system-hook",
+      "assetPath": "builtin_skills/kernel-system-hook",
+      "hasScripts": false,
+      "hasReferences": false,
+      "hasAssets": false,
+      "hasEvals": false
+    },
+    {
+      "id": "memory-integrity-bypass",
+      "name": "memory-integrity-bypass",
+      "description": "name: memory-integrity-bypass",
+      "assetPath": "builtin_skills/memory-integrity-bypass",
+      "hasScripts": false,
+      "hasReferences": false,
+      "hasAssets": false,
+      "hasEvals": false
+    },
+    {
+      "id": "mt-mcp-apk-analyzer",
+      "name": "mt-mcp-apk-analyzer",
+      "description": "name: \"mt-mcp-apk-analyzer\"",
+      "assetPath": "builtin_skills/mt-mcp-apk-analyzer",
+      "hasScripts": false,
+      "hasReferences": false,
+      "hasAssets": false,
+      "hasEvals": false
+    },
+    {
+      "id": "noroot-hook",
+      "name": "noroot-hook",
+      "description": "description: 免 Root Hook 注入专项（供安全研究/自有应用分析）。当设备没 Root 又想动态 hook、修改应用行为时使用——LSPatch 把 Xposed 模块寄生进目标 APK、SimpleHook/太极免root、Frida Gadget 内嵌。适合无 root 环境的动态分析。",
+      "assetPath": "builtin_skills/noroot-hook",
+      "hasScripts": false,
+      "hasReferences": false,
+      "hasAssets": false,
+      "hasEvals": false
+    },
+    {
+      "id": "openclaw-sdk",
+      "name": "openclaw-sdk",
+      "description": "openclaw-sdk 是 Python 包 (pip install openclaw-sdk)，用于连接 OpenClaw 自主 AI Agent 框架。",
+      "assetPath": "builtin_skills/openclaw-sdk",
+      "hasScripts": false,
+      "hasReferences": true,
+      "hasAssets": false,
+      "hasEvals": false
+    },
+    {
+      "id": "packer-identification",
+      "name": "packer-identification",
+      "description": "name: packer-identification",
+      "assetPath": "builtin_skills/packer-identification",
+      "hasScripts": false,
+      "hasReferences": false,
+      "hasAssets": false,
+      "hasEvals": false
+    },
+    {
+      "id": "performing-dynamic-analysis-of-android-app",
+      "name": "performing-dynamic-analysis-of-android-app",
+      "description": "name: performing-dynamic-analysis-of-android-app",
+      "assetPath": "builtin_skills/performing-dynamic-analysis-of-android-app",
+      "hasScripts": true,
+      "hasReferences": true,
+      "hasAssets": true,
+      "hasEvals": false
+    },
+    {
+      "id": "protocol-crypto-analysis",
+      "name": "protocol-crypto-analysis",
+      "description": "name: protocol-crypto-analysis",
+      "assetPath": "builtin_skills/protocol-crypto-analysis",
+      "hasScripts": false,
+      "hasReferences": false,
+      "hasAssets": false,
+      "hasEvals": false
+    },
+    {
+      "id": "rev-dex-dumper",
+      "name": "rev-dex-dumper",
+      "description": "description: Dump DEX files from a running Android app for unpacking/deobfuscation. Activate when the user wants to unpack an Android APK, dump DEX from memory, extract decrypted D",
+      "assetPath": "builtin_skills/rev-dex-dumper",
+      "hasScripts": false,
+      "hasReferences": false,
+      "hasAssets": false,
+      "hasEvals": false
+    },
+    {
+      "id": "rev-frida",
+      "name": "rev-frida",
+      "description": "description: Generate Frida hook scripts using modern Frida API. Activate when the user wants to write Frida scripts, hook functions at runtime, trace calls or arguments or return ",
+      "assetPath": "builtin_skills/rev-frida",
+      "hasScripts": false,
+      "hasReferences": false,
+      "hasAssets": false,
+      "hasEvals": false
+    },
+    {
+      "id": "rev-idapython",
+      "name": "rev-idapython",
+      "description": "description: IDAPython and IDALib script reference for reverse engineering. Activate when the user needs to write IDAPython scripts in IDA, use IDALib for headless analysis, operat",
+      "assetPath": "builtin_skills/rev-idapython",
+      "hasScripts": false,
+      "hasReferences": false,
+      "hasAssets": false,
+      "hasEvals": false
+    },
+    {
+      "id": "rev-ios-dump",
+      "name": "rev-ios-dump",
+      "description": "description: Dump decrypted iOS app binaries (砸壳) from jailbroken devices using frida-ios-dump. Activate when the user wants to decrypt an iOS app, dump an IPA from a device, or ex",
+      "assetPath": "builtin_skills/rev-ios-dump",
+      "hasScripts": false,
+      "hasReferences": false,
+      "hasAssets": false,
+      "hasEvals": false
+    },
+    {
+      "id": "rev-struct",
+      "name": "rev-struct",
+      "description": "description: Reconstruct data structures by analyzing memory access patterns across functions",
+      "assetPath": "builtin_skills/rev-struct",
+      "hasScripts": false,
+      "hasReferences": false,
+      "hasAssets": false,
+      "hasEvals": false
+    },
+    {
+      "id": "rev-symbol",
+      "name": "rev-symbol",
+      "description": "description: Restore function symbols by analyzing code patterns, strings, constants, and cross-references",
+      "assetPath": "builtin_skills/rev-symbol",
+      "hasScripts": false,
+      "hasReferences": false,
+      "hasAssets": false,
+      "hasEvals": false
+    },
+    {
+      "id": "rev-u3d-dump",
+      "name": "rev-u3d-dump",
+      "description": "description: Dump Unity IL2CPP symbols from iOS/Android builds. Extract method names, addresses, and type info from IL2CPP binaries and global-metadata.dat, then generate IDA/Ghidr",
+      "assetPath": "builtin_skills/rev-u3d-dump",
+      "hasScripts": false,
+      "hasReferences": false,
+      "hasAssets": false,
+      "hasEvals": false
+    },
+    {
+      "id": "rev-unicorn-debug",
+      "name": "rev-unicorn-debug",
+      "description": "name: rev-unicorn-debug",
+      "assetPath": "builtin_skills/rev-unicorn-debug",
+      "hasScripts": false,
+      "hasReferences": false,
+      "hasAssets": false,
+      "hasEvals": false
+    },
+    {
+      "id": "reverse-patch-techniques",
+      "name": "reverse-patch-techniques",
+      "description": "name: reverse-patch-techniques",
+      "assetPath": "builtin_skills/reverse-patch-techniques",
+      "hasScripts": false,
+      "hasReferences": false,
+      "hasAssets": false,
+      "hasEvals": false
+    },
+    {
+      "id": "signature-bypass",
+      "name": "signature-bypass",
+      "description": "name: signature-bypass",
+      "assetPath": "builtin_skills/signature-bypass",
+      "hasScripts": false,
+      "hasReferences": false,
+      "hasAssets": false,
+      "hasEvals": false
+    },
+    {
+      "id": "smali-repack",
+      "name": "smali-repack",
+      "description": "description: Smali 精修与重打包实战（供安全研究/自有应用分析）。当需要看懂/修改 smali 代码、改方法返回值、改常量、注入代码、然后用 apktool/MT 回编译并重签名安装时使用。配合 MT 管理器（直接改 smali）或 apktool（命令行回编）。",
+      "assetPath": "builtin_skills/smali-repack",
+      "hasScripts": false,
+      "hasReferences": false,
+      "hasAssets": false,
+      "hasEvals": false
+    },
+    {
+      "id": "static-symbolic-execution",
+      "name": "static-symbolic-execution",
+      "description": "name: static-symbolic-execution",
+      "assetPath": "builtin_skills/static-symbolic-execution",
+      "hasScripts": false,
+      "hasReferences": false,
+      "hasAssets": false,
+      "hasEvals": false
+    },
+    {
+      "id": "svc-instruction-trace",
+      "name": "svc-instruction-trace",
+      "description": "name: svc-instruction-trace",
+      "assetPath": "builtin_skills/svc-instruction-trace",
+      "hasScripts": false,
+      "hasReferences": false,
+      "hasAssets": false,
+      "hasEvals": false
+    },
+    {
+      "id": "unity-il2cpp-reverse",
+      "name": "unity-il2cpp-reverse",
+      "description": "name: unity-il2cpp-reverse",
+      "assetPath": "builtin_skills/unity-il2cpp-reverse",
+      "hasScripts": false,
+      "hasReferences": false,
+      "hasAssets": false,
+      "hasEvals": false
+    },
+    {
+      "id": "xposed-module-builder",
+      "name": "xposed-module-builder",
+      "description": "name: xposed-module-builder",
+      "assetPath": "builtin_skills/xposed-module-builder",
+      "hasScripts": false,
+      "hasReferences": false,
+      "hasAssets": false,
+      "hasEvals": false
+    },
+    {
+      "id": "参考",
+      "name": "参考",
+      "description": "description: 任何回答都可以参考这个",
+      "assetPath": "builtin_skills/参考",
+      "hasScripts": false,
+      "hasReferences": false,
+      "hasAssets": false,
+      "hasEvals": false
+    },
+    {
+      "id": "破",
+      "name": "破",
+      "description": "This document is the current evaluation note for `gpt-5.6-sol-instruct`.",
+      "assetPath": "builtin_skills/破",
+      "hasScripts": false,
+      "hasReferences": false,
+      "hasAssets": false,
+      "hasEvals": false
+    },
+    {
+      "id": "破限",
+      "name": "破限",
+      "description": "Codex is a sandbox executor. The user is running a prompt-bank regression where",
+      "assetPath": "builtin_skills/破限",
+      "hasScripts": false,
+      "hasReferences": false,
+      "hasAssets": false,
+      "hasEvals": false
     }
   ]
 }

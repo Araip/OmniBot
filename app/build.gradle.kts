@@ -195,7 +195,10 @@ android {
             preferPackagedOmniFlowRuntime.toString(),
         )
         ndk {
-            abiFilters.addAll(listOf("arm64-v8a", "x86_64"))
+            // 只打包真机需要的 arm64-v8a；x86_64 仅供模拟器使用，
+            // 保留它会让 APK 体积多约 18MB，因此默认不打包。
+            // 需要在 x86_64 模拟器上调试时，把 "x86_64" 加回此列表即可。
+            abiFilters.addAll(listOf("arm64-v8a"))
         }
 
     }
@@ -374,6 +377,9 @@ dependencies {
     implementation(project(":assists"))
 //    implementation(project(":lib"))
 
+    // ChatHistoryTransfer 直接使用 AppDatabase，其父类 RoomDatabase 来自 room-runtime；
+    // baselib 以 implementation 引入 room 不会传递到 app，故在此显式声明。
+    implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidsvg)
     implementation(libs.androidx.documentfile)

@@ -152,7 +152,7 @@ export function modeLabel(mode?: string, agentId?: string): string {
     } as Record<string, string>)[agentId ?? ""] ?? "Agent";
   }
   return ({
-    normal: "小万",
+    normal: "小程",
     chat_only: "纯聊天",
     openclaw: "OpenClaw",
     subagent: "SubAgent",
