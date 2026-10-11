@@ -60,20 +60,20 @@
 mt_mcp/
 ├── 📄 README.md                    # 项目说明文档
 ├── 📄 SKILL.md                     # 技能定义文件（APK分析核心）
-├── 📄 MT_MCP_使用文档.md           # MCP服务使用指南
+├── 📄 MT_MCP_usage.md           # MCP服务使用指南
 │
 ├── 📁 docs/                        # 📚 文档与报告中心
-│   ├── Open_Photo_Frame_汉化指南.md       # Flutter应用汉化案例
-│   ├── 签名校验问题分析.md                # APK签名校验机制分析
-│   ├── Appkey配置错误问题分析与解决方案.md  # DCloud Appkey问题方案
-│   ├── 表盘自定义工具_综合分析报告.md       # 表盘工具综合分析
-│   ├── 表盘自定义工具_捐赠者功能破解方案.md  # 捐赠者功能分析
-│   ├── 表盘自定义工具_6.4.0_终极破解版修改指南.md # 破解修改实战
+│   ├── Open_Photo_Frame_localization.md       # Flutter应用汉化案例
+│   ├── signature-verification-analysis.md                # APK签名校验机制分析
+│   ├── appkey-config-error-analysis.md  # DCloud Appkey问题方案
+│   ├── watchface-tool-analysis-report.md       # 表盘工具综合分析
+│   ├── watchface-tool-donor-feature-patch.md  # 捐赠者功能分析
+│   ├── watchface-tool-6.4.0-patch-guide.md # 破解修改实战
 │   └── 📁 reports/                        # 分析报告库
-│       ├── APKPure_分析报告.md             # VIP/支付功能分析
-│       ├── Cellular-Z_广告分析报告.md      # 广告SDK检测与移除
-│       ├── 酷我音乐_安全分析报告.md         # 第三方注入检测
-│       └── 表盘自定义工具_DCloud_Appkey验证机制分析报告.md
+│       ├── APKPure-analysis-report.md             # VIP/支付功能分析
+│       ├── Cellular-Z-ad-analysis-report.md      # 广告SDK检测与移除
+│       ├── kuwo-music-security-analysis.md         # 第三方注入检测
+│       └── watchface-tool-dcloud-appkey-analysis.md
 │
 └── 📁 .trae/                       # ⚙️ Trae 编辑器配置
     ├── mcp.json                       # MCP服务连接配置
@@ -119,10 +119,10 @@ mt_mcp/
 
 | 报告 | 类型 | 核心发现 |
 |------|------|----------|
-| [APKPure_分析报告.md](./docs/reports/APKPure_分析报告.md) | 功能分析 | VIP会员系统 + 多支付SDK集成 |
-| [Cellular-Z_广告分析报告.md](./docs/reports/Cellular-Z_广告分析报告.md) | 广告检测 | 4个广告SDK + 完整移除方案 |
-| [酷我音乐_安全分析报告.md](./docs/reports/酷我音乐_安全分析报告.md) | 安全审计 | ⚠️ 第三方恶意注入 + Hook框架 |
-| [Open_Photo_Frame_汉化指南.md](./docs/Open_Photo_Frame_汉化指南.md) | 汉化案例 | Flutter应用本地化方案 |
+| [APKPure-analysis-report.md](./docs/reports/APKPure-analysis-report.md) | 功能分析 | VIP会员系统 + 多支付SDK集成 |
+| [Cellular-Z-ad-analysis-report.md](./docs/reports/Cellular-Z-ad-analysis-report.md) | 广告检测 | 4个广告SDK + 完整移除方案 |
+| [kuwo-music-security-analysis.md](./docs/reports/kuwo-music-security-analysis.md) | 安全审计 | ⚠️ 第三方恶意注入 + Hook框架 |
+| [Open_Photo_Frame_localization.md](./docs/Open_Photo_Frame_localization.md) | 汉化案例 | Flutter应用本地化方案 |
 
 ---
 
@@ -144,7 +144,7 @@ mt_mcp/
 | 文档 | 说明 |
 |------|------|
 | [SKILL.md](./SKILL.md) | APK分析技能完整定义 — 工具规范/分析场景/工作流模板 |
-| [MT_MCP_使用文档.md](./MT_MCP_使用文档.md) | MCP服务基础使用指南 |
+| [MT_MCP_usage.md](./MT_MCP_usage.md) | MCP服务基础使用指南 |
 
 ---
 

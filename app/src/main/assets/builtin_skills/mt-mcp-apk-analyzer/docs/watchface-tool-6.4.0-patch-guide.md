@@ -616,5 +616,5 @@ jarsigner -verbose -keystore your_keystore.jks -storepass your_password -keypass
 ---
 
 *修改指南生成时间: 2026-06-23*
-*基于: 表盘自定义工具_DCloud_Appkey验证机制分析报告.md*
+*基于: watchface-tool-dcloud-appkey-analysis.md*
 *工具: MT管理器 MCP APK Analyzer*
