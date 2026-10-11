@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:ui/core/router/go_router_manager.dart';
+import 'package:ui/features/home/pages/settings/appearance_privacy_sheet.dart';
 import 'package:ui/l10n/l10n.dart';
 import 'package:ui/services/chat_history_service.dart';
 import 'package:ui/services/mcp_server_service.dart';
@@ -261,6 +262,23 @@ class _SettingsPageState extends State<SettingsPage> {
   List<_SettingSection> _buildSections(String workspaceMemorySubtitle) {
     final isEnglish = Localizations.localeOf(context).languageCode == 'en';
     return [
+      _SettingSection(
+        label: isEnglish ? 'Appearance & privacy' : '外观与隐私',
+        items: [
+          _SettingItem(
+            icon: Icons.visibility_off,
+            title: isEnglish
+                ? 'Launcher icon & disguise'
+                : '桌面图标与伪装',
+            subtitle: isEnglish
+                ? 'Switch icon style, or disguise as a system feedback app'
+                : '切换桌面图标底色，或伪装为系统「反馈」',
+            onTap: () {
+              showAppearancePrivacySheet(context);
+            },
+          ),
+        ],
+      ),
       _SettingSection(
         label: isEnglish ? 'Account' : '账号',
         items: [

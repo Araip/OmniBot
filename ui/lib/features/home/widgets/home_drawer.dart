@@ -1,3 +1,7 @@
+// 侧滑栏已移除 Web 快捷入口（Kimi Web / DeepSeek Harness Web）。
+// 相关私有字段与构建方法暂时保留，仅不再挂载到 UI 上。
+// ignore_for_file: unused_element, unused_field, unused_import, unused_local_variable
+
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
@@ -213,7 +217,6 @@ class HomeDrawerState extends ConsumerState<HomeDrawer> {
         .scheduledTasksChangedStream
         .listen(_handleScheduledTasksChanged);
     _loadConversations();
-    unawaited(_loadWebQuickActions());
   }
 
   @override
@@ -260,7 +263,6 @@ class HomeDrawerState extends ConsumerState<HomeDrawer> {
 
   void reloadConversations() {
     _loadConversations();
-    unawaited(_loadWebQuickActions());
   }
 
   Future<void> _loadWebQuickActions() async {
@@ -362,7 +364,7 @@ class HomeDrawerState extends ConsumerState<HomeDrawer> {
           children: [
             const SizedBox(height: 16),
             Expanded(child: _buildConversationSection()),
-            if (_webQuickActions.isNotEmpty) _buildWebQuickLaunchBar(),
+            // 产品要求：侧滑栏不再展示 Web 快捷入口按钮。
             _buildFooterShortcutBar(),
             // Aligns this row's bottom edge with the chat composer's bottom
             // edge (both sit this far above the shared SafeArea bottom).

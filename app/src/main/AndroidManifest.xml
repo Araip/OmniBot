@@ -96,12 +96,70 @@
             android:name=".activity.LauncherActivity"
             android:exported="true"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.OmnibotApp.Splash">
+            android:theme="@style/Theme.OmnibotApp.Splash" />
+
+        <!-- ===== 桌面图标方案 =====
+             以下 activity-alias 都指向同一个 LauncherActivity，只有 icon / label /
+             enabled 不同。设置页通过 setComponentEnabledSetting 启停它们来切换桌面
+             图标与名称（含「反馈」伪装模式）。 -->
+        <activity-alias
+            android:name=".activity.LauncherIconPurple"
+            android:enabled="true"
+            android:exported="true"
+            android:icon="@mipmap/ic_launcher_variant_purple"
+            android:label="@string/omni_app_name"
+            android:roundIcon="@mipmap/ic_launcher_variant_purple_round"
+            android:targetActivity=".activity.LauncherActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
+        </activity-alias>
+
+        <!-- 方案 B：石墨黑 -->
+        <activity-alias
+            android:name=".activity.LauncherIconInk"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@mipmap/ic_launcher_variant_ink"
+            android:label="@string/omni_app_name"
+            android:roundIcon="@mipmap/ic_launcher_variant_ink_round"
+            android:targetActivity=".activity.LauncherActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <!-- 方案 C：深海蓝 -->
+        <activity-alias
+            android:name=".activity.LauncherIconOcean"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@mipmap/ic_launcher_variant_ocean"
+            android:label="@string/omni_app_name"
+            android:roundIcon="@mipmap/ic_launcher_variant_ocean_round"
+            android:targetActivity=".activity.LauncherActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <!-- 伪装模式：桌面显示为系统「反馈」 -->
+        <activity-alias
+            android:name=".activity.LauncherFeedback"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@mipmap/ic_launcher_variant_feedback"
+            android:label="@string/omni_feedback_app_name"
+            android:roundIcon="@mipmap/ic_launcher_variant_feedback_round"
+            android:targetActivity=".activity.LauncherActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
 
 
         <activity
