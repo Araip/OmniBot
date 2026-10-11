@@ -9,6 +9,7 @@ import 'package:go_router/go_router.dart';
 import 'package:ui/l10n/app_locale_controller.dart';
 import 'package:ui/l10n/generated/app_localizations.dart';
 import 'package:ui/l10n/legacy_text_localizer.dart';
+import 'package:ui/features/home/pages/feedback/disguise_gate.dart';
 import 'package:ui/features/home/state/predictive_back_controller.dart';
 import 'package:ui/services/omnibot_resource_service.dart';
 import 'package:ui/services/app_background_service.dart';
@@ -205,7 +206,10 @@ class _MyAppState extends ConsumerState<MyApp> {
         // 这里用 ColoredBox 把它显式画出来作为整屏兜底色:
         // - 堵住主题切换瞬间 Flutter 子树短暂透明露出原生 windowBackground 的可能
         // - 让背景过渡显式参与 themeAnimationDuration(220ms)的平滑插值
-        return AnnotatedRegion<SystemUiOverlayStyle>(
+        // 伪装模式：桌面图标方案为「反馈」时，整屏替换为仿系统反馈界面，
+        // 长按该界面右上角即可解锁回到小程主页。
+        return DisguiseGate(
+          child: AnnotatedRegion<SystemUiOverlayStyle>(
           value: AppTheme.overlayStyleForBrightness(brightness),
           child: ColoredBox(
             color: theme.scaffoldBackgroundColor,
@@ -219,7 +223,7 @@ class _MyAppState extends ConsumerState<MyApp> {
               ],
             ),
           ),
-        );
+        ));
       },
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,

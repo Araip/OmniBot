@@ -7,5 +7,11 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="launcher_icon_background">#322C76</color>
+    <!-- 桌面图标底色方案（设置页可切换） -->
+    <color name="launcher_icon_background_variant_purple">#322C76</color>
+    <color name="launcher_icon_background_variant_ink">#1B1B1F</color>
+    <color name="launcher_icon_background_variant_ocean">#123A63</color>
+    <!-- 伪装模式：系统「反馈」图标底色 -->
+    <color name="launcher_icon_background_feedback">#3E7BFA</color>
     <color name="white">#FFFFFFFF</color>
 </resources>
